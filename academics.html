@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academics | PREPSA — Excellence in Christian Education</title>
+    <meta name="description" content="Explore the PREPSA academic curriculum from Creche to JSS3. Christian-based, digitally enhanced, and designed for excellence. Learn about our subjects, assessment methods, and learning stages." />
+    <meta name="keywords" content="PREPSA academics, Christian school curriculum, Nigerian curriculum, digital learning, Creche to JSS3, Abeokuta school, PREPSA subjects, CBT exams, leadership development, faith-based education, nursery primary JSS" />
+    <meta name="author" content="Prescious Prime Stars Academy" />
+    <meta property="og:title" content="Academics | PREPSA — Excellence in Christian Education" />
+    <meta property="og:description" content="Discover a curriculum that blends academic rigour, Christian values, and 21st-century skills." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://res.cloudinary.com/drqh2og5z/image/upload/q_auto,f_auto,w_1200/og-academics.jpg" />
+    <meta name="theme-color" content="#4F46E5" />
+    <link rel="canonical" href="https://prepsa.edu.ng/academics.html" />
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/drqh2og5z/image/upload/q_auto,f_auto,w_64/favicon.png" />
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://res.cloudinary.com" />
+    <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'system-ui', 'sans-serif']
+                    },
+                    colors: {
+                        background: '#F8F9FA',
+                        foreground: '#111827',
+                        card: '#FFFFFF',
+                        'card-foreground': '#111827',
+                        primary: { DEFAULT: '#4F46E5', foreground: '#FFFFFF', glow: '#7C3AED' },
+                        secondary: { DEFAULT: '#F3F4F6', foreground: '#1F2937' },
+                        muted: { DEFAULT: '#F3F4F6', foreground: '#6B7280' },
+                        gold: { DEFAULT: '#EAB308', foreground: '#1F2937' },
+                        sky: '#0EA5E9', fresh: '#22C55E', leadership: '#8B5CF6', navy: '#0A2342',
+                        destructive: { DEFAULT: '#EF4444', foreground: '#FFFFFF' },
+                        border: '#E5E7EB', input: '#E5E7EB', ring: '#4F46E5',
+                    },
+                    borderRadius: { '2xl': '1rem', '3xl': '1.5rem', '4xl': '2rem' },
+                    boxShadow: {
+                        elegant: '0 20px 60px -20px rgba(79,70,229,0.25)',
+                        soft: '0 8px 30px -10px rgba(0,0,0,0.12)',
+                        'glow-primary': '0 0 40px -8px rgba(79,70,229,0.35)',
+                        'glow-gold': '0 0 40px -8px rgba(234,179,8,0.35)',
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2.5s ease-in-out infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'shimmer': 'shimmer 2s ease-in-out infinite',
+                        'fade-up': 'fadeUp 0.8s ease-out forwards',
+                        'logo-zoom': 'logoZoom 2.4s cubic-bezier(0.16,1,0.3,1) forwards',
+                        'skeleton-pulse': 'skeletonPulse 1.8s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: { '0%,100%': { boxShadow: '0 0 20px -5px rgba(234,179,8,0.4)' }, '50%': { boxShadow: '0 0 40px -5px rgba(234,179,8,0.7)' } },
+                        float: { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-12px)' } },
+                        shimmer: { '0%,100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
+                        fadeUp: { from: { opacity: '0', transform: 'translateY(28px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
+                        logoZoom: { '0%': { transform: 'scale(2.2)', opacity: '0' }, '18%': { transform: 'scale(1.0)', opacity: '1' }, '35%': { transform: 'scale(1.12)', opacity: '1' }, '52%': { transform: 'scale(1.0)', opacity: '1' }, '72%': { transform: 'scale(0.25)', opacity: '0.55' }, '100%': { transform: 'scale(0)', opacity: '0' } },
+                        skeletonPulse: { '0%,100%': { backgroundColor: '#e5e7eb' }, '50%': { backgroundColor: '#f3f4f6' } },
+                    },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        :root { --border: #E5E7EB; --shadow-soft: 0 8px 30px -10px rgba(0,0,0,0.12); }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: #F8F9FA; color: #111827;
+            font-family: 'Poppins', system-ui, sans-serif; -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        body.loading { overflow: hidden; }
+        h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.02em; }
+
+        /* Page Loader */
+        #page-loader {
+            position: fixed; inset: 0; z-index: 99999;
+            background: #0A2342; display: flex; align-items: center; justify-content: center;
+            flex-direction: column; transition: opacity 0.5s ease, visibility 0.5s ease; pointer-events: all;
+        }
+        #page-loader.hidden-loader { opacity: 0; visibility: hidden; pointer-events: none; }
+        #page-loader .loader-logo-container { display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        #page-loader .loader-logo-icon {
+            width: 80px; height: 80px; background: #4F46E5; border-radius: 1.25rem;
+            display: grid; place-items: center; font-size: 2.8rem; font-weight: 900; color: #fff;
+            box-shadow: 0 0 60px -10px rgba(79,70,229,0.6);
+            animation: logoZoom 2.4s cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+        #page-loader .loader-text { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: -0.03em; opacity: 0; animation: loaderTextFade 2.4s ease forwards; margin-left: 0.4rem; }
+        @keyframes loaderTextFade { 0%,30% { opacity:0; transform:translateX(-8px); } 40%,70% { opacity:1; transform:translateX(0); } 85%,100% { opacity:0; transform:translateX(4px); } }
+        @keyframes logoZoom { 0% { transform:scale(2.2); opacity:0; } 18% { transform:scale(1.0); opacity:1; } 35% { transform:scale(1.12); opacity:1; } 52% { transform:scale(1.0); opacity:1; } 72% { transform:scale(0.25); opacity:0.55; } 100% { transform:scale(0); opacity:0; } }
+
+        /* Skeleton Loading */
+        body.loading .skeleton-card {
+            background: linear-gradient(110deg, #e5e7eb 30%, #f3f4f6 50%, #e5e7eb 70%);
+            background-size: 200% 100%; animation: skeletonShimmer 1.6s ease-in-out infinite;
+            border-radius: 1rem; min-height: 180px; border: 1px solid #e5e7eb;
+        }
+        body.loading .skeleton-card > * { opacity: 0 !important; }
+        body.loading .skeleton-text {
+            background: linear-gradient(110deg, #e5e7eb 30%, #f3f4f6 50%, #e5e7eb 70%);
+            background-size: 200% 100%; animation: skeletonShimmer 1.6s ease-in-out infinite;
+            border-radius: 0.5rem; height: 1rem; margin-bottom: 0.5rem;
+        }
+        @keyframes skeletonShimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+        /* Card hover */
+        .card-hover { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: var(--shadow-soft), 0 0 0 1px rgba(79,70,229,0.18); }
+
+        /* Enhanced animations for learning cards and D-Class journey */
+        .stage-card { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease; }
+        .stage-card:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 25px 40px -12px rgba(79,70,229,0.35); }
+        .stage-card:hover .stage-image { transform: scale(1.02); }
+        .stage-image { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .dclass-card { transition: all 0.4s cubic-bezier(0.34, 1.2, 0.64, 1); }
+        .dclass-card:hover { transform: translateY(-10px) scale(1.02); background: #F3F4F6; border-color: rgba(79,70,229,0.5); }
+        .dclass-card:hover .dclass-icon { transform: rotateY(180deg); }
+        .dclass-icon { transition: transform 0.6s ease; }
+
+        /* Mobile menu */
+        #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1); }
+        #mobile-menu.open { max-height: 1000px; }
+
+        /* Reveal on scroll */
+        .reveal-on-scroll {
+            opacity: 0; transform: translateY(28px);
+            transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+            will-change: opacity, transform;
+        }
+        .reveal-on-scroll.revealed { opacity: 1; transform: translateY(0); }
+
+        /* Back to top */
+        #back-to-top { opacity: 0; pointer-events: none; transition: opacity 0.35s ease, transform 0.35s ease; transform: translateY(12px); }
+        #back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+        /* Gallery placeholder */
+        .gallery-placeholder {
+            background: linear-gradient(135deg, rgba(79,70,229,0.15) 0%, rgba(124,58,237,0.25) 50%, rgba(234,179,8,0.2) 100%);
+            background-size: 200% 200%; animation: shimmer 3s ease-in-out infinite;
+        }
+
+        /* Navigation transition overlay */
+        #nav-transition-overlay {
+            position: fixed; inset: 0; z-index: 9998; background: #0A2342;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; pointer-events: none;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+        #nav-transition-overlay.active { opacity: 1; visibility: visible; pointer-events: all; }
+        #nav-transition-overlay .nav-logo-icon {
+            width: 64px; height: 64px; background: #4F46E5; border-radius: 1rem;
+            display: grid; place-items: center; font-size: 2.2rem; font-weight: 900; color: #fff;
+            box-shadow: 0 0 50px -8px rgba(79,70,229,0.55);
+            animation: navLogoPulse 0.9s ease-in-out infinite;
+        }
+        @keyframes navLogoPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.18); } }
+
+        /* Lazy load blur-up */
+        img.lazy-img { filter: blur(12px); transition: filter 0.5s ease; }
+        img.lazy-img.loaded { filter: blur(0); }
+
+        /* Floating actions */
+        .floating-actions {
+            position: fixed; bottom: 24px; right: 24px; z-index: 40;
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        @media (max-width: 640px) { .floating-actions { bottom: 16px; right: 16px; } }
+    </style>
+
+    <!-- JSON-LD Structured Data for Academics Page -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "EducationalOrganization",
+            "name": "Prescious Prime Stars Academy (PREPSA)",
+            "alternateName": "PREPSA Digital Campus",
+            "url": "https://prepsa.edu.ng",
+            "description": "A Christian digital campus from Creche to JSS3 in Abeokuta, Ogun State, Nigeria, blending academic rigour, leadership development, and faith-based character formation.",
+            "address": { "@type": "PostalAddress", "streetAddress": "38 Asalu Avenue, Apete, Obantoko", "addressLocality": "Abeokuta", "addressRegion": "Ogun State", "addressCountry": "NG" },
+            "telephone": "+2349132577502",
+            "email": "presciousprimestars@gmail.com",
+            "sameAs": ["https://facebook.com/prepsa", "https://instagram.com/prepsa", "https://linkedin.com/company/prepsa"],
+            "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Academic Programs",
+                "itemListElement": [
+                    { "@type": "Offer", "itemOffered": { "@type": "EducationalOccupationalProgram", "name": "Creche & Pre-Nursery", "educationalLevel": "Early Childhood" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "EducationalOccupationalProgram", "name": "Nursery", "educationalLevel": "Early Childhood" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "EducationalOccupationalProgram", "name": "Primary 1-6", "educationalLevel": "Primary Education" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "EducationalOccupationalProgram", "name": "JSS 1-3", "educationalLevel": "Junior Secondary Education" } }
+                ]
+            }
+        }
+    </script>
+    <!-- FAQ Structured Data -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                { "@type": "Question", "name": "What curriculum does PREPSA follow?", "acceptedAnswer": { "@type": "Answer", "text": "We blend the Nigerian National Curriculum with British best practices, enriched with Christian Religious Studies and 21st-century skills (digital literacy, leadership, critical thinking)." } },
+                { "@type": "Question", "name": "Are there exams at PREPSA? How often?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Continuous assessment (quizzes, assignments) throughout the term, plus end-of-term CBT examinations. JSS3 students write the BECE/JSSCE." } },
+                { "@type": "Question", "name": "Do you offer support for students with learning needs?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We have a Learning Support Unit that provides differentiated instruction, extra tutoring, and individualised plans as needed." } },
+                { "@type": "Question", "name": "What is the teacher-to-student ratio?", "acceptedAnswer": { "@type": "Answer", "text": "Average 1:15 in Early Years, 1:20 in Primary, and 1:25 in JSS. Small class sizes ensure individual attention." } }
+            ]
+        }
+    </script>
+</head>
+<body class="min-h-screen antialiased loading">
+
+    <!-- PAGE LOADER with Logo Zoom Animation -->
+    <div id="page-loader" aria-hidden="true">
+        <div class="loader-logo-container">
+            <div class="loader-logo-icon">P</div>
+            <span class="loader-text">PREPSA</span>
+        </div>
+    </div>
+
+    <!-- NAVIGATION TRANSITION OVERLAY -->
+    <div id="nav-transition-overlay" aria-hidden="true">
+        <div class="nav-logo-icon">P</div>
+    </div>
+
+    <!-- PROGRESS BAR -->
+    <div id="progress-bar" class="fixed top-0 left-0 h-1 bg-primary z-[9999]" style="width:0%;"></div>
+
+    <!-- AUTH MODAL (Login / Sign Up) -->
+    <div id="auth-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-navy/70 backdrop-blur-sm p-4" aria-hidden="true">
+        <div class="modal-content relative w-full max-w-md rounded-3xl bg-card p-8 shadow-elegant ring-1 ring-border">
+            <button id="modal-close" class="absolute right-5 top-5 grid size-9 place-items-center rounded-full bg-secondary text-muted-foreground hover:bg-border hover:text-foreground transition-colors" aria-label="Close modal">
+                <svg class="size-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" /></svg>
+            </button>
+            <div class="flex gap-1 mb-7 rounded-xl bg-secondary p-1">
+                <button id="tab-login" class="flex-1 rounded-lg py-2.5 text-sm font-semibold bg-card text-foreground shadow-sm transition-all">Login</button>
+                <button id="tab-signup" class="flex-1 rounded-lg py-2.5 text-sm font-semibold text-muted-foreground hover:text-foreground transition-all">Sign Up</button>
+            </div>
+            <form id="form-login" class="space-y-4" onsubmit="event.preventDefault(); handleLogin();">
+                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Email</label><input type="email" required placeholder="your@email.com" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" /></div>
+                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Password</label><input type="password" required placeholder="••••••••" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" /></div>
+                <button type="submit" class="w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-elegant transition-transform hover:-translate-y-0.5">Login to Portal</button>
+            </form>
+            <form id="form-signup" class="space-y-4 hidden" onsubmit="event.preventDefault(); handleSignup();">
+                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Full Name</label><input type="text" required placeholder="Your full name" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" /></div>
+                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">I am a...</label><select required class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"><option value="">Select role</option><option value="student">Student</option><option value="parent">Parent</option><option value="teacher">Teacher</option><option value="admin">Admin</option></select></div>
+                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Email</label><input type="email" required placeholder="your@email.com" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" /></div>
+                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Password</label><input type="password" required placeholder="Min. 8 characters" minlength="8" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" /></div>
+                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Confirm Password</label><input type="password" required placeholder="Re-enter password" minlength="8" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" /></div>
+                <button type="submit" class="w-full rounded-full bg-gold px-6 py-3 text-sm font-semibold text-gold-foreground shadow-soft transition-transform hover:-translate-y-0.5">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-xl">
+        <div class="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-6 py-4">
+            <a href="index.html" class="flex items-center gap-2.5 group" aria-label="PREPSA Home">
+                <span class="grid size-9 place-items-center rounded-lg bg-primary font-extrabold text-primary-foreground shadow-soft transition-transform group-hover:scale-110 duration-300">P</span>
+                <span class="text-xl font-extrabold tracking-tight text-foreground">PREPSA</span>
+            </a>
+            <nav class="hidden items-center gap-7 lg:flex" aria-label="Main navigation">
+                <a href="index.html" class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">Home</a>
+                <a href="about.html" class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">About</a>
+                <a href="academics.html" class="text-sm font-medium text-primary" aria-current="page">Academics</a>
+                <a href="admissions.html" class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">Admissions</a>
+                <a href="index.html#events" class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">Events</a>
+                <a href="index.html#gallery" class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">Gallery</a>
+                <a href="index.html#blog" class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">Blog</a>
+                <a href="#contact" class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">Contact</a>
+            </nav>
+            <div class="hidden items-center gap-3 lg:flex">
+                <button id="btn-login-desktop" class="text-sm font-semibold text-foreground hover:text-primary transition-colors">Portal Login</button>
+                <button id="btn-signup-desktop" class="text-sm font-semibold text-primary hover:text-primary-glow transition-colors">Sign Up</button>
+                <a href="admissions.html#apply-form" class="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-gold-foreground shadow-soft transition-transform hover:-translate-y-0.5 animate-pulse-glow">Apply Now</a>
+            </div>
+            <button id="menu-toggle" class="rounded-md p-2 lg:hidden" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+                <svg id="menu-icon" class="size-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="border-t border-border bg-background lg:hidden">
+            <nav class="mx-auto max-w-7xl px-6 py-4 flex flex-col gap-1" aria-label="Mobile navigation">
+                <a href="index.html" class="rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-secondary">Home</a>
+                <a href="about.html" class="rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-secondary">About</a>
+                <a href="academics.html" class="rounded-md px-3 py-2.5 text-sm font-medium bg-secondary text-primary">Academics</a>
+                <a href="admissions.html" class="rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-secondary">Admissions</a>
+                <a href="index.html#events" class="rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-secondary">Events</a>
+                <a href="index.html#gallery" class="rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-secondary">Gallery</a>
+                <a href="index.html#blog" class="rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-secondary">Blog</a>
+                <a href="#contact" class="rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-secondary">Contact</a>
+                <hr class="my-2 border-border" />
+                <button id="btn-login-mobile" class="rounded-md px-3 py-2.5 text-sm font-medium text-foreground hover:bg-secondary text-left">Portal Login</button>
+                <button id="btn-signup-mobile" class="rounded-md px-3 py-2.5 text-sm font-medium text-primary hover:bg-secondary text-left">Sign Up</button>
+                <a href="admissions.html#apply-form" class="mt-2 rounded-full bg-gold px-5 py-3 text-center text-sm font-semibold text-gold-foreground">Apply Now</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION with sticky parallax image -->
+        <section class="relative overflow-hidden py-20 text-white">
+            <div class="absolute inset-0 z-0">
+                <img src="https://res.cloudinary.com/drqh2og5z/image/upload/q_auto,f_auto,w_1600/academics-hero.jpg"
+                     alt="Students learning in a modern classroom"
+                     class="w-full h-full object-cover sticky top-0 lazy-img"
+                     style="position: sticky; top: 0;"
+                     onerror="this.style.display='none'; this.parentElement.classList.add('gallery-placeholder');">
+            </div>
+            <div class="absolute inset-0 z-1 bg-gradient-to-br from-primary to-primary-glow opacity-90"></div>
+            <div class="absolute inset-0 z-2 bg-black/20"></div>
+            <div class="relative z-10 mx-auto max-w-7xl px-6 text-center">
+                <div class="animate-fade-up">
+                    <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 backdrop-blur"><span class="text-xs font-bold uppercase tracking-[0.18em]">Academic Excellence</span></div>
+                    <h1 class="text-4xl font-extrabold tracking-tight lg:text-6xl">A Curriculum That Shapes <span class="text-gold">Leaders</span></h1>
+                    <p class="mt-6 max-w-2xl mx-auto text-white/80 text-lg">Nigeria-British blended curriculum, enhanced with Christian values, digital tools, and leadership formation — from Creche through JSS3.</p>
+                    <div class="mt-8 flex flex-wrap justify-center gap-4">
+                        <a href="#curriculum" class="rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-gold-foreground shadow-elegant transition-transform hover:-translate-y-0.5">Explore Curriculum</a>
+                        <a href="#stages" class="rounded-full border border-white/30 px-7 py-3.5 text-sm font-semibold hover:bg-white/10 transition-colors">Learning Stages</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUICK STATS -->
+        <section class="border-b border-border bg-secondary/40 py-12">
+            <div class="mx-auto max-w-7xl px-6">
+                <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+                    <div class="text-center reveal-on-scroll"><div class="text-3xl font-extrabold text-primary">15+</div><div class="text-xs font-semibold uppercase text-muted-foreground">Years of Excellence</div></div>
+                    <div class="text-center reveal-on-scroll"><div class="text-3xl font-extrabold text-primary">98%</div><div class="text-xs font-semibold uppercase text-muted-foreground">JSSCE Pass Rate</div></div>
+                    <div class="text-center reveal-on-scroll"><div class="text-3xl font-extrabold text-primary">12+</div><div class="text-xs font-semibold uppercase text-muted-foreground">Subjects (JSS)</div></div>
+                    <div class="text-center reveal-on-scroll"><div class="text-3xl font-extrabold text-primary">40+</div><div class="text-xs font-semibold uppercase text-muted-foreground">Qualified Teachers</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CURRICULUM OVERVIEW -->
+        <section id="curriculum" class="py-24">
+            <div class="mx-auto max-w-7xl px-6">
+                <div class="text-center reveal-on-scroll">
+                    <span class="text-xs font-bold uppercase tracking-[0.18em] text-primary">Our Approach</span>
+                    <h2 class="mt-3 text-4xl font-extrabold tracking-tight">Rigorous, Relevant, Christ‑Centred</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-muted-foreground">We blend the Nigerian national curriculum with British best practices, integrating faith, digital literacy, and leadership at every stage.</p>
+                </div>
+                <div class="mt-16 grid gap-6 md:grid-cols-3">
+                    <div class="card-hover rounded-2xl border border-border bg-card p-7 reveal-on-scroll">
+                        <div class="mb-4 inline-flex rounded-full bg-primary/10 p-2 text-primary"><svg class="size-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg></div>
+                        <h3 class="text-lg font-bold">Academic Rigour</h3>
+                        <p class="mt-2 text-sm text-muted-foreground">Learners master core subjects with critical thinking, problem-solving, and inquiry-based methods.</p>
+                    </div>
+                    <div class="card-hover rounded-2xl border border-border bg-card p-7 reveal-on-scroll">
+                        <div class="mb-4 inline-flex rounded-full bg-primary/10 p-2 text-primary"><svg class="size-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg></div>
+                        <h3 class="text-lg font-bold">Christian Worldview</h3>
+                        <p class="mt-2 text-sm text-muted-foreground">Every subject is taught through the lens of biblical truth, with daily devotion and discipleship.</p>
+                    </div>
+                    <div class="card-hover rounded-2xl border border-border bg-card p-7 reveal-on-scroll">
+                        <div class="mb-4 inline-flex rounded-full bg-primary/10 p-2 text-primary"><svg class="size-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 3v2m6-2v2M9 19v2m6-2v2M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2zm3 8h8m-4-4v8" /></svg></div>
+                        <h3 class="text-lg font-bold">Digital Integration</h3>
+                        <p class="mt-2 text-sm text-muted-foreground">LMS, CBT exams, coding, and digital citizenship prepare learners for the future workforce.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEARNING STAGES with images and animations -->
+        <section id="stages" class="bg-secondary/40 py-24">
+            <div class="mx-auto max-w-7xl px-6">
+                <div class="text-center reveal-on-scroll">
+                    <span class="text-xs font-bold uppercase tracking-[0.18em] text-primary">Learning Pathways</span>
+                    <h2 class="mt-3 text-4xl font-extrabold tracking-tight">Every Stage, Intentional Design</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-muted-foreground">From foundational years to junior secondary, each stage builds on the last — academically, spiritually, and socially.</p>
+                </div>
+                <div class="mt-16 space-y-8">
+                    <!-- Creche & Pre-Nursery -->
+                    <div class="stage-card rounded-2xl border border-border bg-card overflow-hidden reveal-on-scroll">
+                        <div class="relative overflow-hidden h-48"><img src="https://res.cloudinary.com/drqh2og5z/image/upload/q_auto,f_auto,w_800/creche-pre-nursery.jpg" alt="Creche & Pre-Nursery" class="stage-image lazy-img w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.classList.add('gallery-placeholder');"></div>
+                        <div class="bg-primary/10 px-6 py-4"><h3 class="text-xl font-bold text-primary">Creche & Pre-Nursery (3 months – 2 years)</h3></div>
+                        <div class="p-6"><p class="text-muted-foreground">A nurturing, play‑based environment that promotes sensory exploration, early communication, and social-emotional growth in a safe, Christian atmosphere.</p><div class="mt-4 flex flex-wrap gap-2"><span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">Sensory Play</span><span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">Music & Rhymes</span><span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">Biblical Stories</span></div></div>
+                    </div>
+                    <!-- Nursery -->
+                    <div class="stage-card rounded-2xl border border-border bg-card overflow-hidden reveal-on-scroll">
+                        <div class="relative overflow-hidden h-48"><img src="https://res.cloudinary.com/drqh2og5z/image/upload/q_auto,f_auto,w_800/nursery-class.jpg" alt="Nursery" class="stage-image lazy-img w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.classList.add('gallery-placeholder');"></div>
+                        <div class="bg-primary/10 px-6 py-4"><h3 class="text-xl font-bold text-primary">Nursery (3 – 5 years)</h3></div>
+                        <div class="p-6"><p class="text-muted-foreground">Montessori-inspired early years foundation: literacy, numeracy, phonics, creative arts, and Christian living. Learners build confidence and curiosity.</p><div class="mt-4 flex flex-wrap gap-2"><span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">Early Literacy</span><span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">Numeracy</span><span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">CRS</span></div></div>
+                    </div>
+                    <!-- Primary -->
+                    <div class="stage-card rounded-2xl border border-border bg-card overflow-hidden reveal-on-scroll">
+                        <div class="relative overflow-hidden h-48"><img src="https://res.cloudinary.com/drqh2og5z/image/upload/q_auto,f_auto,w_800/primary-class.jpg" alt="Primary School" class="stage-image lazy-img w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.classList.add('gallery-placeholder');"></div>
+                        <div class="bg-primary/10 px-6 py-4"><h3 class="text-xl font-bold text-primary">Primary 1 – 6 (6 – 11 years)</h3></div>
+                        <div class="p-6"><p class="text-muted-foreground">Nigeria-British blended curriculum. Core subjects include English, Mathematics, Science, Social Studies, CRS, ICT, French, Agricultural Science, Creative Arts, and Physical Education. Leadership clubs begin.</p><div class="mt-4 flex flex-wrap gap-2"><span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">English</span><span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">Mathematics</span><span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">Science</span><span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">ICT</span></div></div>
+                    </div>
+                    <!-- Junior Secondary -->
+                    <div class="stage-card rounded-2xl border border-border bg-card overflow-hidden reveal-on-scroll">
+                        <div class="relative overflow-hidden h-48"><img src="https://res.cloudinary.com/drqh2og5z/image/upload/q_auto,f_auto,w_800/jss-class.jpg" alt="Junior Secondary" class="stage-image lazy-img w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.classList.add('gallery-placeholder');"></div>
+                        <div class="bg-primary/10 px-6 py-4"><h3 class="text-xl font-bold text-primary">JSS 1 – 3 (12 – 14 years)</h3></div>
+                        <div class="p-6"><p class="text-muted-foreground">Comprehensive preparation for BECE/JSSCE. Subjects: English, Mathematics, Basic Science, Basic Technology, Social Studies, CRS, Business Studies, French, ICT, Agricultural Science, Home Economics, Civic Education, and Cultural & Creative Arts. Plus Leadership Academy and career guidance.</p><div class="mt-4 flex flex-wrap gap-2"><span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">CBT Practice</span><span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">Leadership Projects</span><span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">Mentorship</span></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIGITAL LEARNING FEATURES -->
+        <section class="py-24">
+            <div class="mx-auto max-w-7xl px-6">
+                <div class="grid gap-12 lg:grid-cols-2 items-center">
+                    <div class="reveal-on-scroll">
+                        <span class="text-xs font-bold uppercase tracking-[0.18em] text-primary">Digital Campus</span>
+                        <h2 class="mt-3 text-4xl font-extrabold tracking-tight">Technology-Enhanced Learning</h2>
+                        <p class="mt-4 text-muted-foreground">Our digital ecosystem makes learning engaging, accessible, and data-driven — while safeguarding Christian values.</p>
+                        <ul class="mt-6 space-y-3">
+                            <li class="flex gap-2"><svg class="size-5 text-primary shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> <span class="text-sm">Learning Management System (LMS) for assignments, resources, and progress tracking</span></li>
+                            <li class="flex gap-2"><svg class="size-5 text-primary shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> <span class="text-sm">Computer‑Based Testing (CBT) for exams and continuous assessment</span></li>
+                            <li class="flex gap-2"><svg class="size-5 text-primary shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> <span class="text-sm">Digital library and research tools</span></li>
+                            <li class="flex gap-2"><svg class="size-5 text-primary shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> <span class="text-sm">Parent portal for real-time updates on attendance, grades, and announcements</span></li>
+                        </ul>
+                    </div>
+                    <div class="reveal-on-scroll rounded-3xl overflow-hidden shadow-soft ring-1 ring-border">
+                        <img src="https://res.cloudinary.com/drqh2og5z/image/upload/q_auto,f_auto,w_800/digital-learning.jpg" alt="Digital learning at PREPSA" class="lazy-img w-full h-auto object-cover" onerror="this.style.display='none'; this.parentElement.classList.add('gallery-placeholder'); this.parentElement.style.minHeight='300px';">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ASSESSMENT & REPORTING -->
+        <section class="bg-secondary/40 py-24">
+            <div class="mx-auto max-w-7xl px-6">
+                <div class="text-center reveal-on-scroll">
+                    <span class="text-xs font-bold uppercase tracking-[0.18em] text-primary">Assessment</span>
+                    <h2 class="mt-3 text-4xl font-extrabold tracking-tight">Measuring Growth, Not Just Grades</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-muted-foreground">We use continuous, formative, and summative assessments to celebrate progress and identify areas for support.</p>
+                </div>
+                <div class="mt-12 grid gap-6 md:grid-cols-3">
+                    <div class="card-hover rounded-2xl border border-border bg-card p-6 text-center reveal-on-scroll"><div class="text-3xl mb-2">📝</div><h3 class="font-bold">Continuous Assessment</h3><p class="text-sm text-muted-foreground mt-1">Weekly quizzes, projects, and class participation (30% of term grade).</p></div>
+                    <div class="card-hover rounded-2xl border border-border bg-card p-6 text-center reveal-on-scroll"><div class="text-3xl mb-2">💻</div><h3 class="font-bold">CBT Exams</h3><p class="text-sm text-muted-foreground mt-1">End-of-term computer-based tests (70% of term grade).</p></div>
+                    <div class="card-hover rounded-2xl border border-border bg-card p-6 text-center reveal-on-scroll"><div class="text-3xl mb-2">📊</div><h3 class="font-bold">Parent Conferences</h3><p class="text-sm text-muted-foreground mt-1">Termly meetings to discuss learner progress and set goals.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUBJECTS HIGHLIGHT -->
+        <section class="py-24">
+            <div class="mx-auto max-w-7xl px-6">
+                <div class="text-center reveal-on-scroll">
+                    <span class="text-xs font-bold uppercase tracking-[0.18em] text-primary">Subject Areas</span>
+                    <h2 class="mt-3 text-4xl font-extrabold tracking-tight">A Well-Rounded Education</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-muted-foreground">From core academics to creative arts and vocational skills, we prepare learners for life.</p>
+                </div>
+                <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    <div class="bg-card rounded-xl p-5 shadow-soft ring-1 ring-border text-center reveal-on-scroll"><div class="text-2xl">📖</div><div class="font-semibold mt-2">English & Literacy</div></div>
+                    <div class="bg-card rounded-xl p-5 shadow-soft ring-1 ring-border text-center reveal-on-scroll"><div class="text-2xl">🔢</div><div class="font-semibold mt-2">Mathematics</div></div>
+                    <div class="bg-card rounded-xl p-5 shadow-soft ring-1 ring-border text-center reveal-on-scroll"><div class="text-2xl">🔬</div><div class="font-semibold mt-2">Basic Science & Tech</div></div>
+                    <div class="bg-card rounded-xl p-5 shadow-soft ring-1 ring-border text-center reveal-on-scroll"><div class="text-2xl">🌍</div><div class="font-semibold mt-2">Social Studies</div></div>
+                    <div class="bg-card rounded-xl p-5 shadow-soft ring-1 ring-border text-center reveal-on-scroll"><div class="text-2xl">✝️</div><div class="font-semibold mt-2">Christian Religious Studies</div></div>
+                    <div class="bg-card rounded-xl p-5 shadow-soft ring-1 ring-border text-center reveal-on-scroll"><div class="text-2xl">💻</div><div class="font-semibold mt-2">ICT & Coding</div></div>
+                    <div class="bg-card rounded-xl p-5 shadow-soft ring-1 ring-border text-center reveal-on-scroll"><div class="text-2xl">🇫🇷</div><div class="font-semibold mt-2">French</div></div>
+                    <div class="bg-card rounded-xl p-5 shadow-soft ring-1 ring-border text-center reveal-on-scroll"><div class="text-2xl">🎨</div><div class="font-semibold mt-2">Creative Arts</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BEYOND THE CLASSROOM -->
+        <section class="bg-navy text-white py-24">
+            <div class="mx-auto max-w-7xl px-6">
+                <div class="text-center reveal-on-scroll">
+                    <span class="text-xs font-bold uppercase tracking-[0.18em] text-gold">Beyond Academics</span>
+                    <h2 class="mt-3 text-4xl font-extrabold tracking-tight">Holistic Development</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-white/70">Learning doesn't stop at the classroom door. We offer clubs, leadership opportunities, and spiritual formation.</p>
+                </div>
+                <div class="mt-12 grid gap-6 md:grid-cols-3">
+                    <div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur reveal-on-scroll"><div class="text-2xl mb-2">👑</div><h3 class="font-bold text-gold">Leadership Hub</h3><p class="text-sm text-white/70 mt-1">Prefect body, student council, project-based leadership badges, and mentorship.</p></div>
+                    <div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur reveal-on-scroll"><div class="text-2xl mb-2">⚽</div><h3 class="font-bold text-gold">Sports & Clubs</h3><p class="text-sm text-white/70 mt-1">Football, basketball, athletics, chess, coding club, literary & debate, music, and drama.</p></div>
+                    <div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur reveal-on-scroll"><div class="text-2xl mb-2">🙏</div><h3 class="font-bold text-gold">Spiritual Formation</h3><p class="text-sm text-white/70 mt-1">Daily devotion, weekly chapel, Bible study groups, and community service projects.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- D‑CLASS DISCIPLESHIP JOURNEY with animations -->
+        <section class="py-24 bg-gradient-to-b from-white to-secondary/20">
+            <div class="mx-auto max-w-7xl px-6">
+                <div class="text-center reveal-on-scroll">
+                    <span class="text-xs font-bold uppercase tracking-[0.18em] text-gold">D‑Class Discipleship</span>
+                    <h2 class="mt-3 text-4xl font-extrabold tracking-tight">A Journey of Faith & Purpose</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-muted-foreground">Our digital discipleship pathway guides learners from foundational faith to missional leadership.</p>
+                </div>
+                <div class="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                    <div class="dclass-card rounded-2xl border border-border bg-card p-6 text-center reveal-on-scroll">
+                        <div class="relative overflow-hidden rounded-xl h-40 mb-4"><img src="https://res.cloudinary.com/drqh2og5z/image/upload/q_auto,f_auto,w_600/dclass-foundation.jpg" alt="D-Class Foundation" class="lazy-img w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.classList.add('gallery-placeholder');"></div>
+                        <div class="dclass-icon text-4xl mb-3">🌱</div>
+                        <h3 class="text-xl font-bold text-primary">Foundation</h3>
+                        <p class="mt-2 text-sm text-muted-foreground">Introduction to biblical truths, memory verses, and prayer habits. Learners discover God's love.</p>
+                    </div>
+                    <div class="dclass-card rounded-2xl border border-border bg-card p-6 text-center reveal-on-scroll">
+                        <div class="relative overflow-hidden rounded-xl h-40 mb-4"><img src="https://res.cloudinary.com/drqh2og5z/image/upload/q_auto,f_auto,w_600/dclass-exploration.jpg" alt="D-Class Exploration" class="lazy-img w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.classList.add('gallery-placeholder');"></div>
+                        <div class="dclass-icon text-4xl mb-3">🔍</div>
+                        <h3 class="text-xl font-bold text-primary">Exploration</h3>
+                        <p class="mt-2 text-sm text-muted-foreground">Deep dive into Scripture, Christian living, and apologetics. Learners ask big questions.</p>
+                    </div>
+                    <div class="dclass-card rounded-2xl border border-border bg-card p-6 text-center reveal-on-scroll">
+                        <div class="relative overflow-hidden rounded-xl h-40 mb-4"><img src="https://res.cloudinary.com/drqh2og5z/image/upload/q_auto,f_auto,w_600/dclass-leadership.jpg" alt="D-Class Leadership" class="lazy-img w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.classList.add('gallery-placeholder');"></div>
+                        <div class="dclass-icon text-4xl mb-3">👑</div>
+                        <h3 class="text-xl font-bold text-primary">Leadership</h3>
+                        <p class="mt-2 text-sm text-muted-foreground">Mentorship, serving in chapel, leading prayer groups, and developing a servant heart.</p>
+                    </div>
+                    <div class="dclass-card rounded-2xl border border-border bg-card p-6 text-center reveal-on-scroll">
+                        <div class="relative overflow-hidden rounded-xl h-40 mb-4"><img src="https://res.cloudinary.com/drqh2og5z/image/upload/q_auto,f_auto,w_600/dclass-commissioning.jpg" alt="D-Class Commissioning" class="lazy-img w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.classList.add('gallery-placeholder');"></div>
+                        <div class="dclass-icon text-4xl mb-3">🚀</div>
+                        <h3 class="text-xl font-bold text-primary">Commissioning</h3>
+                        <p class="mt-2 text-sm text-muted-foreground">Ready to impact the world. Learners lead community projects and share their faith boldly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="py-24">
+            <div class="mx-auto max-w-4xl px-6">
+                <div class="text-center reveal-on-scroll"><span class="text-xs font-bold uppercase tracking-[0.18em] text-primary">FAQ</span><h2 class="mt-3 text-4xl font-extrabold tracking-tight">Common Questions About Academics</h2></div>
+                <div class="mt-12 space-y-4">
+                    <div class="bg-card rounded-2xl p-6 shadow-soft ring-1 ring-border reveal-on-scroll"><button class="faq-btn w-full text-left font-bold flex justify-between items-center">What curriculum does PREPSA follow?<span class="text-primary text-xl">+</span></button><div class="faq-content hidden mt-2 text-sm text-muted-foreground">We blend the Nigerian National Curriculum with British best practices, enriched with Christian Religious Studies and 21st-century skills (digital literacy, leadership, critical thinking).</div></div>
+                    <div class="bg-card rounded-2xl p-6 shadow-soft ring-1 ring-border reveal-on-scroll"><button class="faq-btn w-full text-left font-bold flex justify-between items-center">Are there exams? How often?<span class="text-primary text-xl">+</span></button><div class="faq-content hidden mt-2 text-sm text-muted-foreground">Yes. Continuous assessment (quizzes, assignments) throughout the term, plus end-of-term CBT examinations. JSS3 students write the BECE/JSSCE.</div></div>
+                    <div class="bg-card rounded-2xl p-6 shadow-soft ring-1 ring-border reveal-on-scroll"><button class="faq-btn w-full text-left font-bold flex justify-between items-center">Do you offer support for students with learning needs?<span class="text-primary text-xl">+</span></button><div class="faq-content hidden mt-2 text-sm text-muted-foreground">Yes. We have a Learning Support Unit that provides differentiated instruction, extra tutoring, and individualised plans as needed.</div></div>
+                    <div class="bg-card rounded-2xl p-6 shadow-soft ring-1 ring-border reveal-on-scroll"><button class="faq-btn w-full text-left font-bold flex justify-between items-center">What is the teacher-to-student ratio?<span class="text-primary text-xl">+</span></button><div class="faq-content hidden mt-2 text-sm text-muted-foreground">Average 1:15 in Early Years, 1:20 in Primary, and 1:25 in JSS. Small class sizes ensure individual attention.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA BANNER -->
+        <section class="relative overflow-hidden bg-gradient-to-r from-primary to-primary-glow py-20 text-white">
+            <div class="relative z-10 mx-auto max-w-4xl px-6 text-center reveal-on-scroll">
+                <h2 class="text-4xl font-extrabold tracking-tight">Ready to Enrol?</h2>
+                <p class="mt-4 text-white/80">Give your child an education that combines academic excellence, Christian values, and future-ready skills.</p>
+                <div class="mt-8 flex flex-wrap justify-center gap-4">
+                    <a href="admissions.html#apply-form" class="rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-gold-foreground shadow-elegant transition-transform hover:-translate-y-0.5">Apply Now</a>
+                    <a href="#contact" class="rounded-full border border-white/30 px-7 py-3.5 text-sm font-semibold hover:bg-white/10 transition-colors">Request Information</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-navy text-white pt-16 sm:pt-24 pb-10 border-t-4 border-gold">
+        <div class="mx-auto max-w-7xl px-6">
+            <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
+                <div class="lg:col-span-2">
+                    <a href="index.html" class="flex items-center gap-2.5 group">
+                        <span class="grid size-9 place-items-center rounded-lg bg-gold font-extrabold text-gold-foreground transition-transform group-hover:scale-110">P</span>
+                        <span class="text-xl font-extrabold tracking-tight">PREPSA</span>
+                    </a>
+                    <p class="mt-6 max-w-sm text-sm leading-relaxed text-white/65">Prescious Prime Stars Academy — A Christian digital campus shaping the next generation of Nigerian leaders through academic rigour, character formation, and innovation.</p>
+                    <p class="mt-3 text-xs italic text-gold/80">Arise and Shine! • Nurturing Stars • Building Leaders • Inspiring Excellence</p>
+                    <div class="mt-6 flex gap-3">
+                        <a href="javascript:void(0)" aria-label="Facebook" class="grid size-10 place-items-center rounded-full border border-white/15 transition-colors hover:bg-white/10"><svg class="size-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+                        <a href="javascript:void(0)" aria-label="Instagram" class="grid size-10 place-items-center rounded-full border border-white/15 transition-colors hover:bg-white/10"><svg class="size-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+                        <a href="javascript:void(0)" aria-label="LinkedIn" class="grid size-10 place-items-center rounded-full border border-white/15 transition-colors hover:bg-white/10"><svg class="size-4" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-[0.18em] text-gold mb-6">Quick Links</h4>
+                    <ul class="space-y-3 text-sm text-white/65">
+                        <li><a href="about.html" class="hover:text-white transition-colors">About PREPSA</a></li>
+                        <li><a href="academics.html" class="hover:text-white transition-colors">Academics</a></li>
+                        <li><a href="admissions.html" class="hover:text-white transition-colors">Admissions</a></li>
+                        <li><a href="index.html#events" class="hover:text-white transition-colors">Events</a></li>
+                        <li><a href="index.html#gallery" class="hover:text-white transition-colors">Gallery</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-[0.18em] text-gold mb-6">Contact</h4>
+                    <ul class="space-y-3 text-sm text-white/65">
+                        <li class="flex gap-3"><svg class="size-5 shrink-0 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="3"/></svg>38 Asalu Avenue, Apete, Obantoko, Abeokuta, Ogun State, Nigeria</li>
+                        <li class="flex gap-3"><svg class="size-5 shrink-0 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><a href="tel:+2349132577502" class="hover:text-white transition-colors">+2349132577502</a></li>
+                        <li class="flex gap-3"><svg class="size-5 shrink-0 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:presciousprimestars@gmail.com" class="hover:text-white transition-colors">presciousprimestars@gmail.com</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-[0.18em] text-gold mb-6">Stay Updated</h4>
+                    <p class="text-sm text-white/60 mb-4">Monthly updates from the PREPSA community.</p>
+                    <form class="flex flex-col sm:flex-row gap-2" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                        <input type="email" required placeholder="Email address" class="w-full rounded-md border border-white/15 bg-white/5 px-3 py-2 text-sm placeholder:text-white/40 focus:border-gold focus:outline-none" />
+                        <button class="rounded-md bg-gold px-3 py-2 text-xs font-bold uppercase tracking-wider text-gold-foreground hover:bg-gold/90 transition-colors">Join</button>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-white/45">&copy; <span id="current-year"></span> Prescious Prime Stars Academy (PREPSA). All rights reserved. • Arise and Shine!</p>
+                <div class="flex gap-4 text-xs text-white/50"><a href="#" class="hover:text-white">Privacy Policy</a><a href="#" class="hover:text-white">Terms of Use</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP & FLOATING ACTIONS -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 z-40 grid size-11 place-items-center rounded-full bg-primary text-primary-foreground shadow-glow-primary hover:-translate-y-1 transition-all" aria-label="Back to top">
+        <svg class="size-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7" /></svg>
+    </button>
+    <div class="floating-actions" style="bottom: 80px;">
+        <a href="https://wa.me/2349132577502" target="_blank" rel="noopener noreferrer" class="grid size-12 place-items-center rounded-full bg-green-500 text-white shadow-lg hover:scale-105 transition" aria-label="Chat on WhatsApp"><svg class="size-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        <a href="tel:+2349132577502" class="grid size-12 place-items-center rounded-full bg-blue-600 text-white shadow-lg hover:scale-105 transition" aria-label="Call school"><svg class="size-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></a>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+        (function() {
+            // === CLOUDINARY CONFIG ===
+            // Cloud name: drqh2og5z | Upload preset: peterwork
+            // Use https://res.cloudinary.com/drqh2og5z/image/upload/q_auto,f_auto/your-file.jpg
+            // or video: https://res.cloudinary.com/drqh2og5z/video/upload/q_auto,f_auto/your-file.mp4
+
+            // === PAGE LOADER ===
+            const pageLoader = document.getElementById('page-loader');
+            const bodyEl = document.body;
+            function hidePageLoader() {
+                if (pageLoader) {
+                    pageLoader.classList.add('hidden-loader');
+                    setTimeout(() => {
+                        if (pageLoader && pageLoader.classList.contains('hidden-loader')) {
+                            pageLoader.style.opacity = '0';
+                            pageLoader.style.visibility = 'hidden';
+                            pageLoader.style.pointerEvents = 'none';
+                        }
+                    }, 500);
+                }
+                bodyEl.classList.remove('loading');
+            }
+            if (pageLoader && !sessionStorage.getItem('prepsa_acad_loader_shown')) {
+                sessionStorage.setItem('prepsa_acad_loader_shown', 'true');
+                setTimeout(hidePageLoader, 2600);
+            } else if (pageLoader) {
+                hidePageLoader();
+            }
+
+            // === NAVIGATION TRANSITION OVERLAY ===
+            const navTransitionOverlay = document.getElementById('nav-transition-overlay');
+            function triggerNavTransition(url) {
+                if (!navTransitionOverlay) { window.location.href = url; return; }
+                navTransitionOverlay.classList.add('active');
+                setTimeout(() => { window.location.href = url; }, 700);
+            }
+            document.querySelectorAll('a[href]').forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href.endsWith('.html') && !href.startsWith('#') && !link.getAttribute('target') && !link.closest('footer')) {
+                    link.addEventListener('click', function(e) {
+                        if (e.ctrlKey || e.metaKey || e.button !== 0) return;
+                        e.preventDefault();
+                        triggerNavTransition(href);
+                    });
+                }
+            });
+
+            // === CURRENT YEAR ===
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // === PROGRESS BAR ===
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const percent = (scrollTop / docHeight) * 100;
+                const progressBar = document.getElementById('progress-bar');
+                if (progressBar) progressBar.style.width = percent + '%';
+            });
+
+            // === MOBILE MENU ===
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', () => {
+                    const isOpen = mobileMenu.classList.toggle('open');
+                    menuToggle.setAttribute('aria-expanded', isOpen);
+                    menuIcon.innerHTML = isOpen
+                        ? '<path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" />'
+                        : '<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />';
+                    mobileMenu.style.maxHeight = isOpen ? mobileMenu.scrollHeight + 'px' : '0';
+                });
+                mobileMenu.querySelectorAll('a, button').forEach(el => el.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />';
+                    mobileMenu.style.maxHeight = '0';
+                }));
+            }
+
+            // === AUTH MODAL ===
+            const authModal = document.getElementById('auth-modal');
+            if (authModal) {
+                const modalClose = document.getElementById('modal-close');
+                const tabLogin = document.getElementById('tab-login');
+                const tabSignup = document.getElementById('tab-signup');
+                const formLogin = document.getElementById('form-login');
+                const formSignup = document.getElementById('form-signup');
+                function openModal(tab = 'login') {
+                    authModal.classList.add('active'); authModal.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden';
+                    if (tab === 'signup') { formLogin.classList.add('hidden'); formSignup.classList.remove('hidden'); } else { formSignup.classList.add('hidden'); formLogin.classList.remove('hidden'); }
+                }
+                function closeModal() { authModal.classList.remove('active'); authModal.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; }
+                document.getElementById('btn-login-desktop')?.addEventListener('click', () => openModal('login'));
+                document.getElementById('btn-signup-desktop')?.addEventListener('click', () => openModal('signup'));
+                document.getElementById('btn-login-mobile')?.addEventListener('click', () => openModal('login'));
+                document.getElementById('btn-signup-mobile')?.addEventListener('click', () => openModal('signup'));
+                modalClose?.addEventListener('click', closeModal);
+                authModal.addEventListener('click', (e) => { if (e.target === authModal) closeModal(); });
+                tabLogin?.addEventListener('click', () => { formSignup.classList.add('hidden'); formLogin.classList.remove('hidden'); });
+                tabSignup?.addEventListener('click', () => { formLogin.classList.add('hidden'); formSignup.classList.remove('hidden'); });
+                document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && authModal.classList.contains('active')) closeModal(); });
+                window.handleLogin = function() { alert('Demo login successful!'); closeModal(); };
+                window.handleSignup = function() { alert('Account created (demo). Welcome!'); closeModal(); };
+            }
+
+            // === SMOOTH SCROLL ===
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#' || href === '#0') return;
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        const offset = 80;
+                        const pos = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                        window.scrollTo({ top: pos, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // === BACK TO TOP ===
+            const backBtn = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => { if (backBtn) backBtn.classList.toggle('visible', window.scrollY > 500); });
+            if (backBtn) backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+            // === SCROLL REVEAL ===
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); } });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+            // === IMAGE FALLBACK ===
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('error', function() {
+                    const h = this.offsetHeight || 200;
+                    this.style.display = 'none';
+                    const parent = this.parentElement;
+                    if (parent && !parent.classList.contains('gallery-placeholder')) {
+                        parent.classList.add('gallery-placeholder');
+                        parent.style.minHeight = h + 'px';
+                    }
+                });
+            });
+
+            // === LAZY LOADING with blur-up ===
+            const lazyImages = document.querySelectorAll('img.lazy-img');
+            const lazyImageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('loaded'); lazyImageObserver.unobserve(entry.target); } });
+            }, { threshold: 0.1, rootMargin: '100px' });
+            lazyImages.forEach(img => lazyImageObserver.observe(img));
+            setTimeout(() => { document.querySelectorAll('img.lazy-img:not(.loaded)').forEach(img => img.classList.add('loaded')); }, 3000);
+
+            // === FAQ ACCORDION ===
+            document.querySelectorAll('.faq-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const content = btn.nextElementSibling;
+                    const icon = btn.querySelector('span');
+                    const isOpen = !content.classList.contains('hidden');
+                    document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+                    document.querySelectorAll('.faq-btn span').forEach(s => s.textContent = '+');
+                    if (!isOpen) { content.classList.remove('hidden'); if (icon) icon.textContent = '−'; }
+                });
+            });
+
+            console.log('%c PREPSA Academics Page %c Ready ', 'background:#4F46E5;color:#fff;padding:6px 12px;border-radius:6px 0 0 6px;font-weight:bold;', 'background:#EAB308;color:#1F2937;padding:6px 12px;border-radius:0 6px 6px 0;font-weight:bold;');
+            console.log('%c Cloudinary: %c drqh2og5z %c | Preset: %c peterwork ', 'color:#6B7280;', 'color:#4F46E5;font-weight:bold;', 'color:#6B7280;', 'color:#EAB308;font-weight:bold;');
+        })();
+    </script>
+    <script type="module" src="firebase.js"></script>
+</body>
+</html>
