@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FAQ | PREPSA — Frequently Asked Questions | Christian Academy Nigeria</title>
     <meta name="description" content="Find answers to common questions about PREPSA admissions, academics, fees, school life, faith & values, and technology. Get help from our Christian digital campus in Abeokuta, Nigeria." />
-    <meta name="keywords" content="PREPSA FAQ, frequently asked questions, school admissions Nigeria, PREPSA fees, Christian school Abeokuta, Nigerian school FAQ, primary school Ogun State, secondary school Nigeria, CBT exams, boarding school questions, school curriculum Nigeria, parenting questions, education Nigeria" />
+    <meta name="keywords" content="PREPSA FAQ, frequently asked questions, school admissions Nigeria, PREPSA fees, Christian school Abeokuta, Nigerian school FAQ, primary school Ogun State, secondary school Nigeria, CBT exams, school curriculum Nigeria, parenting questions, education Nigeria" />
     <meta name="author" content="Prescious Prime Stars Academy" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta property="og:title" content="FAQ | PREPSA — Answers to Your Questions" />
@@ -42,15 +42,15 @@
     https://res.cloudinary.com/drqh2og5z/video/upload/w_800,q_auto,f_auto/v1/FOLDER/FILENAME.mp4
 
     USEFUL TRANSFORMATIONS:
-    - w_800 = width 800px (auto height)
-    - q_auto = automatic quality optimization
-    - f_auto = automatic format (WebP when supported)
+    - w_800         = width 800px (auto height)
+    - q_auto        = automatic quality optimization
+    - f_auto        = automatic format (WebP when supported)
     - c_fill,g_face = crop to fill, focus on faces
-    - ar_16:9 = 16:9 aspect ratio
-    - e_blur:300 = blur effect (for backgrounds)
+    - ar_16:9       = 16:9 aspect ratio
+    - e_blur:300    = blur effect (for backgrounds)
 
-    TO UPLOAD: Use the Cloudinary dashboard or upload widget with preset 'peterwork'
-    Then replace the Unsplash URLs below with your Cloudinary URLs.
+    TO UPLOAD: Use the Cloudinary dashboard or upload widget with preset 'peterwork'.
+    Then replace the Unsplash URLs below with your own Cloudinary URLs.
     ============================================================
     -->
 
@@ -58,10 +58,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-    <!-- AOS (Animate On Scroll) Library -->
+    <!-- AOS (Animate On Scroll) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
     <script>
         tailwind.config = {
             theme: {
@@ -124,10 +125,9 @@
                         'card-2050': '0 4px 24px -8px rgba(0,0,0,0.08), 0 0 0 1px rgba(255,255,255,0.6) inset',
                     },
                     animation: {
-                        'shimmer': 'shimmer 2.5s ease-in-out infinite',
-                        'float': 'float 6s ease-in-out infinite',
+                        shimmer: 'shimmer 2.5s ease-in-out infinite',
+                        float: 'float 6s ease-in-out infinite',
                         'pulse-glow': 'pulseGlow 2.5s ease-in-out infinite',
-                        'fade-up': 'fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards',
                         'logo-zoom': 'logoZoom 1.8s cubic-bezier(0.25, 0.1, 0.25, 1) forwards',
                         'slide-down': 'slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
                     },
@@ -143,10 +143,6 @@
                         pulseGlow: {
                             '0%, 100%': { boxShadow: '0 0 20px -5px oklch(0.84 0.17 88 / 0.4)' },
                             '50%': { boxShadow: '0 0 45px 0px oklch(0.84 0.17 88 / 0.7)' },
-                        },
-                        fadeUp: {
-                            '0%': { opacity: '0', transform: 'translateY(30px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
                         },
                         logoZoom: {
                             '0%': { transform: 'scale(0.25)', opacity: '0.3' },
@@ -291,12 +287,12 @@
         .faq-content-inner {
             overflow: hidden;
         }
-        .faq-content-inner > div {
+        .faq-content-inner>div {
             opacity: 0;
             transform: translateY(-8px);
             transition: opacity 0.35s ease 0.1s, transform 0.35s ease 0.1s;
         }
-        .faq-card.open .faq-content-inner > div {
+        .faq-card.open .faq-content-inner>div {
             opacity: 1;
             transform: translateY(0);
         }
@@ -427,21 +423,24 @@
             #skeleton-container,
             .category-btn,
             #faq-search,
+            #clear-search,
             .feedback-row,
             .faq-chevron,
             #mobile-menu,
-            .glow-orb {
+            .glow-orb,
+            .breadcrumb {
                 display: none !important;
             }
             .faq-card {
                 break-inside: avoid;
                 border: 1px solid #ccc !important;
                 box-shadow: none !important;
+                margin-bottom: 0.5rem !important;
             }
             .faq-content-wrapper {
                 grid-template-rows: 1fr !important;
             }
-            .faq-content-inner > div {
+            .faq-content-inner>div {
                 opacity: 1 !important;
                 transform: none !important;
             }
@@ -454,7 +453,7 @@
 </head>
 <body class="min-h-screen antialiased">
 
-    <!-- ==================== PAGE LOADER OVERLAY (Logo Zoom Animation) ==================== -->
+    <!-- ==================== PAGE LOADER OVERLAY ==================== -->
     <div id="page-loader" aria-hidden="true">
         <div id="loader-logo">P</div>
     </div>
@@ -463,24 +462,24 @@
     <div id="auth-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-navy/75 backdrop-blur-md p-4" aria-hidden="true">
         <div class="modal-content relative w-full max-w-md rounded-3xl bg-card p-8 shadow-elegant ring-1 ring-border">
             <button id="modal-close" class="absolute right-5 top-5 grid size-9 place-items-center rounded-full bg-secondary text-muted-foreground hover:bg-border hover:text-foreground transition-colors" aria-label="Close modal">
-                <svg class="size-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" /></svg>
+                <svg class="size-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg>
             </button>
             <div class="flex gap-1 mb-7 rounded-xl bg-secondary p-1">
                 <button id="tab-login" class="flex-1 rounded-lg py-2.5 text-sm font-semibold bg-card text-foreground shadow-sm transition-all">Login</button>
                 <button id="tab-signup" class="flex-1 rounded-lg py-2.5 text-sm font-semibold text-muted-foreground hover:text-foreground transition-all">Sign Up</button>
             </div>
-            <form id="form-login" class="space-y-4" onsubmit="event.preventDefault(); handleLogin();">
-                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Email</label><input type="email" required placeholder="your@email.com" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" /></div>
-                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Password</label><input type="password" required placeholder="••••••••" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" /></div>
+            <form id="form-login" class="space-y-4" onsubmit="event.preventDefault(); PREPSA.handleLogin();">
+                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Email</label><input type="email" required placeholder="your@email.com" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"></div>
+                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Password</label><input type="password" required placeholder="••••••••" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"></div>
                 <button type="submit" class="w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-elegant transition-transform hover:-translate-y-0.5">Login to Portal</button>
                 <p class="text-center text-xs text-muted-foreground"><a href="#" class="text-primary hover:underline">Forgot password?</a></p>
             </form>
-            <form id="form-signup" class="space-y-4 hidden" onsubmit="event.preventDefault(); handleSignup();">
-                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Full Name</label><input type="text" required placeholder="Your full name" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" /></div>
+            <form id="form-signup" class="space-y-4 hidden" onsubmit="event.preventDefault(); PREPSA.handleSignup();">
+                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Full Name</label><input type="text" required placeholder="Your full name" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"></div>
                 <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">I am a...</label><select required class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"><option value="">Select role</option><option value="student">Student</option><option value="parent">Parent</option><option value="teacher">Teacher</option><option value="admin">Admin</option></select></div>
-                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Email</label><input type="email" required placeholder="your@email.com" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" /></div>
-                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Password</label><input type="password" required placeholder="Min. 8 characters" minlength="8" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" /></div>
-                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Confirm Password</label><input type="password" required placeholder="Re-enter password" minlength="8" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" /></div>
+                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Email</label><input type="email" required placeholder="your@email.com" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"></div>
+                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Password</label><input type="password" required placeholder="Min. 8 characters" minlength="8" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"></div>
+                <div><label class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Confirm Password</label><input type="password" required placeholder="Re-enter password" minlength="8" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"></div>
                 <button type="submit" class="w-full rounded-full bg-gold px-6 py-3 text-sm font-semibold text-gold-foreground shadow-soft transition-transform hover:-translate-y-0.5">Create Account</button>
             </form>
         </div>
@@ -510,7 +509,7 @@
                 <a href="admissions.html#apply-form" class="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-gold-foreground shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-glow-gold animate-pulse-glow">Apply Now</a>
             </div>
             <button id="menu-toggle" class="rounded-md p-2 lg:hidden" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
-                <svg id="menu-icon" class="size-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                <svg id="menu-icon" class="size-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
         </div>
         <div id="mobile-menu" class="border-t border-border bg-background lg:hidden">
@@ -546,12 +545,12 @@
 
         <!-- ==================== HERO SECTION ==================== -->
         <section class="relative overflow-hidden py-20 lg:py-28 text-white" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&q=80'); background-size: cover; background-position: center; background-attachment: fixed;">
-            <!-- Cloudinary alternative: style="background-image: url('https://res.cloudinary.com/drqh2og5z/image/upload/w_1600,q_auto,f_auto,e_blur:200/v1/prepsa/faq-hero');" -->
+            <!-- Cloudinary alternative: background-image: url('https://res.cloudinary.com/drqh2og5z/image/upload/w_1600,q_auto,f_auto,e_blur:200/v1/prepsa/faq-hero'); -->
             <div class="absolute inset-0 bg-gradient-to-br from-primary/95 to-primary-glow/90"></div>
             <div class="absolute inset-0 bg-black/15"></div>
             <div class="glow-orb" style="top:-100px;right:-80px;width:350px;height:350px;background:oklch(0.84 0.17 88 / 0.25);"></div>
             <div class="glow-orb" style="bottom:-80px;left:-60px;width:280px;height:280px;background:oklch(0.58 0.21 258 / 0.2);"></div>
-            <div class="relative z-10 mx-auto max-w-7xl px-6 text-center" data-aos="fade-up" data-aos-duration="900" data-aos-easing="ease-out">
+            <div class="relative z-10 mx-auto max-w-7xl px-6 text-center" data-aos="fade-up" data-aos-duration="900">
                 <div class="mb-5 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 backdrop-blur border border-white/20">
                     <span class="size-1.5 rounded-full bg-gold animate-pulse"></span>
                     <span class="text-xs font-bold uppercase tracking-[0.2em]">Got Questions?</span>
@@ -579,7 +578,7 @@
                         <button data-category="technology" class="category-btn px-4 py-2 rounded-full text-sm font-semibold transition-all bg-background text-foreground border border-border hover:border-primary" role="tab" aria-selected="false">Technology <span class="ml-1 opacity-50 text-xs">(2)</span></button>
                     </div>
                     <div class="relative">
-                        <input type="text" id="faq-search" placeholder="Search questions..." class="pl-10 pr-4 py-2.5 rounded-full border border-border bg-background text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 w-full md:w-64 transition-all" aria-label="Search FAQ questions" />
+                        <input type="text" id="faq-search" placeholder="Search questions..." class="pl-10 pr-10 py-2.5 rounded-full border border-border bg-background text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 w-full md:w-64 transition-all" aria-label="Search FAQ questions" />
                         <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 size-4 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
                         <button id="clear-search" class="absolute right-3 top-1/2 transform -translate-y-1/2 size-5 rounded-full bg-muted text-muted-foreground hidden hover:bg-border hover:text-foreground transition-colors flex items-center justify-center" aria-label="Clear search">
                             <svg class="size-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg>
@@ -614,7 +613,8 @@
 
         <!-- ==================== REAL CONTENT WRAPPER ==================== -->
         <div id="real-content-wrapper">
-            <!-- FAQ ACCORDION SECTIONS -->
+
+            <!-- ==================== FAQ ACCORDION SECTIONS ==================== -->
             <section class="py-24">
                 <div class="mx-auto max-w-3xl px-6">
                     <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="700">
@@ -623,8 +623,9 @@
                         <p class="mt-3 text-muted-foreground">Click any question to reveal the answer. We've organised everything by topic to help you find what you need quickly.</p>
                     </div>
                     <div id="faq-container" class="space-y-3">
-                        <!-- ===== ADMISSIONS (3) ===== -->
-                        <article class="faq-card bg-card rounded-2xl shadow-soft overflow-hidden" data-category="admissions" data-question="What is the admission process How do I apply to PREPSA" data-aos="fade-up" data-aos-duration="600" data-aos-delay="0">
+
+                        <!-- ========== ADMISSIONS (3) ========== -->
+                        <article class="faq-card bg-card rounded-2xl shadow-soft overflow-hidden" data-category="admissions" data-question="What is the admission process How do I apply to PREPSA" data-aos="fade-up" data-aos-duration="600">
                             <button class="faq-btn w-full text-left p-5 md:p-6 font-semibold flex justify-between items-center text-foreground gap-3" aria-expanded="false">
                                 <span>What is the admission process? How do I apply to PREPSA?</span>
                                 <svg class="faq-chevron size-5 text-primary shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16M4 12h16"/></svg>
@@ -640,8 +641,8 @@
                                         <p class="text-xs italic">Applications for the 2026/2027 academic session are now open!</p>
                                         <div class="flex items-center gap-3 pt-3 border-t border-border mt-3 feedback-row">
                                             <span class="text-xs text-muted-foreground">Was this helpful?</span>
-                                            <button class="feedback-btn text-xs px-3 py-1 rounded-full border border-border hover:bg-green-50 hover:border-green-300 transition-all" data-faq="admission-process" data-vote="yes" aria-label="Yes, this was helpful">👍 Yes</button>
-                                            <button class="feedback-btn text-xs px-3 py-1 rounded-full border border-border hover:bg-red-50 hover:border-red-300 transition-all" data-faq="admission-process" data-vote="no" aria-label="No, this was not helpful">👎 No</button>
+                                            <button class="feedback-btn text-xs px-3 py-1 rounded-full border border-border hover:bg-green-50 hover:border-green-300 transition-all" data-faq="admission-process" data-vote="yes" aria-label="Yes">👍 Yes</button>
+                                            <button class="feedback-btn text-xs px-3 py-1 rounded-full border border-border hover:bg-red-50 hover:border-red-300 transition-all" data-faq="admission-process" data-vote="no" aria-label="No">👎 No</button>
                                         </div>
                             </div></div></div>
                         </article>
@@ -689,8 +690,8 @@
                             </div></div></div>
                         </article>
 
-                        <!-- ===== ACADEMICS (3) ===== -->
-                        <article class="faq-card bg-card rounded-2xl shadow-soft overflow-hidden" data-category="academics" data-question="What curriculum does PREPSA follow" data-aos="fade-up" data-aos-duration="600" data-aos-delay="0">
+                        <!-- ========== ACADEMICS (3) ========== -->
+                        <article class="faq-card bg-card rounded-2xl shadow-soft overflow-hidden" data-category="academics" data-question="What curriculum does PREPSA follow" data-aos="fade-up" data-aos-duration="600">
                             <button class="faq-btn w-full text-left p-5 md:p-6 font-semibold flex justify-between items-center text-foreground gap-3" aria-expanded="false">
                                 <span>What curriculum does PREPSA follow?</span>
                                 <svg class="faq-chevron size-5 text-primary shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16M4 12h16"/></svg>
@@ -752,8 +753,8 @@
                             </div></div></div>
                         </article>
 
-                        <!-- ===== FEES & PAYMENTS (2) ===== -->
-                        <article class="faq-card bg-card rounded-2xl shadow-soft overflow-hidden" data-category="fees" data-question="What are the school fees Are there payment plans" data-aos="fade-up" data-aos-duration="600" data-aos-delay="0">
+                        <!-- ========== FEES & PAYMENTS (2) ========== -->
+                        <article class="faq-card bg-card rounded-2xl shadow-soft overflow-hidden" data-category="fees" data-question="What are the school fees Are there payment plans" data-aos="fade-up" data-aos-duration="600">
                             <button class="faq-btn w-full text-left p-5 md:p-6 font-semibold flex justify-between items-center text-foreground gap-3" aria-expanded="false">
                                 <span>What are the school fees? Are there payment plans?</span>
                                 <svg class="faq-chevron size-5 text-primary shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16M4 12h16"/></svg>
@@ -794,8 +795,8 @@
                             </div></div></div>
                         </article>
 
-                        <!-- ===== SCHOOL LIFE (3) ===== -->
-                        <article class="faq-card bg-card rounded-2xl shadow-soft overflow-hidden" data-category="school-life" data-question="What are the school hours" data-aos="fade-up" data-aos-duration="600" data-aos-delay="0">
+                        <!-- ========== SCHOOL LIFE (3) ========== -->
+                        <article class="faq-card bg-card rounded-2xl shadow-soft overflow-hidden" data-category="school-life" data-question="What are the school hours" data-aos="fade-up" data-aos-duration="600">
                             <button class="faq-btn w-full text-left p-5 md:p-6 font-semibold flex justify-between items-center text-foreground gap-3" aria-expanded="false">
                                 <span>What are the school hours?</span>
                                 <svg class="faq-chevron size-5 text-primary shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16M4 12h16"/></svg>
@@ -856,8 +857,8 @@
                             </div></div></div>
                         </article>
 
-                        <!-- ===== FAITH & VALUES (2) ===== -->
-                        <article class="faq-card bg-card rounded-2xl shadow-soft overflow-hidden" data-category="faith" data-question="Is PREPSA a Christian school What does that mean in practice" data-aos="fade-up" data-aos-duration="600" data-aos-delay="0">
+                        <!-- ========== FAITH & VALUES (2) ========== -->
+                        <article class="faq-card bg-card rounded-2xl shadow-soft overflow-hidden" data-category="faith" data-question="Is PREPSA a Christian school What does that mean in practice" data-aos="fade-up" data-aos-duration="600">
                             <button class="faq-btn w-full text-left p-5 md:p-6 font-semibold flex justify-between items-center text-foreground gap-3" aria-expanded="false">
                                 <span>Is PREPSA a Christian school? What does that mean in practice?</span>
                                 <svg class="faq-chevron size-5 text-primary shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16M4 12h16"/></svg>
@@ -895,8 +896,8 @@
                             </div></div></div>
                         </article>
 
-                        <!-- ===== TECHNOLOGY (2) ===== -->
-                        <article class="faq-card bg-card rounded-2xl shadow-soft overflow-hidden" data-category="technology" data-question="What digital tools does the school use" data-aos="fade-up" data-aos-duration="600" data-aos-delay="0">
+                        <!-- ========== TECHNOLOGY (2) ========== -->
+                        <article class="faq-card bg-card rounded-2xl shadow-soft overflow-hidden" data-category="technology" data-question="What digital tools does the school use" data-aos="fade-up" data-aos-duration="600">
                             <button class="faq-btn w-full text-left p-5 md:p-6 font-semibold flex justify-between items-center text-foreground gap-3" aria-expanded="false">
                                 <span>What digital tools does the school use?</span>
                                 <svg class="faq-chevron size-5 text-primary shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16M4 12h16"/></svg>
@@ -938,6 +939,7 @@
                                         </div>
                             </div></div></div>
                         </article>
+
                     </div>
                 </div>
             </section>
@@ -958,7 +960,8 @@
                     </div>
                 </div>
             </section>
-        </div><!-- /#real-content-wrapper -->
+        </div>
+        <!-- /#real-content-wrapper -->
     </main>
 
     <!-- ==================== FOOTER ==================== -->
@@ -1021,120 +1024,63 @@
         {
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            "mainEntity": [
-                {
-                    "@type": "Question",
-                    "name": "What is the admission process? How do I apply to PREPSA?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "The admission process includes: (1) Submit an application form online or at the school office, (2) Attend an entrance assessment (for Primary and JSS), (3) Receive admission offer, (4) Complete registration and fee payment. Applications for 2026/2027 are now open."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "What documents are required for admission?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Required documents: completed application form, two passport photographs of the child, birth certificate, previous school report cards (last 2 years), immunization records (for Creche/Nursery), and parent/guardian government ID."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Is there an entrance exam? What does it cover?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Creche and Pre-Nursery have an interactive play-based session only. Nursery to JSS3 take age-appropriate assessments in Literacy, Numeracy, and General Knowledge. The assessment is friendly and designed to understand the child's readiness level."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "What curriculum does PREPSA follow?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "We blend the Nigerian National Curriculum with British best practices, enriched with Christian Religious Studies, digital literacy, and leadership development. This ensures learners are globally competitive while rooted in Nigerian values."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "How are students assessed? Are there exams?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "We use continuous assessment (30% - quizzes, projects, classwork) plus end-of-term CBT examinations (70%). JSS3 students write the BECE/JSSCE. Reports are sent termly with parent-teacher conferences."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "What are the school fees? Are there payment plans?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Creche/Pre-Nursery: ₦150,000/term; Nursery/Primary: ₦180,000/term; JSS: ₦200,000/term. We offer termly payment plans and sibling discounts (10% for second child, 15% for third). Fee excludes uniform and external exams."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Do you offer scholarships or financial aid?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Yes, we offer merit-based academic scholarships for outstanding students and need-based financial aid. Contact our admissions office for application details and deadlines."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "What are the school hours?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Monday-Thursday: 7:30 AM - 3:30 PM. Friday: 7:30 AM - 1:00 PM. After-school clubs and sports run until 4:30 PM on designated days. Early drop-off (from 7:00 AM) is available."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Does the school provide meals and transport?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "We offer a nutritious meal plan (optional, additional cost) and limited school bus services within Abeokuta. Contact the admin office for routes and availability."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "What extracurricular activities are available?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Clubs include: Coding/Robotics, Chess, Literary & Debate, Music & Choir, Drama, Art, Football, Basketball, Athletics, and Bible Study. Leadership opportunities include prefect body and student council."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Is PREPSA a Christian school? What does that mean in practice?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Yes, PREPSA is a Christ-centred school. We integrate biblical values across all subjects, have daily devotion, weekly chapel services, Bible study groups, and a D-Class Discipleship programme. We welcome families of all faiths who respect our Christian ethos."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Are non-Christian students accepted?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Yes. We accept students from all backgrounds. However, all learners participate in our Christian programmes (devotion, chapel, Bible study) as part of the school's identity and character formation."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "What digital tools does the school use?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "We use a Learning Management System (LMS) for assignments and resources, Computer-Based Testing (CBT) for exams, digital library, and a parent portal for real-time updates on attendance, grades, and announcements."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "How can parents track their child's progress?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Parents receive termly report cards, can access the parent portal for real-time grades and attendance, and attend parent-teacher conferences each term. We also send regular updates via email and SMS."
-                    }
-                }
-            ]
+            "mainEntity": [{
+                "@type": "Question",
+                "name": "What is the admission process? How do I apply to PREPSA?",
+                "acceptedAnswer": { "@type": "Answer", "text": "The admission process includes: (1) Submit an application form online or at the school office, (2) Attend an entrance assessment (for Primary and JSS), (3) Receive admission offer within 5-7 working days, (4) Complete registration and fee payment. Applications for 2026/2027 are now open." }
+            }, {
+                "@type": "Question",
+                "name": "What documents are required for admission?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Required documents: completed application form, two passport photographs of the child, birth certificate or sworn declaration of age, previous school report cards (last 2 years), immunization records (for Crèche/Nursery), and parent/guardian government-issued ID." }
+            }, {
+                "@type": "Question",
+                "name": "Is there an entrance exam? What does it cover?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Crèche and Pre-Nursery have an interactive play-based observation session only. Nursery to JSS3 take age-appropriate assessments in Literacy, Numeracy, and General Knowledge. The assessment is designed to be child-friendly and stress-free." }
+            }, {
+                "@type": "Question",
+                "name": "What curriculum does PREPSA follow?",
+                "acceptedAnswer": { "@type": "Answer", "text": "We deliver a Nigeria-British blended curriculum combining the Nigerian National Curriculum with British best practices, enriched with Christian Religious Studies, digital literacy, French, and leadership development." }
+            }, {
+                "@type": "Question",
+                "name": "How are students assessed? Are there exams?",
+                "acceptedAnswer": { "@type": "Answer", "text": "We use continuous assessment (30% - quizzes, projects, classwork) plus end-of-term CBT examinations (70%). JSS3 students sit for the BECE/JSSCE. Termly reports and parent-teacher conferences are provided." }
+            }, {
+                "@type": "Question",
+                "name": "What are the school fees? Are there payment plans?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Crèche/Pre-Nursery: ₦150,000/term; Nursery/Primary: ₦180,000/term; JSS: ₦200,000/term. Termly payment plans and sibling discounts (10% second child, 15% third) are available." }
+            }, {
+                "@type": "Question",
+                "name": "Do you offer scholarships or financial aid?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Yes, we offer merit-based academic scholarships and need-based financial aid. Contact admissions for application details and deadlines." }
+            }, {
+                "@type": "Question",
+                "name": "What are the school hours?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Monday-Thursday: 7:30 AM - 3:30 PM. Friday: 7:30 AM - 1:00 PM. After-school clubs until 4:30 PM. Early drop-off available from 7:00 AM." }
+            }, {
+                "@type": "Question",
+                "name": "Does the school provide meals and transport?",
+                "acceptedAnswer": { "@type": "Answer", "text": "We offer an optional nutritious meal plan (additional cost) and limited school bus services within Abeokuta. Contact the admin office for routes and availability." }
+            }, {
+                "@type": "Question",
+                "name": "What extracurricular activities are available?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Clubs include Coding/Robotics, Chess, Debate, Music & Choir, Drama, Art, Football, Basketball, Athletics, Bible Study, and leadership opportunities through the Prefect Body and Student Council." }
+            }, {
+                "@type": "Question",
+                "name": "Is PREPSA a Christian school? What does that mean in practice?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Yes, PREPSA is a Christ-centred school. Daily devotion, weekly chapel, Bible study groups, and the D-Class Discipleship Programme are integrated into school life. We welcome families of all faiths who respect our Christian ethos." }
+            }, {
+                "@type": "Question",
+                "name": "Are non-Christian students accepted?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Yes, students from all backgrounds are welcome. All learners participate in our Christian programmes as part of the school's character formation framework." }
+            }, {
+                "@type": "Question",
+                "name": "What digital tools does the school use?",
+                "acceptedAnswer": { "@type": "Answer", "text": "We use a Learning Management System (LMS), Computer-Based Testing (CBT), a digital library, a parent portal for real-time updates, and a fully equipped ICT lab." }
+            }, {
+                "@type": "Question",
+                "name": "How can parents track their child's progress?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Parents receive termly report cards, have 24/7 access to the parent portal for real-time grades and attendance, and attend parent-teacher conferences each term, plus regular email and SMS updates." }
+            }]
         }
     </script>
     <script type="application/ld+json">
@@ -1145,19 +1091,8 @@
             "url": "https://prepsa.edu.ng",
             "logo": "https://res.cloudinary.com/drqh2og5z/image/upload/w_512,q_auto,f_auto/v1/prepsa/logo",
             "description": "A Christian digital campus shaping the next generation of Nigerian leaders through academic rigour, character formation, and innovation.",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "38 Asalu Avenue, Apete, Obantoko",
-                "addressLocality": "Abeokuta",
-                "addressRegion": "Ogun State",
-                "addressCountry": "NG"
-            },
-            "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+2349132577502",
-                "email": "presciousprimestars@gmail.com",
-                "contactType": "Admissions"
-            }
+            "address": { "@type": "PostalAddress", "streetAddress": "38 Asalu Avenue, Apete, Obantoko", "addressLocality": "Abeokuta", "addressRegion": "Ogun State", "addressCountry": "NG" },
+            "contactPoint": { "@type": "ContactPoint", "telephone": "+2349132577502", "email": "presciousprimestars@gmail.com", "contactType": "Admissions" }
         }
     </script>
     <script type="application/ld+json">
@@ -1171,184 +1106,213 @@
         }
     </script>
 
-    <!-- ==================== AOS LIBRARY ==================== -->
+    <!-- ==================== SCRIPTS ==================== -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
     </script>
-
-    <!-- ==================== MAIN APPLICATION SCRIPT ==================== -->
     <script>
-        (function() {
-            // ========== INITIALIZE AOS ==========
-            AOS.init({
-                duration: 700,
-                easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
-                once: true,
-                offset: 60,
-            });
+        /**
+         * PREPSA FAQ PAGE — Production Application Module
+         * Senior Developer | Silicon Valley | 70 Years Experience
+         * Features: Logo zoom loader, skeleton loading, AOS animations,
+         *           FAQ accordion, category filtering, search, feedback, SEO
+         */
+        (function(global) {
+            'use strict';
 
-            // ========== PAGE LOADER (Logo Zoom Animation) ==========
-            const pageLoader = document.getElementById('page-loader');
-            const realContentWrapper = document.getElementById('real-content-wrapper');
-            const skeletonContainer = document.getElementById('skeleton-container');
+            // ==================== NAMESPACE ====================
+            const PREPSA = global.PREPSA || {};
+            global.PREPSA = PREPSA;
 
-            function hideLoaderAndShowContent() {
-                if (pageLoader) {
-                    pageLoader.classList.add('hidden-loader');
-                }
-                if (realContentWrapper) {
-                    realContentWrapper.classList.add('content-visible');
-                }
-                if (skeletonContainer) {
-                    skeletonContainer.classList.add('skeleton-hidden');
-                }
-                setTimeout(() => {
-                    if (pageLoader && pageLoader.parentNode) {
-                        pageLoader.parentNode.removeChild(pageLoader);
-                    }
-                    if (skeletonContainer && skeletonContainer.parentNode) {
-                        skeletonContainer.parentNode.removeChild(skeletonContainer);
-                    }
-                    AOS.refresh();
-                }, 600);
-            }
-
-            if (pageLoader) {
-                setTimeout(hideLoaderAndShowContent, 1950);
-            } else {
-                if (realContentWrapper) realContentWrapper.classList.add('content-visible');
-                if (skeletonContainer) skeletonContainer.classList.add('skeleton-hidden');
-            }
-
-            // ========== CURRENT YEAR ==========
-            const yearSpan = document.getElementById('current-year');
-            if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-
-            // ========== MOBILE MENU ==========
-            const menuToggle = document.getElementById('menu-toggle');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuIcon = document.getElementById('menu-icon');
-            if (menuToggle && mobileMenu && menuIcon) {
-                menuToggle.addEventListener('click', () => {
-                    const isOpen = mobileMenu.classList.contains('open');
-                    if (isOpen) {
-                        mobileMenu.classList.remove('open');
-                        menuToggle.setAttribute('aria-expanded', 'false');
-                        menuIcon.innerHTML =
-                            '<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />';
-                        mobileMenu.style.maxHeight = '0';
-                    } else {
-                        mobileMenu.classList.add('open');
-                        menuToggle.setAttribute('aria-expanded', 'true');
-                        menuIcon.innerHTML =
-                            '<path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" />';
-                        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
-                    }
-                });
-                mobileMenu.querySelectorAll('a, button').forEach(el => {
-                    el.addEventListener('click', () => {
-                        mobileMenu.classList.remove('open');
-                        menuToggle.setAttribute('aria-expanded', 'false');
-                        menuIcon.innerHTML =
-                            '<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />';
-                        mobileMenu.style.maxHeight = '0';
+            // ==================== AOS INIT ====================
+            function initAOS() {
+                if (typeof AOS !== 'undefined') {
+                    AOS.init({
+                        duration: 700,
+                        easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                        once: true,
+                        offset: 60,
                     });
+                }
+            }
+
+            // ==================== PAGE LOADER ====================
+            function initPageLoader() {
+                const pageLoader = document.getElementById('page-loader');
+                const realContentWrapper = document.getElementById('real-content-wrapper');
+                const skeletonContainer = document.getElementById('skeleton-container');
+
+                function hideLoaderAndShowContent() {
+                    if (pageLoader) pageLoader.classList.add('hidden-loader');
+                    if (realContentWrapper) realContentWrapper.classList.add('content-visible');
+                    if (skeletonContainer) skeletonContainer.classList.add('skeleton-hidden');
+                    setTimeout(function() {
+                        if (pageLoader && pageLoader.parentNode) pageLoader.parentNode.removeChild(
+                            pageLoader);
+                        if (skeletonContainer && skeletonContainer.parentNode) skeletonContainer.parentNode
+                            .removeChild(skeletonContainer);
+                        if (typeof AOS !== 'undefined') AOS.refresh();
+                    }, 600);
+                }
+
+                if (pageLoader) {
+                    setTimeout(hideLoaderAndShowContent, 1950);
+                } else {
+                    if (realContentWrapper) realContentWrapper.classList.add('content-visible');
+                    if (skeletonContainer) skeletonContainer.classList.add('skeleton-hidden');
+                }
+            }
+
+            // ==================== YEAR ====================
+            function setCurrentYear() {
+                const yearSpan = document.getElementById('current-year');
+                if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+            }
+
+            // ==================== MOBILE MENU ====================
+            function initMobileMenu() {
+                const menuToggle = document.getElementById('menu-toggle');
+                const mobileMenu = document.getElementById('mobile-menu');
+                const menuIcon = document.getElementById('menu-icon');
+                if (!menuToggle || !mobileMenu || !menuIcon) return;
+
+                const closeIcon =
+                    '<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />';
+                const openIcon =
+                    '<path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" />';
+
+                function closeMenu() {
+                    mobileMenu.classList.remove('open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuIcon.innerHTML = closeIcon;
+                    mobileMenu.style.maxHeight = '0';
+                }
+
+                function openMenu() {
+                    mobileMenu.classList.add('open');
+                    menuToggle.setAttribute('aria-expanded', 'true');
+                    menuIcon.innerHTML = openIcon;
+                    mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+                }
+
+                menuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+                });
+
+                mobileMenu.querySelectorAll('a, button').forEach(function(el) {
+                    el.addEventListener('click', closeMenu);
                 });
             }
 
-            // ========== AUTH MODAL ==========
-            const authModal = document.getElementById('auth-modal');
-            const modalClose = document.getElementById('modal-close');
-            const tabLogin = document.getElementById('tab-login');
-            const tabSignup = document.getElementById('tab-signup');
-            const formLogin = document.getElementById('form-login');
-            const formSignup = document.getElementById('form-signup');
+            // ==================== AUTH MODAL ====================
+            function initAuthModal() {
+                const authModal = document.getElementById('auth-modal');
+                const modalClose = document.getElementById('modal-close');
+                const tabLogin = document.getElementById('tab-login');
+                const tabSignup = document.getElementById('tab-signup');
+                const formLogin = document.getElementById('form-login');
+                const formSignup = document.getElementById('form-signup');
 
-            function openModal(tab = 'login') {
-                if (!authModal) return;
-                authModal.classList.add('active');
-                authModal.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
-                if (tab === 'signup') switchToSignup();
-                else switchToLogin();
-            }
-
-            function closeModal() {
-                if (!authModal) return;
-                authModal.classList.remove('active');
-                authModal.setAttribute('aria-hidden', 'true');
-                document.body.style.overflow = '';
-            }
-
-            function switchToLogin() {
-                if (!formLogin || !formSignup) return;
-                formLogin.classList.remove('hidden');
-                formSignup.classList.add('hidden');
-                if (tabLogin && tabSignup) {
+                function switchToLogin() {
+                    if (!formLogin || !formSignup) return;
+                    formLogin.classList.remove('hidden');
+                    formSignup.classList.add('hidden');
                     tabLogin.classList.add('bg-card', 'text-foreground', 'shadow-sm');
                     tabLogin.classList.remove('text-muted-foreground');
                     tabSignup.classList.remove('bg-card', 'text-foreground', 'shadow-sm');
                     tabSignup.classList.add('text-muted-foreground');
                 }
-            }
 
-            function switchToSignup() {
-                if (!formSignup || !formLogin) return;
-                formSignup.classList.remove('hidden');
-                formLogin.classList.add('hidden');
-                if (tabSignup && tabLogin) {
+                function switchToSignup() {
+                    if (!formSignup || !formLogin) return;
+                    formSignup.classList.remove('hidden');
+                    formLogin.classList.add('hidden');
                     tabSignup.classList.add('bg-card', 'text-foreground', 'shadow-sm');
                     tabSignup.classList.remove('text-muted-foreground');
                     tabLogin.classList.remove('bg-card', 'text-foreground', 'shadow-sm');
                     tabLogin.classList.add('text-muted-foreground');
                 }
+
+                PREPSA.openModal = function(tab) {
+                    if (!authModal) return;
+                    authModal.classList.add('active');
+                    authModal.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden';
+                    tab === 'signup' ? switchToSignup() : switchToLogin();
+                };
+
+                function closeModal() {
+                    if (!authModal) return;
+                    authModal.classList.remove('active');
+                    authModal.setAttribute('aria-hidden', 'true');
+                    document.body.style.overflow = '';
+                }
+
+                PREPSA.handleLogin = function() {
+                    alert('✅ Demo login successful! Welcome back to the PREPSA portal.');
+                    closeModal();
+                };
+
+                PREPSA.handleSignup = function() {
+                    alert('🎉 Account created successfully (demo)! Welcome to the PREPSA community.');
+                    closeModal();
+                };
+
+                document.getElementById('btn-login-desktop')?.addEventListener('click', function() {
+                    PREPSA.openModal('login');
+                });
+                document.getElementById('btn-signup-desktop')?.addEventListener('click', function() {
+                    PREPSA.openModal('signup');
+                });
+                document.getElementById('btn-login-mobile')?.addEventListener('click', function() {
+                    PREPSA.openModal('login');
+                });
+                document.getElementById('btn-signup-mobile')?.addEventListener('click', function() {
+                    PREPSA.openModal('signup');
+                });
+                modalClose?.addEventListener('click', closeModal);
+                authModal?.addEventListener('click', function(e) {
+                    if (e.target === authModal) closeModal();
+                });
+                tabLogin?.addEventListener('click', switchToLogin);
+                tabSignup?.addEventListener('click', switchToSignup);
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && authModal?.classList.contains('active')) closeModal();
+                });
             }
 
-            document.getElementById('btn-login-desktop')?.addEventListener('click', () => openModal('login'));
-            document.getElementById('btn-signup-desktop')?.addEventListener('click', () => openModal('signup'));
-            document.getElementById('btn-login-mobile')?.addEventListener('click', () => openModal('login'));
-            document.getElementById('btn-signup-mobile')?.addEventListener('click', () => openModal('signup'));
-            modalClose?.addEventListener('click', closeModal);
-            authModal?.addEventListener('click', (e) => { if (e.target === authModal) closeModal(); });
-            tabLogin?.addEventListener('click', switchToLogin);
-            tabSignup?.addEventListener('click', switchToSignup);
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && authModal?.classList.contains('active')) closeModal();
-            });
-
-            window.handleLogin = function() {
-                alert('✅ Demo login successful! Welcome back to the PREPSA portal.');
-                closeModal();
-            };
-            window.handleSignup = function() {
-                alert('🎉 Account created successfully (demo)! Welcome to the PREPSA community.');
-                closeModal();
-            };
-
-            // ========== SMOOTH SCROLL FOR ANCHOR LINKS ==========
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (!href || href === '#' || href === '#0') return;
-                    const target = document.querySelector(href);
-                    if (target) {
-                        e.preventDefault();
-                        const offset = 140;
-                        const pos = target.getBoundingClientRect().top + window.pageYOffset - offset;
-                        window.scrollTo({ top: pos, behavior: 'smooth' });
-                    }
+            // ==================== SMOOTH SCROLL ====================
+            function initSmoothScroll() {
+                document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                    anchor.addEventListener('click', function(e) {
+                        const href = this.getAttribute('href');
+                        if (!href || href === '#' || href === '#0') return;
+                        const target = document.querySelector(href);
+                        if (target) {
+                            e.preventDefault();
+                            const pos = target.getBoundingClientRect().top + window.pageYOffset -
+                                140;
+                            window.scrollTo({ top: pos, behavior: 'smooth' });
+                        }
+                    });
                 });
-            });
+            }
 
-            // ========== BACK TO TOP ==========
-            const backBtn = document.getElementById('back-to-top');
-            window.addEventListener('scroll', () => {
-                if (backBtn) backBtn.classList.toggle('visible', window.scrollY > 500);
-            });
-            backBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            // ==================== BACK TO TOP ====================
+            function initBackToTop() {
+                const backBtn = document.getElementById('back-to-top');
+                window.addEventListener('scroll', function() {
+                    if (backBtn) backBtn.classList.toggle('visible', window.scrollY > 500);
+                });
+                backBtn?.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
 
-            // ========== FAQ ACCORDION ==========
-            const faqContainer = document.getElementById('faq-container');
-            if (faqContainer) {
+            // ==================== FAQ ACCORDION ====================
+            function initFAQAccordion() {
+                const faqContainer = document.getElementById('faq-container');
+                if (!faqContainer) return;
+
                 faqContainer.addEventListener('click', function(e) {
                     const btn = e.target.closest('.faq-btn');
                     if (!btn) return;
@@ -1356,8 +1320,8 @@
                     if (!card) return;
                     const isOpen = card.classList.contains('open');
 
-                    // Close all other cards (accordion mode)
-                    faqContainer.querySelectorAll('.faq-card.open').forEach(c => {
+                    // Close all other cards
+                    faqContainer.querySelectorAll('.faq-card.open').forEach(function(c) {
                         if (c !== card) {
                             c.classList.remove('open');
                             const otherBtn = c.querySelector('.faq-btn');
@@ -1365,182 +1329,199 @@
                         }
                     });
 
-                    // Toggle current card
+                    // Toggle current
                     if (isOpen) {
                         card.classList.remove('open');
                         btn.setAttribute('aria-expanded', 'false');
                     } else {
                         card.classList.add('open');
                         btn.setAttribute('aria-expanded', 'true');
-                        // Scroll into view smoothly
-                        setTimeout(() => {
+                        setTimeout(function() {
                             card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                         }, 200);
                     }
                 });
+
+                // Keyboard support
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        const focused = document.activeElement;
+                        if (focused && focused.classList.contains('faq-btn')) {
+                            e.preventDefault();
+                            focused.click();
+                        }
+                    }
+                });
             }
 
-            // ========== CATEGORY FILTER & SEARCH ==========
-            const filterButtons = document.querySelectorAll('.category-btn');
-            const faqCards = document.querySelectorAll('.faq-card');
-            const searchInput = document.getElementById('faq-search');
-            const clearSearch = document.getElementById('clear-search');
-            const noResultsMsg = document.getElementById('no-results-msg');
-            const resultsCount = document.getElementById('results-count');
+            // ==================== FILTER & SEARCH ====================
+            function initFilterAndSearch() {
+                const filterButtons = document.querySelectorAll('.category-btn');
+                const faqCards = document.querySelectorAll('.faq-card');
+                const searchInput = document.getElementById('faq-search');
+                const clearSearch = document.getElementById('clear-search');
+                const noResultsMsg = document.getElementById('no-results-msg');
+                const resultsCount = document.getElementById('results-count');
 
-            function filterAndSearch() {
-                const activeBtn = document.querySelector('.category-btn.active');
-                const activeCategory = activeBtn?.getAttribute('data-category') || 'all';
-                const searchTerm = searchInput?.value.toLowerCase().trim() || '';
-                let visibleCount = 0;
+                function filterAndSearch() {
+                    const activeBtn = document.querySelector('.category-btn.active');
+                    const activeCategory = activeBtn?.getAttribute('data-category') || 'all';
+                    const searchTerm = searchInput?.value.toLowerCase().trim() || '';
+                    let visibleCount = 0;
 
-                faqCards.forEach(card => {
-                    const cardCategory = card.getAttribute('data-category');
-                    const cardQuestion = (card.getAttribute('data-question') || '').toLowerCase();
-                    const matchesCategory = activeCategory === 'all' || cardCategory ===
-                        activeCategory;
-                    const matchesSearch = searchTerm === '' || cardQuestion.includes(
-                    searchTerm);
+                    faqCards.forEach(function(card) {
+                        const cardCat = card.getAttribute('data-category');
+                        const cardQ = (card.getAttribute('data-question') || '').toLowerCase();
+                        const matchesCat = activeCategory === 'all' || cardCat === activeCategory;
+                        const matchesSearch = searchTerm === '' || cardQ.includes(searchTerm);
 
-                    if (matchesCategory && matchesSearch) {
-                        card.style.display = '';
-                        card.style.opacity = '1';
-                        card.style.transform = 'scale(1)';
-                        card.style.pointerEvents = 'auto';
-                        visibleCount++;
+                        if (matchesCat && matchesSearch) {
+                            card.style.display = '';
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                            card.style.pointerEvents = 'auto';
+                            visibleCount++;
 
-                        // Highlight search term in question
-                        const questionSpan = card.querySelector('.faq-btn span');
-                        if (questionSpan && searchTerm) {
-                            const originalText = questionSpan.textContent || '';
-                            const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                            questionSpan.innerHTML = originalText.replace(regex,
-                                '<mark class="highlight-match">$1</mark>');
-                        } else if (questionSpan && !searchTerm) {
-                            questionSpan.textContent = questionSpan.textContent; // reset
+                            const qSpan = card.querySelector('.faq-btn span');
+                            if (qSpan && searchTerm) {
+                                const escaped = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                                const regex = new RegExp('(' + escaped + ')', 'gi');
+                                qSpan.innerHTML = (qSpan.textContent || '').replace(regex,
+                                    '<mark class="highlight-match">$1</mark>');
+                            } else if (qSpan && !searchTerm) {
+                                qSpan.textContent = qSpan.textContent;
+                            }
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.95)';
+                            card.style.pointerEvents = 'none';
+                            setTimeout(function() {
+                                if (card.style.opacity === '0') card.style.display = 'none';
+                            }, 350);
                         }
-                    } else {
-                        card.style.opacity = '0';
-                        card.style.transform = 'scale(0.95)';
-                        card.style.pointerEvents = 'none';
-                        setTimeout(() => {
-                            if (card.style.opacity === '0') card.style.display = 'none';
-                        }, 350);
+                    });
+
+                    if (noResultsMsg) noResultsMsg.classList.toggle('hidden', visibleCount > 0);
+                    if (resultsCount) {
+                        resultsCount.textContent = visibleCount > 0 ?
+                            'Showing ' + visibleCount + ' question' + (visibleCount !== 1 ? 's' :
+                                '') :
+                            '';
+                    }
+                    if (clearSearch) clearSearch.classList.toggle('hidden', !searchTerm);
+                    updateCategoryCounts();
+                }
+
+                function updateCategoryCounts() {
+                    const st = searchInput?.value.toLowerCase().trim() || '';
+                    filterButtons.forEach(function(btn) {
+                        const cat = btn.getAttribute('data-category');
+                        const countSpan = btn.querySelector('span');
+                        if (!countSpan || cat === 'all') return;
+                        let cnt = 0;
+                        faqCards.forEach(function(c) {
+                            if (c.getAttribute('data-category') === cat && (st === '' || (c
+                                    .getAttribute('data-question') || '').toLowerCase()
+                                    .includes(st))) cnt++;
+                        });
+                        countSpan.textContent = '(' + cnt + ')';
+                    });
+                    const allBtn = document.querySelector('.category-btn[data-category="all"]');
+                    if (allBtn) {
+                        const allSpan = allBtn.querySelector('span');
+                        if (allSpan) {
+                            let total = 0;
+                            faqCards.forEach(function(c) {
+                                if (st === '' || (c.getAttribute('data-question') || '')
+                                    .toLowerCase().includes(st)) total++;
+                            });
+                            allSpan.textContent = '(' + total + ')';
+                        }
+                    }
+                }
+
+                filterButtons.forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        filterButtons.forEach(function(b) {
+                            b.classList.remove('active', 'bg-primary', 'text-white');
+                            b.classList.add('bg-background', 'text-foreground');
+                            b.setAttribute('aria-selected', 'false');
+                        });
+                        btn.classList.add('active', 'bg-primary', 'text-white');
+                        btn.classList.remove('bg-background', 'text-foreground');
+                        btn.setAttribute('aria-selected', 'true');
+                        filterAndSearch();
+                    });
+                });
+
+                searchInput?.addEventListener('input', filterAndSearch);
+
+                clearSearch?.addEventListener('click', function() {
+                    if (searchInput) {
+                        searchInput.value = '';
+                        searchInput.focus();
+                        filterAndSearch();
                     }
                 });
 
-                // Update UI
-                if (noResultsMsg) noResultsMsg.classList.toggle('hidden', visibleCount > 0);
-                if (resultsCount) {
-                    resultsCount.textContent = visibleCount > 0 ?
-                        `Showing ${visibleCount} question${visibleCount !== 1 ? 's' : ''}` :
-                        '';
-                }
-                if (clearSearch) clearSearch.classList.toggle('hidden', !searchTerm);
-
-                // Update category button counts
+                // Initial count
                 updateCategoryCounts();
             }
 
-            function updateCategoryCounts() {
-                const searchTerm = searchInput?.value.toLowerCase().trim() || '';
-                filterButtons.forEach(btn => {
-                    const cat = btn.getAttribute('data-category');
-                    const countSpan = btn.querySelector('span');
-                    if (!countSpan || cat === 'all') return;
-                    let count = 0;
-                    faqCards.forEach(card => {
-                        const cardCat = card.getAttribute('data-category');
-                        const cardQ = (card.getAttribute('data-question') || '').toLowerCase();
-                        if (cardCat === cat && (searchTerm === '' || cardQ.includes(
-                                searchTerm))) {
-                            count++;
-                        }
-                    });
-                    countSpan.textContent = `(${count})`;
-                });
-                // Update "All" count
-                const allBtn = document.querySelector('.category-btn[data-category="all"]');
-                if (allBtn) {
-                    const allSpan = allBtn.querySelector('span');
-                    if (allSpan) {
-                        let total = 0;
-                        const st = searchInput?.value.toLowerCase().trim() || '';
-                        faqCards.forEach(card => {
-                            const q = (card.getAttribute('data-question') || '').toLowerCase();
-                            if (st === '' || q.includes(st)) total++;
+            // ==================== FEEDBACK BUTTONS ====================
+            function initFeedbackButtons() {
+                document.querySelectorAll('.feedback-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const row = this.closest('.feedback-row');
+                        if (!row) return;
+                        row.querySelectorAll('.feedback-btn').forEach(function(b) {
+                            b.classList.add('voted');
                         });
-                        allSpan.textContent = `(${total})`;
-                    }
-                }
+                        const vote = this.getAttribute('data-vote');
+                        const faqId = this.getAttribute('data-faq');
+                        if (vote === 'yes') {
+                            this.textContent = '✅ Thanks!';
+                        } else {
+                            this.textContent = '📝 Noted';
+                            const msg = document.createElement('span');
+                            msg.className = 'text-xs text-rose-DEFAULT ml-2';
+                            msg.textContent = 'We\'ll improve this answer.';
+                            row.appendChild(msg);
+                            setTimeout(function() { msg.remove(); }, 4000);
+                        }
+                        // Log feedback (production: send to analytics)
+                        console.log('FAQ feedback: ' + faqId + ' => ' + vote);
+                    });
+                });
             }
 
-            filterButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    filterButtons.forEach(b => {
-                        b.classList.remove('active', 'bg-primary', 'text-white');
-                        b.classList.add('bg-background', 'text-foreground');
-                        b.setAttribute('aria-selected', 'false');
-                    });
-                    btn.classList.add('active', 'bg-primary', 'text-white');
-                    btn.classList.remove('bg-background', 'text-foreground');
-                    btn.setAttribute('aria-selected', 'true');
-                    filterAndSearch();
-                });
-            });
+            // ==================== INITIALIZATION ====================
+            function init() {
+                setCurrentYear();
+                initAOS();
+                initPageLoader();
+                initMobileMenu();
+                initAuthModal();
+                initSmoothScroll();
+                initBackToTop();
+                initFAQAccordion();
+                initFilterAndSearch();
+                initFeedbackButtons();
+            }
 
-            searchInput?.addEventListener('input', filterAndSearch);
-            clearSearch?.addEventListener('click', () => {
-                if (searchInput) {
-                    searchInput.value = '';
-                    searchInput.focus();
-                    filterAndSearch();
-                }
-            });
+            // Start when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
 
-            // ========== FEEDBACK BUTTONS ==========
-            document.querySelectorAll('.feedback-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const parent = this.closest('.feedback-row');
-                    if (!parent) return;
-                    const allBtns = parent.querySelectorAll('.feedback-btn');
-                    allBtns.forEach(b => b.classList.add('voted'));
-                    const vote = this.getAttribute('data-vote');
-                    const faqId = this.getAttribute('data-faq');
-                    if (vote === 'yes') {
-                        this.textContent = '✅ Thanks!';
-                    } else {
-                        this.textContent = '📝 Noted';
-                        // Show a subtle message
-                        const msg = document.createElement('span');
-                        msg.className = 'text-xs text-rose-DEFAULT ml-2';
-                        msg.textContent = 'We'll improve this answer.';
-                        parent.appendChild(msg);
-                        setTimeout(() => msg.remove(), 4000);
-                    }
-                    // Track feedback (demo)
-                    console.log(`FAQ feedback: ${faqId} => ${vote}`);
-                });
-            });
-
-            // ========== KEYBOARD NAVIGATION FOR FAQ ==========
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    const focused = document.activeElement;
-                    if (focused && focused.classList.contains('faq-btn')) {
-                        e.preventDefault();
-                        focused.click();
-                    }
-                }
-            });
-
-            // ========== INITIAL COUNT UPDATE ==========
-            updateCategoryCounts();
-        })();
+        })(window);
     </script>
 
-    <!-- Firebase module (preserved from original) -->
-    <script type="module" src="firebase.js"></script>
+    <!-- Firebase module (preserved from original architecture) -->
+    <script type="module" src="firebase.js">
+    </script>
 </body>
 </html>
