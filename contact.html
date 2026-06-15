@@ -117,8 +117,7 @@
         .faq-item[open] .faq-chevron { transform: rotate(180deg); }
         .form-error { display: none; }
         .form-error.show { display: block; }
-        .form-success { display: none; }
-        .form-success.show { display: flex; }
+        /* We will rely on Tailwind's hidden/flex toggling now */
         ::-webkit-scrollbar { width: 7px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: rgba(79, 70, 229, 0.35); border-radius: 10px; }
@@ -273,7 +272,7 @@
 
                         <!-- CONTACT FORM (Formspree AJAX) -->
                         <form id="contactForm" class="mt-6 space-y-5" novalidate>
-                            <!-- Honeypot (obscure name to avoid autofill) -->
+                            <!-- Honeypot (obscure name) -->
                             <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
 
                             <div>
@@ -315,8 +314,8 @@
                             </button>
                         </form>
 
-                        <!-- Success message (hidden by default) -->
-                        <div id="formSuccess" class="form-success mt-6 p-6 rounded-2xl bg-green-50 border border-green-200 text-green-800 flex items-center gap-3" role="alert">
+                        <!-- Success message (HIDDEN by default, NO flex class) -->
+                        <div id="formSuccess" class="hidden mt-6 p-6 rounded-2xl bg-green-50 border border-green-200 text-green-800 items-center gap-3" role="alert">
                             <svg class="size-6 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             <div><strong>Message sent successfully!</strong><p class="text-sm">We'll get back to you within 24 hours. Thank you!</p></div>
                         </div>
@@ -482,11 +481,11 @@
             "mainEntity": [{
                 "@type": "Question",
                 "name": "What are the best times to visit the school?",
-                "acceptedAnswer": { "@type": "Answer", "text": "We recommend scheduling a visit between 9:00 AM and 1:00 PM on weekdays. Please call ahead to book a tour." }
+                "acceptedAnswer": { "@type": "Answer", "text": "We recommend scheduling a visit between 9:00 AM and 1:00 PM on weekdays." }
             }, {
                 "@type": "Question",
                 "name": "How do I apply for admission?",
-                "acceptedAnswer": { "@type": "Answer", "text": "Apply online via the Admissions page or pick up a form at the school office. Our team will guide you through the process." }
+                "acceptedAnswer": { "@type": "Answer", "text": "Apply online via the Admissions page or pick up a form at the school office." }
             }, {
                 "@type": "Question",
                 "name": "Do you offer virtual tours for out-of-town families?",
@@ -494,7 +493,7 @@
             }, {
                 "@type": "Question",
                 "name": "What is the school's typical response time?",
-                "acceptedAnswer": { "@type": "Answer", "text": "We respond within 24 hours on business days. For urgent matters, please call our phone line." }
+                "acceptedAnswer": { "@type": "Answer", "text": "We respond within 24 hours on business days." }
             }]
         }
     </script>
@@ -609,7 +608,6 @@
             tabSignup?.addEventListener('click', switchToSignup);
             document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && authModal?.classList.contains('active')) closeModal(); });
 
-            // Portal authentication is not yet implemented – show clear message
             PREPSA.handleLogin = () => { alert('🚪 Portal login coming soon. For now, please contact admissions directly.'); closeModal(); };
             PREPSA.handleSignup = () => { alert('📝 Portal sign-up coming soon. For admissions inquiries, please call or email us.'); closeModal(); };
 
@@ -633,7 +631,7 @@
                 backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
             }
 
-            // ── CONTACT FORM SUBMISSION (REAL FORMSPREE ENDPOINT) ──
+            // ── CONTACT FORM SUBMISSION (FORMSPREE) ──
             const contactForm = document.getElementById('contactForm');
             const formSuccess = document.getElementById('formSuccess');
             const formError = document.getElementById('formError');
@@ -641,29 +639,39 @@
             const btnText = document.getElementById('btnText');
             const btnLoading = document.getElementById('btnLoading');
 
-            // ✅ YOUR ACTIVE FORMSPREE ENDPOINT
+            // ✅ YOUR FORMSPREE ENDPOINT
             const FORMSPREE_ENDPOINT = "https://formspree.io/f/xaqzvqen";
 
-            // Ensure success message is hidden on page load (extra safety)
-            if (formSuccess) formSuccess.classList.remove('show');
-            if (formError) formError.classList.remove('show');
+            // Force-hide success & error on DOM ready
+            function resetMessages() {
+                if (formSuccess) {
+                    formSuccess.classList.add('hidden');
+                    formSuccess.classList.remove('flex');
+                }
+                if (formError) {
+                    formError.classList.add('hidden');
+                    formError.classList.remove('show');
+                }
+            }
+
+            // Run now and after DOMContentLoaded to be safe
+            resetMessages();
+            document.addEventListener('DOMContentLoaded', resetMessages);
 
             if (contactForm) {
                 contactForm.addEventListener('submit', async (e) => {
                     e.preventDefault();
 
-                    // Reset messages
-                    formError.classList.remove('show');
-                    formSuccess.classList.remove('show');
+                    // Ensure messages are hidden at start
+                    resetMessages();
 
-                    // ── STRONG CLIENT-SIDE VALIDATION ─────────────────
-                    // 1. Browser built-in validation (required fields)
+                    // 1. Browser validation
                     if (!contactForm.checkValidity()) {
                         contactForm.reportValidity();
                         return;
                     }
 
-                    // 2. Manual check for empty strings (trimmed) – extra safety
+                    // 2. Manual field checks
                     const formData = new FormData(contactForm);
                     const name = (formData.get('name') || '').trim();
                     const email = (formData.get('email') || '').trim();
@@ -671,60 +679,52 @@
 
                     if (!name || !email || !message) {
                         formError.textContent = 'Please fill in all required fields (Name, Email, and Message).';
+                        formError.classList.remove('hidden');
                         formError.classList.add('show');
                         return;
                     }
 
-                    // 3. Honeypot check (hidden field should be empty)
+                    // 3. Honeypot check
                     const honeypot = contactForm.querySelector('input[name="website"]');
                     if (honeypot && honeypot.value) {
-                        // Bot detected – fake success to avoid tipping off
                         contactForm.reset();
                         contactForm.style.display = 'none';
-                        formSuccess.classList.add('show');
+                        formSuccess.classList.remove('hidden');
+                        formSuccess.classList.add('flex');
                         return;
                     }
 
-                    // ── SHOW LOADING STATE ─────────────────────────
+                    // 4. Show loading state
                     btnText.classList.add('hidden');
                     btnLoading.classList.remove('hidden');
                     btnLoading.classList.add('flex');
                     submitBtn.disabled = true;
                     submitBtn.style.opacity = '0.8';
 
-                    // Build payload (sanitized)
-                    const payload = {
-                        name: name,
-                        email: email,
-                        phone: (formData.get('phone') || '').trim(),
-                        subject: formData.get('subject') || '',
-                        message: message
-                    };
-
                     try {
+                        // Use FormData body (recommended by Formspree)
                         const response = await fetch(FORMSPREE_ENDPOINT, {
                             method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Accept': 'application/json'
-                            },
-                            body: JSON.stringify(payload)
+                            body: formData,
+                            headers: { 'Accept': 'application/json' }
                         });
 
                         const result = await response.json();
 
                         if (response.ok && !result.errors) {
-                            // ✅ Real success
+                            // Real success
                             contactForm.reset();
                             contactForm.style.display = 'none';
-                            formSuccess.classList.add('show');
+                            formSuccess.classList.remove('hidden');
+                            formSuccess.classList.add('flex');
                         } else {
                             const errorMsg = result.errors?.[0]?.message || 'Message could not be sent. Please try again.';
                             throw new Error(errorMsg);
                         }
                     } catch (error) {
-                        // ❌ Show error
+                        // Show error
                         formError.textContent = error.message || 'Unable to send message. Please check your connection.';
+                        formError.classList.remove('hidden');
                         formError.classList.add('show');
                         // Re-enable form
                         btnText.classList.remove('hidden');
