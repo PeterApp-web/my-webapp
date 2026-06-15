@@ -206,7 +206,6 @@
     <main>
         <!-- HERO SECTION -->
         <section class="relative overflow-hidden py-24 lg:py-32 text-white" style="background-image: url('https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1600&q=80'); background-size: cover; background-position: center; background-attachment: fixed;">
-            <!-- Cloudinary alternative: https://res.cloudinary.com/drqh2og5z/image/upload/w_1600,q_auto,f_auto,e_blur:200/v1/prepsa/contact-hero -->
             <div class="absolute inset-0 bg-gradient-to-br from-primary/95 to-primary-glow/90"></div>
             <div class="absolute inset-0 bg-black/15"></div>
             <div class="glow-orb" style="top:-100px;right:-80px;width:350px;height:350px;background:oklch(0.84 0.17 88 / 0.25);"></div>
@@ -272,7 +271,7 @@
                         <h2 class="mt-3 text-3xl font-extrabold tracking-tight font-display">We're Here to Help</h2>
                         <p class="mt-2 text-muted-foreground">Fill out the form below and our team will respond within 24 hours.</p>
 
-                        <!-- REAL CONTACT FORM -->
+                        <!-- CONTACT FORM (Formspree integrated) -->
                         <form id="contactForm" class="mt-6 space-y-5" novalidate>
                             <!-- Honeypot – hidden from humans, catches bots -->
                             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
@@ -328,17 +327,7 @@
                         <h2 class="mt-3 text-3xl font-extrabold tracking-tight font-display">Find Our Campus</h2>
                         <p class="mt-2 text-muted-foreground">We're conveniently located in Obantoko, Abeokuta. Visit us during school hours.</p>
                         <div id="map" class="mt-6 rounded-2xl overflow-hidden shadow-soft">
-                            <!--
-                            ============================================================
-                            GOOGLE MAPS EMBED – REAL LOCATION
-                            Replace this URL with one generated from Google Maps
-                            for: 38 Asalu Avenue, Apete, Obantoko, Abeokuta, Ogun State
-                            1. Go to https://www.google.com/maps
-                            2. Search for the address above
-                            3. Click "Share" → "Embed a map"
-                            4. Copy the iframe src and paste below
-                            ============================================================
-                            -->
+                            <!-- Replace with your actual Google Maps embed code for the exact address -->
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.897111111111!2d3.348611!3d7.1825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103a2e5555555555%3A0x5555555555555555!2sObantoko%2C%20Abeokuta%2C%20Ogun%20State!5e0!3m2!1sen!2sng!4v1717000000000"
                                 width="100%"
@@ -521,9 +510,7 @@
             const PREPSA = global.PREPSA || {};
             global.PREPSA = PREPSA;
 
-            // ──────────────────────────────────────────────
-            // AOS INIT
-            // ──────────────────────────────────────────────
+            // ── AOS INIT ──
             function initAOS() {
                 if (typeof AOS !== 'undefined') {
                     AOS.init({ duration: 700, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', once: true, offset: 60 });
@@ -532,9 +519,7 @@
                 }
             }
 
-            // ──────────────────────────────────────────────
-            // PAGE LOADER
-            // ──────────────────────────────────────────────
+            // ── PAGE LOADER ──
             const pageLoader = document.getElementById('page-loader');
             function hideLoaderAndShowContent() {
                 if (pageLoader) {
@@ -547,15 +532,11 @@
             }
             if (pageLoader) setTimeout(hideLoaderAndShowContent, 1950);
 
-            // ──────────────────────────────────────────────
-            // CURRENT YEAR
-            // ──────────────────────────────────────────────
+            // ── CURRENT YEAR ──
             const yearSpan = document.getElementById('current-year');
             if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-            // ──────────────────────────────────────────────
-            // MOBILE MENU
-            // ──────────────────────────────────────────────
+            // ── MOBILE MENU ──
             const menuToggle = document.getElementById('menu-toggle'),
                   mobileMenu = document.getElementById('mobile-menu'),
                   menuIcon = document.getElementById('menu-icon');
@@ -577,9 +558,7 @@
                 }));
             }
 
-            // ──────────────────────────────────────────────
-            // AUTH MODAL
-            // ──────────────────────────────────────────────
+            // ── AUTH MODAL ──
             const authModal = document.getElementById('auth-modal'),
                   modalClose = document.getElementById('modal-close'),
                   tabLogin = document.getElementById('tab-login'),
@@ -635,9 +614,7 @@
             PREPSA.handleLogin = () => { alert('🚪 Portal login coming soon. For now, please contact admissions directly.'); closeModal(); };
             PREPSA.handleSignup = () => { alert('📝 Portal sign-up coming soon. For admissions inquiries, please call or email us.'); closeModal(); };
 
-            // ──────────────────────────────────────────────
-            // SMOOTH SCROLL
-            // ──────────────────────────────────────────────
+            // ── SMOOTH SCROLL ──
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     const href = this.getAttribute('href');
@@ -650,19 +627,14 @@
                 });
             });
 
-            // ──────────────────────────────────────────────
-            // BACK TO TOP
-            // ──────────────────────────────────────────────
+            // ── BACK TO TOP ──
             const backBtn = document.getElementById('back-to-top');
             if (backBtn) {
                 window.addEventListener('scroll', () => backBtn.classList.toggle('visible', window.scrollY > 500));
                 backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
             }
 
-            // ──────────────────────────────────────────────
-            // CONTACT FORM – REAL FORMSPREE SUBMISSION
-            // ⚠️ REPLACE WITH YOUR ACTUAL FORMSPREE FORM ID
-            // ──────────────────────────────────────────────
+            // ── CONTACT FORM SUBMISSION (REAL FORMSPREE ENDPOINT) ──
             const contactForm = document.getElementById('contactForm');
             const formSuccess = document.getElementById('formSuccess');
             const formError = document.getElementById('formError');
@@ -670,44 +642,41 @@
             const btnText = document.getElementById('btnText');
             const btnLoading = document.getElementById('btnLoading');
 
-            // ============================================================
-            // CHANGE THIS TO YOUR REAL FORMSPREE FORM ID
-            // Example: "https://formspree.io/f/xqkrnpyn"
-            // ============================================================
-            const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_REAL_FORM_ID";
+            // ✅ YOUR ACTIVE FORMSPREE ENDPOINT
+            const FORMSPREE_ENDPOINT = "https://formspree.io/f/xaqzvqen";
 
             if (contactForm) {
                 contactForm.addEventListener('submit', async (e) => {
                     e.preventDefault();
 
-                    // Hide previous messages
+                    // Clear previous messages
                     formError.classList.remove('show');
                     formSuccess.classList.remove('show');
 
-                    // ── Frontend validation ──────────────────────────
+                    // Frontend validation
                     if (!contactForm.checkValidity()) {
                         contactForm.reportValidity();
                         return;
                     }
 
-                    // ── Honeypot check ────────────────────────────────
+                    // Honeypot check (bots will fill this hidden field)
                     const honeypot = contactForm.querySelector('input[name="_gotcha"]');
                     if (honeypot && honeypot.value) {
-                        // Bot detected – pretend success but don't send
+                        // Fake success for bots
                         contactForm.reset();
                         contactForm.style.display = 'none';
                         formSuccess.classList.add('show');
                         return;
                     }
 
-                    // ── Show loading state ────────────────────────────
+                    // Show loading state
                     btnText.classList.add('hidden');
                     btnLoading.classList.remove('hidden');
                     btnLoading.classList.add('flex');
                     submitBtn.disabled = true;
                     submitBtn.style.opacity = '0.8';
 
-                    // ── Build JSON payload ────────────────────────────
+                    // Build JSON payload
                     const formData = new FormData(contactForm);
                     const payload = {
                         name: formData.get('name') || '',
@@ -729,18 +698,17 @@
 
                         const result = await response.json();
 
-                        // ── Check for actual success ──────────────────
+                        // Only show success if Formspree confirms no errors
                         if (response.ok && !result.errors) {
                             contactForm.reset();
                             contactForm.style.display = 'none';
                             formSuccess.classList.add('show');
                         } else {
-                            // Server returned errors
                             const errorMsg = result.errors?.[0]?.message || 'Message could not be sent. Please try again.';
                             throw new Error(errorMsg);
                         }
                     } catch (error) {
-                        // ── Show error to user ────────────────────────
+                        // Show error to user
                         formError.textContent = error.message || 'Unable to send message. Please check your connection and try again.';
                         formError.classList.add('show');
                         btnText.classList.remove('hidden');
@@ -752,9 +720,7 @@
                 });
             }
 
-            // ──────────────────────────────────────────────
-            // INIT AOS WHEN READY
-            // ──────────────────────────────────────────────
+            // ── INIT AOS WHEN READY ──
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', initAOS);
             } else {
