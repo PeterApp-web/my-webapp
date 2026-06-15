@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Student Dashboard | PREPSA – Prescious Prime Stars Academy</title>
+    <meta name="description" content="Access your PREPSA student dashboard. View grades, take CBT exams, check attendance, submit assignments, and track your Christian education journey. Secure role‑based portal for students of Prescious Prime Stars Academy." />
+    <meta name="keywords" content="PREPSA student dashboard, student portal, CBT exam, Christian school dashboard, academic analytics, online Christian learning, attendance tracker, school fees payment, e‑library, student assignments, PREPSA academy, Christian K‑12 dashboard" />
+    <meta name="author" content="Prescious Prime Stars Academy" />
+    <meta name="theme-color" content="#4F46E5" />
+    <link rel="canonical" href="https://prepsa.edu/student-dashboard" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Student Dashboard | PREPSA" />
+    <meta property="og:description" content="Your central hub for Christian education – grades, CBT, assignments, and more." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://prepsa.edu/student-dashboard" />
+    <meta property="og:image" content="https://res.cloudinary.com/drqh2og5z/image/upload/prepsa-og-student.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="PREPSA Portal" />
+
+    <!-- JSON‑LD for WebApplication -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "PREPSA Student Dashboard",
+            "url": "https://prepsa.edu/student-dashboard",
+            "applicationCategory": "EducationalApplication",
+            "operatingSystem": "All",
+            "author": {
+                "@type": "EducationalOrganization",
+                "name": "Prescious Prime Stars Academy"
+            }
+        }
+    </script>
+
+    <!-- Fonts & CSS libraries -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'system-ui', 'sans-serif'],
+                        orbitron: ['Orbitron', 'Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: { DEFAULT: '#4F46E5', foreground: '#ffffff' },
+                        gold: { DEFAULT: '#EAB308', foreground: '#1f2937' },
+                        navy: '#0A2342',
+                        oxford: '#0A2342',
+                        border: '#e5e7eb',
+                        background: '#f9fafb',
+                        foreground: '#111827',
+                        muted: { DEFAULT: '#f3f4f6', foreground: '#6b7280' },
+                    },
+                    boxShadow: {
+                        'soft': '0 8px 30px -10px rgba(0,0,0,0.1)',
+                        'neon': '0 0 20px rgba(234,179,8,0.35)',
+                    },
+                    borderRadius: { '2xl': '1.5rem', '3xl': '2rem' },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: #f8fafc; }
+        .sidebar-link { transition: background 0.2s, color 0.2s; }
+        .sidebar-link:hover { background: rgba(255,255,255,0.12); }
+        .sidebar-link.active { background: rgba(79,70,229,0.3); border-left: 3px solid #EAB308; color: white !important; }
+        .sidebar-link.cbt-button {
+            background: rgba(234,179,8,0.15);
+            border: 1px solid #EAB308;
+            border-radius: 0.75rem;
+            margin: 0.5rem 0;
+            font-weight: 600;
+            color: #EAB308 !important;
+        }
+        .sidebar-link.cbt-button.active { background: #EAB308; color: #0A2342 !important; border-left: 3px solid #4F46E5; }
+        .section-card { background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border: 1px solid #f1f5f9; }
+        .badge { display: inline-block; padding: 0.2em 0.6em; font-size: 0.75rem; font-weight: 600; border-radius: 9999px; }
+        .loading-spinner { border: 3px solid #e5e7eb; border-top-color: #4F46E5; border-radius: 50%; width: 24px; height: 24px; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Logo Intro Overlay */
+        #logo-intro-overlay {
+            position: fixed; inset: 0; z-index: 9999;
+            background: radial-gradient(ellipse at center, #0A2342 0%, #000000 100%);
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+            transition: opacity 0.55s, visibility 0.55s;
+        }
+        #logo-intro-overlay.exit { opacity: 0; visibility: hidden; pointer-events: none; }
+        #logo-intro-ring {
+            position: absolute; width: 160px; height: 160px;
+            border: 2px solid rgba(234,179,8,0.5); border-radius: 50%;
+            animation: ringPulse 2.2s cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+        @keyframes ringPulse {
+            0% { width:60px; height:60px; opacity:0; border-width:4px; }
+            40% { width:200px; height:200px; opacity:0.9; border-width:1px; }
+            100% { width:400px; height:400px; opacity:0; border-width:0.5px; }
+        }
+        #logo-intro-inner {
+            z-index: 2; font-family: 'Orbitron',sans-serif;
+            animation: zoomInOut 2.2s cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+        @keyframes zoomInOut {
+            0% { transform:scale(0.1); opacity:0; filter:blur(8px); }
+            35% { transform:scale(1.08); opacity:1; filter:blur(0); }
+            55% { transform:scale(0.92); }
+            75% { transform:scale(1.02); }
+            100% { transform:scale(1); opacity:1; }
+        }
+        #logo-intro-text {
+            z-index:2; opacity:0; font-family: 'Orbitron',sans-serif;
+            animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.8s forwards;
+        }
+        @keyframes fadeSlideUp {
+            from { opacity:0; transform:translateY(30px); }
+            to { opacity:1; transform:translateY(0); }
+        }
+
+        /* Skeleton Loading */
+        .skeleton {
+            background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+            background-size: 200% 100%; animation: shimmer 1.8s ease-in-out infinite;
+            border-radius: 0.5rem;
+        }
+        .skeleton-dark {
+            background: linear-gradient(90deg, rgba(255,255,255,0.08) 25%, rgba(255,255,255,0.16) 50%, rgba(255,255,255,0.08) 75%);
+            background-size: 200% 100%; animation: shimmer 1.8s ease-in-out infinite;
+        }
+        @keyframes shimmer { 0%{background-position:200% 0;} 100%{background-position:-200% 0;} }
+
+        /* FAQ accordion */
+        .faq-item summary { cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between; padding:1rem 1.25rem; font-weight:600; color:#0A2342; }
+        .faq-item summary::-webkit-details-marker { display:none; }
+        .faq-item summary .faq-icon { transition:transform 0.3s; font-size:1.2rem; color:#EAB308; }
+        .faq-item[open] summary .faq-icon { transform:rotate(45deg); }
+        .faq-item .faq-answer { padding:0 1.25rem 1rem; color:#475569; line-height:1.7; }
+    </style>
+</head>
+<body class="min-h-screen flex">
+
+<!-- ========== LOGO INTRO OVERLAY ========== -->
+<div id="logo-intro-overlay">
+    <div id="logo-intro-ring"></div>
+    <div id="logo-intro-inner" class="grid place-items-center rounded-3xl bg-gradient-to-br from-gold to-amber-400 text-oxford font-extrabold shadow-neon"
+         style="width:100px;height:100px;font-size:3rem;font-family:'Orbitron';">P</div>
+    <p id="logo-intro-text" class="mt-5 text-lg font-semibold text-gold tracking-widest uppercase font-orbitron">Student Hub</p>
+</div>
+
+<!-- ========== PAGE TRANSITION OVERLAY (for future navigation) ========== -->
+<div id="page-transition-overlay" style="position:fixed;inset:0;z-index:10000;background:#0A2342;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;pointer-events:none;transition:opacity 0.35s, visibility 0.35s;">
+    <div id="page-transition-logo" class="grid place-items-center rounded-3xl bg-gradient-to-br from-gold to-amber-400 text-oxford font-extrabold shadow-neon"
+         style="width:90px;height:90px;font-size:2.8rem;font-family:'Orbitron';">P</div>
+</div>
+
+<!-- ========== SIDEBAR ========== -->
+<aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-oxford text-white flex flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300">
+    <div class="p-5 flex items-center gap-3 border-b border-white/10">
+        <span class="grid size-9 place-items-center rounded-lg bg-primary font-extrabold text-white text-sm font-orbitron">P</span>
+        <span class="text-lg font-extrabold tracking-tight font-orbitron">PREPSA</span>
+    </div>
+    <nav class="flex-1 mt-4 space-y-1 px-3 overflow-y-auto">
+        <a href="#" data-section="overview" class="sidebar-link active flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium"><span>🏠</span> Overview</a>
+        <a href="#" data-section="profile" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>👤</span> Profile</a>
+        <a href="#" data-section="grades" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>📊</span> Results</a>
+        <a href="#" data-section="cbt" class="sidebar-link cbt-button flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium">
+            <span>💻</span> CBT Exams <span class="ml-auto bg-gold text-oxford text-xs font-bold px-2 py-0.5 rounded-full">NEW</span>
+        </a>
+        <a href="#" data-section="assignments" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>📝</span> Assignments</a>
+        <a href="#" data-section="attendance" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>📅</span> Attendance</a>
+        <a href="#" data-section="timetable" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>🕒</span> Timetable</a>
+        <a href="#" data-section="lms" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>💻</span> E‑Learning</a>
+        <a href="#" data-section="library" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>📚</span> E‑Library</a>
+        <a href="#" data-section="fees" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>💳</span> Fees</a>
+        <a href="#" data-section="discipleship" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>✝️</span> D‑Class</a>
+        <a href="#" data-section="leadership" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>🏆</span> Leadership</a>
+        <a href="#" data-section="notifications" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>🔔</span> Notifications</a>
+        <a href="#" data-section="messages" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>💬</span> Messages</a>
+        <a href="#" data-section="badges" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>🏅</span> Achievements</a>
+        <a href="#" data-section="analytics" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>📈</span> Analytics</a>
+        <a href="#" data-section="events" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>📅</span> Events</a>
+        <a href="#" data-section="health" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>🏥</span> Health</a>
+        <a href="#" data-section="transport" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>🚌</span> Transport</a>
+        <a href="#" data-section="hostel" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>🏠</span> Hostel</a>
+        <a href="#" data-section="faq" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>❓</span> FAQ</a>
+    </nav>
+    <div class="p-4 border-t border-white/10">
+        <div class="flex items-center gap-3">
+            <div class="size-9 rounded-full bg-gold text-oxford grid place-items-center font-bold text-sm" id="user-initials">S</div>
+            <div>
+                <p class="text-sm font-medium text-white" id="user-name">Student</p>
+                <p class="text-xs text-white/50" id="user-email">student@prepsa.com</p>
+            </div>
+        </div>
+        <button id="logout-btn" class="mt-3 w-full text-left text-xs text-white/50 hover:text-white transition flex items-center gap-2">🚪 Sign out</button>
+    </div>
+</aside>
+
+<div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden" onclick="closeSidebar()"></div>
+
+<!-- ========== MAIN CONTENT AREA ========== -->
+<div class="flex-1 flex flex-col md:ml-64">
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-border px-4 py-3 flex items-center justify-between">
+        <button class="md:hidden p-2 rounded-md hover:bg-gray-100" onclick="openSidebar()">☰</button>
+        <div class="flex-1 max-w-md ml-4"><input type="search" placeholder="Search…" class="w-full rounded-lg border px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40" /></div>
+        <div class="flex items-center gap-3 relative">
+            <button id="notifications-bell" class="relative p-2 rounded-full hover:bg-gray-100">🔔<span id="notification-badge" class="absolute -top-1 -right-1 min-w-[18px] h-[18px] bg-red-500 text-white text-[10px] rounded-full hidden"></span></button>
+            <div id="notification-dropdown" class="hidden p-3 absolute right-0 top-full w-72 bg-white border rounded-lg shadow-lg z-50 max-h-80 overflow-y-auto">
+                <div class="flex justify-between items-center mb-2">
+                    <p class="text-xs font-bold text-foreground">Notifications</p>
+                    <button id="mark-all-read-btn" class="text-xs text-primary font-medium hover:underline">Mark all read</button>
+                </div>
+                <div id="notification-list" class="text-xs text-muted-foreground space-y-1"></div>
+            </div>
+            <div class="size-8 rounded-full bg-primary/20 text-primary grid place-items-center font-bold text-xs" id="header-initials">S</div>
+        </div>
+    </header>
+
+    <main id="main-content" class="p-4 md:p-6 space-y-6">
+        <!-- Initial skeleton shown until content loads -->
+        <div class="skeleton h-48 rounded-2xl mb-6"></div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="skeleton h-24 rounded-xl"></div>
+            <div class="skeleton h-24 rounded-xl"></div>
+            <div class="skeleton h-24 rounded-xl"></div>
+            <div class="skeleton h-24 rounded-xl"></div>
+        </div>
+    </main>
+</div>
+
+<!-- ========== SCRIPTS ========== -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 600, easing: 'ease-out-cubic', once: true, offset: 40 });
+</script>
+
+<!-- Firebase & custom logic -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+    import { getFirestore, doc, getDoc, onSnapshot, collection, query, where, getDocs, updateDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-storage.js";
+
+    // ========== CLOUDINARY CONFIG ==========
+    window.PREPSA_CLOUDINARY = {
+        cloudName: 'drqh2og5z',
+        uploadPreset: 'peterwork',
+        baseURL: 'https://res.cloudinary.com/drqh2og5z',
+        buildImageURL: (publicId, opts = {}) => {
+            const t = [];
+            if (opts.width) t.push(`w_${opts.width}`);
+            if (opts.height) t.push(`h_${opts.height}`);
+            if (opts.crop) t.push(`c_${opts.crop}`);
+            if (opts.quality) t.push(`q_${opts.quality}`);
+            if (opts.format) t.push(`f_${opts.format}`);
+            const trans = t.length ? t.join(',') + '/' : '';
+            return `https://res.cloudinary.com/drqh2og5z/image/upload/${trans}${publicId}`;
+        },
+        buildVideoURL: (publicId, opts = {}) => {
+            const t = [];
+            if (opts.width) t.push(`w_${opts.width}`);
+            if (opts.height) t.push(`h_${opts.height}`);
+            if (opts.quality) t.push(`q_${opts.quality}`);
+            const trans = t.length ? t.join(',') + '/' : '';
+            return `https://res.cloudinary.com/drqh2og5z/video/upload/${trans}${publicId}`;
+        }
+    };
+    console.log('☁️ Cloudinary ready:', window.PREPSA_CLOUDINARY.cloudName);
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDTg6I8aRkvBbFb-sesYhR0rtrQewZstXI",
+        authDomain: "myapp-d4a01.firebaseapp.com",
+        projectId: "myapp-d4a01",
+        storageBucket: "myapp-d4a01.appspot.com",
+        messagingSenderId: "153428401856",
+        appId: "1:153428401856:web:4f61f429722452c06c5725",
+        measurementId: "G-8JDMZ6QNVN"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
+    // ========== GLOBALS ==========
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    const mainContent = document.getElementById('main-content');
+    const loadingScreen = document.getElementById('logo-intro-overlay');
+    let currentUser = null;
+    let studentProfile = null;
+    let currentSection = 'overview';
+    let unsubscribeProfile = null;
+    let editMode = false;
+
+    window.openSidebar = () => { sidebar.classList.remove('-translate-x-full'); overlay.classList.remove('hidden'); };
+    window.closeSidebar = () => { sidebar.classList.add('-translate-x-full'); overlay.classList.add('hidden'); };
+
+    // ========== LOGO INTRO ==========
+    function playLogoIntro() {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                loadingScreen.classList.add('exit');
+                setTimeout(() => {
+                    if (loadingScreen.parentNode) loadingScreen.style.display = 'none';
+                    resolve();
+                }, 600);
+            }, 2300);
+        });
+    }
+
+    // ========== SKELETON HELPERS ==========
+    function showSkeleton() {
+        mainContent.innerHTML = `
+            <div class="skeleton h-48 rounded-2xl mb-6"></div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="skeleton h-24 rounded-xl"></div>
+                <div class="skeleton h-24 rounded-xl"></div>
+                <div class="skeleton h-24 rounded-xl"></div>
+                <div class="skeleton h-24 rounded-xl"></div>
+            </div>
+        `;
+    }
+
+    // ========== ACTIVE SECTION ==========
+    function setActiveSection(section) {
+        currentSection = section;
+        document.querySelectorAll('.sidebar-link[data-section]').forEach(link => {
+            link.classList.remove('active');
+            if (link.dataset.section === section) link.classList.add('active');
+        });
+        localStorage.setItem('activeStudentSection', section);
+    }
+
+    document.querySelectorAll('.sidebar-link[data-section]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const section = link.dataset.section;
+            setActiveSection(section);
+            renderSection(section);
+            if (window.innerWidth < 768) closeSidebar();
+        });
+    });
+
+    async function renderSection(section) {
+        if (!currentUser) return;
+        showSkeleton();
+        const sectionMap = {
+            overview: loadDashboard,
+            profile: loadProfile,
+            grades: loadResults,
+            cbt: loadCBTExams,
+            assignments: loadAssignments,
+            attendance: loadAttendance,
+            timetable: loadTimetable,
+            lms: loadELearning,
+            library: loadELibrary,
+            fees: loadFees,
+            discipleship: loadDClass,
+            leadership: loadLeadership,
+            notifications: loadNotifications,
+            messages: loadMessages,
+            badges: loadAchievement,
+            analytics: loadAnalytics,
+            events: loadEvents,
+            health: loadHealth,
+            transport: loadTransport,
+            hostel: loadHostel,
+            faq: loadFAQ
+        };
+        const fn = sectionMap[section];
+        if (fn) await fn();
+        AOS.refresh();
+    }
+
+    // ========== UTILS ==========
+    function getInitials(name) {
+        if (!name) return 'S';
+        const parts = name.trim().split(' ').filter(Boolean);
+        return parts.slice(0, 2).map(p => p[0].toUpperCase()).join('');
+    }
+    function safeDate(seconds) {
+        return seconds?.seconds ? new Date(seconds.seconds * 1000).toLocaleDateString() : 'N/A';
+    }
+    function safeDateTime(seconds) {
+        return seconds?.seconds ? new Date(seconds.seconds * 1000).toLocaleString() : 'N/A';
+    }
+
+    // ========== AUTH & PROFILE LISTENER ==========
+    function startProfileListener(uid) {
+        if (unsubscribeProfile) unsubscribeProfile();
+        unsubscribeProfile = onSnapshot(doc(db, 'students', uid), (snap) => {
+            if (snap.exists()) studentProfile = snap.data();
+            else studentProfile = { fullName: currentUser?.displayName || 'Student', class: '', arm: '', status: 'active' };
+            updateHeaderInfo();
+            if (currentSection) renderSection(currentSection);
+        });
+    }
+
+    function updateHeaderInfo() {
+        const name = studentProfile?.fullName || currentUser?.displayName || 'Student';
+        document.getElementById('user-name').textContent = name;
+        document.getElementById('user-email').textContent = currentUser?.email || '';
+        const initials = getInitials(name);
+        document.getElementById('user-initials').textContent = initials;
+        document.getElementById('header-initials').textContent = initials;
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+        if (!user) { window.location.href = 'portal.html'; return; }
+        currentUser = user;
+        try {
+            const userDoc = await getDoc(doc(db, 'users', user.uid));
+            if (!userDoc.exists() || userDoc.data().role !== 'student') {
+                await signOut(auth);
+                window.location.href = 'portal.html';
+                return;
+            }
+            startProfileListener(user.uid);
+            const snap = await getDoc(doc(db, 'students', user.uid));
+            studentProfile = snap.exists() ? snap.data() : { fullName: user.displayName || 'Student' };
+            updateHeaderInfo();
+
+            await playLogoIntro();
+            const saved = localStorage.getItem('activeStudentSection') || 'overview';
+            setActiveSection(saved);
+            await renderSection(saved);
+            updateNotificationBadge();
+            setInterval(updateNotificationBadge, 30000);
+        } catch (err) {
+            mainContent.innerHTML = `<p class="text-red-500">Error loading dashboard: ${err.message}</p>`;
+        }
+    });
+
+    // ========== LOGOUT ==========
+    document.getElementById('logout-btn').addEventListener('click', async () => {
+        await signOut(auth);
+        window.location.href = 'portal.html';
+    });
+
+    // ========== NOTIFICATIONS ==========
+    async function updateNotificationBadge() {
+        if (!currentUser) return;
+        const q = query(collection(db, 'notifications'), where('userId', '==', currentUser.uid), where('read', '==', false));
+        const snap = await getDocs(q);
+        const badge = document.getElementById('notification-badge');
+        badge.textContent = snap.size > 9 ? '9+' : snap.size;
+        badge.style.display = snap.size ? 'flex' : 'none';
+    }
+
+    document.getElementById('notifications-bell').addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const dropdown = document.getElementById('notification-dropdown');
+        dropdown.classList.toggle('hidden');
+        if (!dropdown.classList.contains('hidden')) {
+            const q = query(collection(db, 'notifications'), where('userId', '==', currentUser.uid));
+            const snap = await getDocs(q);
+            const list = document.getElementById('notification-list');
+            const all = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+            list.innerHTML = all.slice(0, 10).map(n => `<div class="border-b pb-1 mb-1 ${n.read ? 'opacity-50' : ''}"><p class="font-medium">${n.title}</p><p class="text-xs">${n.message}</p></div>`).join('') || '<p>No notifications.</p>';
+        }
+    });
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('#notifications-bell') && !e.target.closest('#notification-dropdown'))
+            document.getElementById('notification-dropdown').classList.add('hidden');
+    });
+    document.getElementById('mark-all-read-btn')?.addEventListener('click', async () => {
+        const q = query(collection(db, 'notifications'), where('userId', '==', currentUser.uid), where('read', '==', false));
+        const snap = await getDocs(q);
+        snap.forEach(d => updateDoc(d.ref, { read: true }));
+        updateNotificationBadge();
+    });
+
+    // ========== LOAD SECTIONS (FULL IMPLEMENTATIONS) ==========
+
+    // ---------- OVERVIEW ----------
+    async function loadDashboard() {
+        try {
+            const classId = studentProfile?.class || '';
+            const [resultsSnap, assignmentsSnap, attendanceSnap, paymentsSnap, eventsSnap] = await Promise.allSettled([
+                getDocs(query(collection(db, 'results'), where('studentId', '==', currentUser.uid))),
+                getDocs(query(collection(db, 'assignments'), where('class', '==', classId), where('status', '==', 'active'))),
+                getDocs(query(collection(db, 'attendanceRecords'), where('studentId', '==', currentUser.uid))),
+                getDocs(query(collection(db, 'payments'), where('studentId', '==', currentUser.uid))),
+                getDocs(query(collection(db, 'events'), where('targetAudience', 'array-contains', 'students')))
+            ]);
+
+            const resultsDocs = resultsSnap.status === 'fulfilled' ? resultsSnap.value.docs : [];
+            const assignmentsDocs = assignmentsSnap.status === 'fulfilled' ? assignmentsSnap.value.docs : [];
+            const attendanceDocs = attendanceSnap.status === 'fulfilled' ? attendanceSnap.value.docs : [];
+            const paymentsDocs = paymentsSnap.status === 'fulfilled' ? paymentsSnap.value.docs : [];
+            const eventsDocs = eventsSnap.status === 'fulfilled' ? eventsSnap.value.docs : [];
+
+            const fullName = studentProfile?.fullName || currentUser.displayName || 'Student';
+            const admissionNo = studentProfile?.admissionNo || 'N/A';
+            const house = studentProfile?.house || 'Unassigned';
+            const bloodGroup = studentProfile?.bloodGroup || 'N/A';
+            const classTeacher = studentProfile?.classTeacher || 'N/A';
+
+            // Compute term average and subject scores
+            const subjectScores = {};
+            resultsDocs.forEach(doc => {
+                const data = doc.data();
+                if (data.subjects) {
+                    Object.entries(data.subjects).forEach(([subj, val]) => {
+                        if (!subjectScores[subj]) subjectScores[subj] = [];
+                        subjectScores[subj].push(val.total || 0);
+                    });
+                }
+            });
+            const gradeLabels = Object.keys(subjectScores).slice(0, 5);
+            const gradeValues = gradeLabels.map(subj => Math.round(subjectScores[subj].reduce((a, b) => a + b, 0) / subjectScores[subj].length));
+            const termAvg = gradeValues.length ? Math.round(gradeValues.reduce((a, b) => a + b, 0) / gradeValues.length) : 'N/A';
+
+            // Rank
+            let rank = 'N/A';
+            if (resultsDocs.length > 0 && classId) {
+                const allResultsSnap = await getDocs(query(collection(db, 'results'), where('classId', '==', classId)));
+                const allResults = allResultsSnap.docs.map(d => d.data().average || 0).filter(Boolean);
+                const studentTotal = resultsDocs.reduce((sum, doc) => sum + (doc.data().average || 0), 0) / resultsDocs.length;
+                allResults.sort((a, b) => b - a);
+                const idx = allResults.indexOf(studentTotal);
+                if (idx >= 0) rank = `${idx + 1} / ${allResults.length}`;
+            }
+
+            // Attendance
+            let presentDays = 0, absentDays = 0;
+            attendanceDocs.forEach(doc => {
+                if (doc.data().status === 'present') presentDays++;
+                else absentDays++;
+            });
+            const totalAtt = presentDays + absentDays;
+            const attendancePct = totalAtt ? Math.round((presentDays / totalAtt) * 100) : 100;
+
+            // Fee balance
+            let totalDue = 0, totalPaid = 0;
+            paymentsDocs.forEach(doc => {
+                totalDue += doc.data().amountDue || 0;
+                totalPaid += doc.data().amountPaid || 0;
+            });
+            const balance = totalDue - totalPaid;
+
+            // Upcoming assignments & events
+            const upcomingAssignments = assignmentsDocs.map(d => d.data()).sort((a, b) => (a.dueDate?.seconds || 0) - (b.dueDate?.seconds || 0)).slice(0, 4);
+            const upcomingEvents = eventsDocs.map(d => d.data()).sort((a, b) => (a.date?.seconds || 0) - (b.date?.seconds || 0)).slice(0, 4);
+
+            let html = `
+            <div class="bg-white rounded-2xl p-6 shadow-soft mb-6" data-aos="fade-up">
+                <div class="flex flex-wrap gap-6 items-center">
+                    <div class="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center text-3xl text-primary font-bold">${getInitials(fullName)}</div>
+                    <div>
+                        <h2 class="text-2xl font-bold">${fullName}</h2>
+                        <p class="text-muted-foreground">${classId || 'N/A'} · House: ${house} · Admission: ${admissionNo} · Blood: ${bloodGroup}</p>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <button onclick="document.querySelector('[data-section=grades]').click()" class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">View Result</button>
+                            <button onclick="document.querySelector('[data-section=fees]').click()" class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Pay Fees</button>
+                            <button onclick="document.querySelector('[data-section=cbt]').click()" class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Start CBT</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="section-card text-center"><p class="text-xs font-bold uppercase">Term Avg</p><p class="text-2xl font-bold text-primary">${termAvg === 'N/A' ? 'N/A' : termAvg + '%'}</p></div>
+                <div class="section-card text-center"><p class="text-xs font-bold uppercase">Attendance</p><p class="text-2xl font-bold text-primary">${attendancePct}%</p></div>
+                <div class="section-card text-center"><p class="text-xs font-bold uppercase">Class Rank</p><p class="text-2xl font-bold text-primary">${rank}</p></div>
+                <div class="section-card text-center"><p class="text-xs font-bold uppercase">Fee Balance</p><p class="text-2xl font-bold ${balance > 0 ? 'text-red-600' : 'text-green-600'}">₦${Math.abs(balance).toLocaleString()}</p></div>
+            </div>
+            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <div class="bg-white rounded-2xl p-6 shadow-soft" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="font-bold text-lg">📊 Current Grades</h3>
+                    <div class="mt-2 space-y-2">${gradeLabels.length === 0 ? '<p class="text-muted-foreground">No results yet.</p>' : gradeLabels.map((subj, i) => `<div><div class="flex justify-between"><span>${subj}</span><span class="font-semibold">${gradeValues[i]}%</span></div><div class="w-full bg-gray-200 rounded-full h-2"><div class="bg-primary h-2 rounded-full" style="width:${gradeValues[i]}%"></div></div></div>`).join('')}</div>
+                    ${gradeLabels.length > 0 ? '<canvas id="gradeChart" height="100" class="mt-4"></canvas>' : ''}
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-soft" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="font-bold text-lg">📅 Upcoming</h3>
+                    ${upcomingAssignments.length === 0 && upcomingEvents.length === 0 ? '<p class="text-muted-foreground mt-3">Nothing due soon.</p>' : `
+                        ${upcomingAssignments.length > 0 ? `<ul class="mt-3 space-y-2">${upcomingAssignments.map(a => `<li class="flex justify-between"><span>${a.title}</span><span class="text-xs text-orange-600">${safeDate(a.dueDate)}</span></li>`).join('')}</ul>` : ''}
+                        ${upcomingEvents.length > 0 ? `<p class="text-sm font-semibold mt-4">Events:</p><ul class="space-y-1 text-sm">${upcomingEvents.map(e => `<li>${e.title} – ${safeDate(e.date)}</li>`).join('')}</ul>` : ''}
+                    `}
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-soft" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="font-bold text-lg">📖 Attendance</h3>
+                    <div class="mt-2 flex items-center gap-4"><div class="relative w-24 h-24"><svg viewBox="0 0 36 36" class="w-full h-full"><path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#e5e7eb" stroke-width="3"/><path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831" fill="none" stroke="#4F46E5" stroke-width="3" stroke-dasharray="${attendancePct}, 100"/></svg><div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl font-bold text-primary">${attendancePct}%</div></div><div><p>Present: ${presentDays} days</p><p>Absent: ${absentDays} days</p></div></div>
+                </div>
+            </div>`;
+
+            mainContent.innerHTML = html;
+
+            if (gradeLabels.length > 0) {
+                const ctx = document.getElementById('gradeChart')?.getContext('2d');
+                if (ctx) new Chart(ctx, { type: 'bar', data: { labels: gradeLabels, datasets: [{ label: 'Average Score (%)', data: gradeValues, backgroundColor: '#4F46E5', borderRadius: 4 }] }, options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 100 } } } });
+            }
+        } catch (err) {
+            mainContent.innerHTML = `<div class="bg-red-50 p-6 rounded-2xl text-red-600">Error loading overview: ${err.message}</div>`;
+        }
+    }
+
+    // ---------- PROFILE (with edit mode & password change) ----------
+    async function loadProfile() {
+        const p = studentProfile || {};
+        const photo = p.photoURL || null;
+        const editableFieldsList = [
+            'studentPhone', 'studentEmail', 'residentialAddress', 'photoURL', 'parentPhone', 'parentEmail',
+            'emergencyContact', 'allergies', 'specialConditions', 'churchAttending', 'discipleshipStage', 'spiritualGifts'
+        ];
+
+        const renderField = (label, fieldKey, value, editable = false) => {
+            const escaped = (val) => String(val == null ? '' : val).replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[m]);
+            if (editMode && editable) {
+                let type = 'text';
+                if (fieldKey.includes('Email')) type = 'email';
+                if (fieldKey.includes('Phone')) type = 'tel';
+                return `<div class="flex flex-col sm:flex-row sm:justify-between py-1"><span class="text-muted-foreground font-medium">${label}:</span><input type="${type}" value="${escaped(value)}" class="border rounded px-2 py-1 text-sm w-48" data-field="${fieldKey}" /></div>`;
+            }
+            return `<div class="flex flex-col sm:flex-row sm:justify-between py-1"><span class="text-muted-foreground font-medium">${label}:</span><span class="text-foreground font-semibold">${escaped(value) || 'N/A'}</span></div>`;
+        };
+
+        const categories = [
+            { title: '👤 Personal & Biographical', fields: [ ['Full Name','fullName',p.fullName,false], ['Admission No','admissionNo',p.admissionNo,false], ['Date of Birth','dateOfBirth',safeDate(p.dateOfBirth),false], ['Gender','gender',p.gender,false], ['Residential Address','residentialAddress',p.residentialAddress,true], ['Student Phone','studentPhone',p.studentPhone,true], ['Student Email','studentEmail',p.studentEmail,true] ] },
+            { title: '👪 Parent / Guardian', fields: [ ['Father Name','fatherName',p.fatherName,false], ['Mother Name','motherName',p.motherName,false], ['Parent Phone','parentPhone',p.parentPhone,true], ['Parent Email','parentEmail',p.parentEmail,true] ] },
+            { title: '🩺 Medical', fields: [ ['Blood Group','bloodGroup',p.bloodGroup,false], ['Allergies','allergies',p.allergies,true], ['Special Conditions','specialConditions',p.specialConditions,true] ] },
+            { title: '📚 Academic', fields: [ ['Class','class',p.class,false], ['Arm','arm',p.arm,false], ['Class Teacher','classTeacher',p.classTeacher,false] ] },
+            { title: '✝️ Faith‑Based', fields: [ ['Church Attending','churchAttending',p.churchAttending,true], ['Discipleship Stage','discipleshipStage',p.discipleshipStage,true], ['Spiritual Gifts','spiritualGifts',p.spiritualGifts?.join(', '),true] ] }
+        ];
+
+        let html = `<div class="bg-white rounded-2xl shadow-soft max-w-4xl mx-auto" data-aos="fade-up">
+            <div class="bg-primary/5 px-6 py-4 border-b flex justify-between items-center flex-wrap gap-3">
+                <h2 class="text-xl font-bold">👤 Student Profile</h2>
+                <div class="flex gap-2">
+                    ${!editMode ? `<button id="enable-edit-btn" class="text-sm bg-primary text-white px-4 py-1 rounded-lg">✏️ Edit Profile</button>` : `<button id="save-profile-btn" class="text-sm bg-green-600 text-white px-4 py-1 rounded-lg">💾 Save</button><button id="cancel-edit-btn" class="text-sm bg-gray-500 text-white px-4 py-1 rounded-lg">❌ Cancel</button>`}
+                    <button id="change-password-btn" class="text-sm bg-secondary text-secondary-foreground px-4 py-1 rounded-lg">🔒 Change Password</button>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="flex flex-col md:flex-row gap-6 items-start mb-8">
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="w-32 h-32 rounded-full bg-primary/20 flex items-center justify-center text-4xl text-primary font-bold overflow-hidden shadow-md">
+                            ${photo ? `<img src="${photo}" class="w-full h-full object-cover" alt="Student Photo" />` : getInitials(p.fullName)}
+                        </div>
+                        ${editMode ? `<label class="text-xs text-primary cursor-pointer hover:underline mt-1"><input type="file" id="photo-upload" class="hidden" accept="image/*" />📷 Change Photo</label>` : ''}
+                        <div id="qr-container" class="mt-2 qr-code"></div>
+                        <p class="text-xs text-muted-foreground">Student QR</p>
+                    </div>
+                    <div class="flex-1 space-y-6">`;
+        for (const cat of categories) {
+            html += `<section><h3 class="text-base font-bold text-primary mb-3 uppercase tracking-wide">${cat.title}</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-sm">`;
+            for (const [label, key, val, editable] of cat.fields) {
+                html += renderField(label, key, val, editable);
+            }
+            html += `</div></section>`;
+        }
+        html += `</div></div></div></div>`;
+        mainContent.innerHTML = html;
+
+        // QR Code
+        const qrData = `PREPSA|${p.admissionNo || ''}|${p.fullName || ''}`;
+        const qrDiv = document.getElementById('qr-container');
+        if (qrDiv) {
+            qrDiv.innerHTML = '';
+            new QRCode(qrDiv, { text: qrData, width: 100, height: 100, colorDark: "#4F46E5", colorLight: "#ffffff" });
+        }
+
+        // Edit mode handlers
+        if (editMode) {
+            document.getElementById('save-profile-btn')?.addEventListener('click', async () => {
+                const updates = {};
+                for (const field of editableFieldsList) {
+                    const input = document.querySelector(`input[data-field="${field}"]`);
+                    if (input) {
+                        let val = input.value.trim();
+                        if (field === 'spiritualGifts') val = val.split(',').map(s => s.trim()).filter(Boolean);
+                        updates[field] = val || null;
+                    }
+                }
+                try {
+                    await updateDoc(doc(db, 'students', currentUser.uid), updates);
+                    editMode = false;
+                    await loadProfile();
+                } catch (err) { alert('Save failed: ' + err.message); }
+            });
+            document.getElementById('cancel-edit-btn')?.addEventListener('click', () => {
+                editMode = false;
+                loadProfile();
+            });
+            const photoInput = document.getElementById('photo-upload');
+            if (photoInput) {
+                photoInput.addEventListener('change', async (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    const storageRef = ref(storage, `student_photos/${currentUser.uid}/${Date.now()}_${file.name}`);
+                    await uploadBytes(storageRef, file);
+                    const downloadURL = await getDownloadURL(storageRef);
+                    await updateDoc(doc(db, 'students', currentUser.uid), { photoURL: downloadURL });
+                    editMode = false;
+                    loadProfile();
+                });
+            }
+        } else {
+            document.getElementById('enable-edit-btn')?.addEventListener('click', () => {
+                editMode = true;
+                loadProfile();
+            });
+        }
+
+        // Change Password modal
+        document.getElementById('change-password-btn')?.addEventListener('click', () => {
+            const modalHtml = `
+            <div id="pw-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000]">
+                <div class="bg-white rounded-2xl p-6 max-w-sm w-full">
+                    <h3 class="text-lg font-bold mb-3">Change Password</h3>
+                    <input type="password" id="current-pw" placeholder="Current password" class="w-full border rounded px-3 py-2 mb-2 text-sm" />
+                    <input type="password" id="new-pw" placeholder="New password (min 6 chars)" class="w-full border rounded px-3 py-2 mb-2 text-sm" />
+                    <input type="password" id="confirm-pw" placeholder="Confirm new password" class="w-full border rounded px-3 py-2 mb-3 text-sm" />
+                    <div class="flex justify-end gap-2">
+                        <button id="modal-cancel" class="px-3 py-1 bg-gray-300 rounded text-sm">Cancel</button>
+                        <button id="modal-update" class="px-3 py-1 bg-primary text-white rounded text-sm">Update</button>
+                    </div>
+                </div>
+            </div>`;
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            const modal = document.getElementById('pw-modal');
+            const close = () => modal.remove();
+            document.getElementById('modal-cancel').addEventListener('click', close);
+            document.getElementById('modal-update').addEventListener('click', async () => {
+                const cur = document.getElementById('current-pw').value;
+                const newPw = document.getElementById('new-pw').value;
+                const confirm = document.getElementById('confirm-pw').value;
+                if (newPw !== confirm) { alert("Passwords don't match"); return; }
+                if (newPw.length < 6) { alert("Minimum 6 characters"); return; }
+                const credential = EmailAuthProvider.credential(currentUser.email, cur);
+                try {
+                    await reauthenticateWithCredential(currentUser, credential);
+                    await updatePassword(currentUser, newPw);
+                    alert('Password updated!');
+                    close();
+                } catch (err) {
+                    alert(err.code === 'auth/wrong-password' ? 'Current password is incorrect' : err.message);
+                }
+            });
+        });
+    }
+
+    // ---------- RESULTS ----------
+    async function loadResults() {
+        try {
+            const q = query(collection(db, 'results'), where('studentId', '==', currentUser.uid));
+            const snap = await getDocs(q);
+            let html = `<h2 class="text-2xl font-bold mb-4" data-aos="fade-up">📊 Results</h2>`;
+            if (snap.empty) {
+                html += '<p class="text-muted-foreground">No results yet.</p>';
+            } else {
+                snap.forEach(doc => {
+                    const data = doc.data();
+                    const grade = (score) => score >= 80 ? 'A' : score >= 70 ? 'B' : score >= 60 ? 'C' : score >= 50 ? 'D' : 'F';
+                    const remark = (score) => score >= 80 ? 'Excellent' : score >= 70 ? 'Very Good' : score >= 60 ? 'Good' : score >= 50 ? 'Fair' : 'Poor';
+                    html += `<div class="bg-white p-4 rounded-2xl shadow-soft mb-4" data-aos="fade-up">
+                        <h3 class="font-semibold text-lg">Term: ${data.term || 'N/A'}, Session: ${data.session || 'N/A'}</h3>
+                        <div class="overflow-x-auto mt-2"><table class="w-full text-sm">
+                            <thead><tr class="bg-muted"><th class="p-2 text-left">Subject</th><th>CA</th><th>Exam</th><th>Total</th><th>Grade</th><th>Remark</th></tr></thead>
+                            <tbody>`;
+                    if (data.subjects) {
+                        Object.entries(data.subjects).forEach(([subj, s]) => {
+                            const total = s.total || 0;
+                            html += `<tr class="border-t"><td class="p-2 font-medium">${subj}</td><td class="p-2 text-center">${s.ca||0}</td><td class="p-2 text-center">${s.exam||0}</td><td class="p-2 text-center font-bold">${total}</td><td class="p-2 text-center"><span class="badge bg-primary/10 text-primary">${grade(total)}</span></td><td class="p-2 text-center text-xs">${remark(total)}</td></tr>`;
+                        });
+                    }
+                    html += `</tbody></table></div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-3 text-sm">
+                            <div><span class="text-muted-foreground">Position:</span> <strong>${data.classPosition || 'N/A'}</strong></div>
+                            <div><span class="text-muted-foreground">Average:</span> <strong>${data.average || 'N/A'}%</strong></div>
+                            <div><span class="text-muted-foreground">Teacher Comment:</span> <span>${data.teacherComment || 'N/A'}</span></div>
+                            <div><span class="text-muted-foreground">Principal Comment:</span> <span>${data.principalComment || 'N/A'}</span></div>
+                        </div>
+                        <button onclick="window.print()" class="mt-3 bg-primary text-white px-4 py-1 rounded text-sm">Print Result</button>
+                    </div>`;
+                });
+            }
+            mainContent.innerHTML = html;
+        } catch (err) { mainContent.innerHTML = `<p class="text-red-500">Error: ${err.message}</p>`; }
+    }
+
+    // ---------- CBT EXAMS ----------
+    async function loadCBTExams() {
+        try {
+            const classId = studentProfile?.class || '';
+            const q = query(collection(db, 'cbt_exams'), where('class', '==', classId), where('status', '==', 'published'));
+            const snap = await getDocs(q);
+            const exams = [];
+            snap.forEach(doc => exams.push({ id: doc.id, ...doc.data() }));
+            exams.sort((a, b) => (a.createdAt?.seconds || 0) - (b.createdAt?.seconds || 0));
+
+            let html = `<h2 class="text-2xl font-bold mb-4" data-aos="fade-up">🖥 CBT Exams</h2>`;
+            if (exams.length === 0) {
+                html += `<div class="bg-white p-8 rounded-2xl text-center"><p class="text-muted-foreground text-lg">No published exams for your class yet.</p></div>`;
+            } else {
+                html += '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">';
+                const now = new Date();
+                exams.forEach(exam => {
+                    const startDate = exam.startDate?.seconds ? new Date(exam.startDate.seconds * 1000) : null;
+                    const endDate = exam.endDate?.seconds ? new Date(exam.endDate.seconds * 1000) : null;
+                    let isActive = false, statusText = 'Upcoming';
+                    if (startDate && endDate) {
+                        if (now >= startDate && now <= endDate) { isActive = true; statusText = 'Active'; }
+                        else if (now > endDate) statusText = 'Completed';
+                    } else { isActive = true; statusText = 'Active'; }
+                    const statusColor = statusText === 'Active' ? 'text-green-600' : statusText === 'Completed' ? 'text-gray-500' : 'text-yellow-600';
+                    html += `<div class="bg-white p-5 rounded-2xl shadow-soft" data-aos="zoom-in">
+                        <h3 class="font-bold text-lg">${exam.title || 'Untitled'}</h3>
+                        <p class="text-sm text-muted-foreground">Subject: ${exam.subject || 'General'} | Duration: ${exam.duration || 'N/A'} mins</p>
+                        <p class="text-sm ${statusColor} font-medium">Status: ${statusText}</p>
+                        <button onclick="window.startExam('${exam.id}')" class="mt-3 bg-primary text-white px-5 py-2 rounded-lg text-sm font-semibold ${!isActive ? 'opacity-50 cursor-not-allowed' : 'hover:bg-primary/90'}" ${!isActive ? 'disabled' : ''}>${isActive ? 'Start Exam' : (statusText === 'Completed' ? 'Exam Ended' : 'Not Yet Open')}</button>
+                    </div>`;
+                });
+                html += '</div>';
+            }
+            mainContent.innerHTML = html;
+        } catch (err) { mainContent.innerHTML = `<p class="text-red-500">Error: ${err.message}</p>`; }
+    }
+    window.startExam = (examId) => {
+        if (confirm('Ready to start the CBT exam? Make sure you have a stable connection.')) {
+            window.location.href = `cbt-portal.html?examId=${examId}`;
+        }
+    };
+
+    // ---------- ASSIGNMENTS ----------
+    async function loadAssignments() {
+        try {
+            const q = query(collection(db, 'assignments'), where('class', '==', studentProfile?.class || ''));
+            const snap = await getDocs(q);
+            const assignments = [];
+            snap.forEach(doc => assignments.push({ id: doc.id, ...doc.data() }));
+            assignments.sort((a, b) => (a.dueDate?.seconds || 0) - (b.dueDate?.seconds || 0));
+
+            let html = `<h2 class="text-2xl font-bold mb-4" data-aos="fade-up">📝 Assignments</h2>`;
+            if (assignments.length === 0) html += '<p class="text-muted-foreground">No assignments.</p>';
+            else {
+                html += '<div class="space-y-3">';
+                assignments.forEach(a => {
+                    const status = a.submissionStatus || 'pending';
+                    const statusColors = { submitted: 'bg-green-100 text-green-700', late: 'bg-red-100 text-red-700', pending: 'bg-yellow-100 text-yellow-700' };
+                    html += `<div class="bg-white p-4 rounded-2xl shadow-soft flex flex-col sm:flex-row sm:justify-between" data-aos="fade-up">
+                        <div><p class="font-semibold">${a.title}</p><p class="text-xs text-muted-foreground">Due: ${safeDate(a.dueDate)}</p>${a.score ? `<p class="text-xs font-medium mt-1">Score: ${a.score}</p>` : ''}${a.feedback ? `<p class="text-xs italic mt-1">Feedback: ${a.feedback}</p>` : ''}</div>
+                        <div class="flex items-center gap-2 mt-2 sm:mt-0"><span class="badge ${statusColors[status] || 'bg-gray-100 text-gray-700'}">${status}</span><label class="cursor-pointer text-xs text-primary bg-primary/10 px-3 py-1 rounded-lg"><input type="file" class="hidden" onchange="alert('Upload coming soon')" />Submit</label></div>
+                    </div>`;
+                });
+                html += '</div>';
+            }
+            mainContent.innerHTML = html;
+        } catch (err) { mainContent.innerHTML = `<p class="text-red-500">Error: ${err.message}</p>`; }
+    }
+
+    // ---------- ATTENDANCE ----------
+    async function loadAttendance() {
+        try {
+            const q = query(collection(db, 'attendanceRecords'), where('studentId', '==', currentUser.uid));
+            const snap = await getDocs(q);
+            const records = snap.docs.map(d => d.data());
+            const present = records.filter(r => r.status === 'present').length;
+            const absent = records.filter(r => r.status === 'absent').length;
+            const late = records.filter(r => r.status === 'late').length;
+            const total = present + absent + late;
+            const pct = total ? Math.round((present / total) * 100) : 100;
+
+            const today = new Date();
+            const month = today.getMonth(), year = today.getFullYear();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            let calHtml = '<div class="grid grid-cols-7 gap-1 text-xs text-center mt-2">';
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                const rec = records.find(r => r.date === dateStr);
+                let bg = 'bg-gray-100', emoji = '';
+                if (rec) {
+                    if (rec.status === 'present') { bg = 'bg-green-100'; emoji = '✓'; }
+                    else if (rec.status === 'absent') { bg = 'bg-red-100'; emoji = '✗'; }
+                    else { bg = 'bg-yellow-100'; emoji = '⏰'; }
+                }
+                calHtml += `<div class="${bg} rounded p-1">${i} ${emoji}</div>`;
+            }
+            calHtml += '</div>';
+
+            mainContent.innerHTML = `
+            <h2 class="text-2xl font-bold mb-4" data-aos="fade-up">📅 Attendance</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-2xl p-6 shadow-soft text-center" data-aos="fade-up">
+                    <p class="text-4xl font-bold text-primary">${pct}%</p>
+                    <p class="text-muted-foreground">Attendance Rate</p>
+                    <div class="flex justify-around mt-4 text-sm"><span>Present: <strong class="text-green-600">${present}</strong></span><span>Absent: <strong class="text-red-600">${absent}</strong></span><span>Late: <strong class="text-yellow-600">${late}</strong></span></div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-soft" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="font-semibold mb-2">${today.toLocaleString('default', { month: 'long' })} ${year}</h3>
+                    ${calHtml}
+                </div>
+            </div>
+            <div class="mt-6 bg-white rounded-2xl p-6 shadow-soft" data-aos="fade-up">
+                <h3 class="font-semibold mb-2">Attendance Trend</h3>
+                <canvas id="attendanceTrendChart" height="100"></canvas>
+            </div>`;
+
+            const ctx = document.getElementById('attendanceTrendChart')?.getContext('2d');
+            if (ctx) {
+                const last7 = [];
+                for (let i = 6; i >= 0; i--) { const d = new Date(); d.setDate(d.getDate() - i); last7.push(d.toISOString().split('T')[0]); }
+                const trendData = last7.map(date => records.filter(r => r.date === date && r.status === 'present').length);
+                new Chart(ctx, { type: 'line', data: { labels: last7.map(d => d.slice(5)), datasets: [{ label: 'Present', data: trendData, borderColor: '#4F46E5' }] } });
+            }
+        } catch (err) { mainContent.innerHTML = `<p class="text-red-500">Error: ${err.message}</p>`; }
+    }
+
+    // ---------- TIMETABLE (stub with future cloudinary image) ----------
+    async function loadTimetable() {
+        mainContent.innerHTML = `<div class="bg-white rounded-2xl p-6 shadow-soft text-center" data-aos="fade-up">
+            <h2 class="text-2xl font-bold">🕒 Timetable</h2>
+            <img src="${window.PREPSA_CLOUDINARY.buildImageURL('timetable-sample', {width:600})}" alt="Timetable" class="mx-auto mt-4 rounded-lg" onerror="this.parentElement.innerHTML='<p class=text-muted-foreground>Timetable will be uploaded soon.</p>'" />
+        </div>`;
+    }
+
+    async function loadELearning() {
+        mainContent.innerHTML = `<div class="bg-white rounded-2xl p-6 shadow-soft text-center" data-aos="fade-up"><h2 class="text-2xl font-bold">💻 E‑Learning</h2><p class="text-muted-foreground mt-2">Interactive lessons coming soon.</p></div>`;
+    }
+
+    async function loadELibrary() {
+        mainContent.innerHTML = `<div class="bg-white rounded-2xl p-6 shadow-soft text-center" data-aos="fade-up"><h2 class="text-2xl font-bold">📚 E‑Library</h2><p class="text-muted-foreground mt-2">Digital books and past questions.</p></div>`;
+    }
+
+    async function loadFees() {
+        try {
+            const q = query(collection(db, 'payments'), where('studentId', '==', currentUser.uid));
+            const snap = await getDocs(q);
+            let totalDue = 0, totalPaid = 0;
+            const payments = [];
+            snap.forEach(doc => {
+                const p = doc.data();
+                totalDue += p.amountDue || 0;
+                totalPaid += p.amountPaid || 0;
+                payments.push(p);
+            });
+            const balance = totalDue - totalPaid;
+            mainContent.innerHTML = `
+            <div class="bg-white rounded-2xl p-6 shadow-soft max-w-lg mx-auto" data-aos="fade-up">
+                <h2 class="text-2xl font-bold mb-4">💳 School Fees</h2>
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between"><span>Total Due:</span><strong>₦${totalDue.toLocaleString()}</strong></div>
+                    <div class="flex justify-between"><span>Total Paid:</span><strong class="text-green-600">₦${totalPaid.toLocaleString()}</strong></div>
+                    <div class="flex justify-between font-bold"><span>Balance:</span><strong class="${balance > 0 ? 'text-red-600' : 'text-green-600'}">₦${balance.toLocaleString()}</strong></div>
+                </div>
+                <button class="mt-4 bg-primary text-white w-full py-2 rounded-lg">Pay Now</button>
+                <h3 class="mt-4 font-semibold">Payment History</h3>
+                <div class="text-xs space-y-1 mt-2">${payments.length === 0 ? '<p>No payments yet.</p>' : payments.map(p => `<div class="flex justify-between"><span>${safeDate(p.date)}</span><span>₦${p.amountPaid}</span></div>`).join('')}</div>
+            </div>`;
+        } catch (err) { mainContent.innerHTML = `<p class="text-red-500">Error: ${err.message}</p>`; }
+    }
+
+    async function loadDClass() {
+        mainContent.innerHTML = `<div class="bg-white rounded-2xl p-6 shadow-soft text-center" data-aos="fade-up"><h2 class="text-2xl font-bold">✝️ D‑Class Discipleship</h2><p class="text-muted-foreground mt-2">Your discipleship journey.</p></div>`;
+    }
+
+    async function loadLeadership() {
+        mainContent.innerHTML = `<div class="bg-white rounded-2xl p-6 shadow-soft text-center" data-aos="fade-up"><h2 class="text-2xl font-bold">🏆 Leadership Hub</h2><p class="text-muted-foreground mt-2">Leadership projects and councils.</p></div>`;
+    }
+
+    async function loadNotifications() {
+        try {
+            const q = query(collection(db, 'notifications'), where('userId', '==', currentUser.uid));
+            const snap = await getDocs(q);
+            const notifs = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+            let html = `<h2 class="text-2xl font-bold mb-4" data-aos="fade-up">🔔 Notifications</h2><div class="bg-white rounded-2xl p-6 shadow-soft"><div class="space-y-2">`;
+            notifs.forEach(n => {
+                html += `<div class="border-b pb-2 flex justify-between items-start ${n.read ? 'opacity-50' : ''}"><div><p class="font-medium">${n.title}</p><p class="text-xs text-muted-foreground">${n.message}</p></div>${n.read ? '' : '<span class="badge bg-red-100 text-red-700">New</span>'}</div>`;
+            });
+            html += `</div><button id="mark-all-notif-read" class="mt-3 text-sm text-primary">Mark all as read</button></div>`;
+            mainContent.innerHTML = html;
+            document.getElementById('mark-all-notif-read')?.addEventListener('click', async () => {
+                for (const n of notifs) { if (!n.read) await updateDoc(doc(db, 'notifications', n.id), { read: true }); }
+                loadNotifications(); updateNotificationBadge();
+            });
+        } catch (err) { mainContent.innerHTML = `<p class="text-red-500">Error: ${err.message}</p>`; }
+    }
+
+    async function loadMessages() {
+        mainContent.innerHTML = `<div class="bg-white rounded-2xl p-6 shadow-soft text-center" data-aos="fade-up"><h2 class="text-2xl font-bold">💬 Messages</h2><p class="text-muted-foreground mt-2">Messaging system will be available soon.</p></div>`;
+    }
+
+    async function loadAchievement() {
+        mainContent.innerHTML = `<div class="bg-white rounded-2xl p-6 shadow-soft text-center" data-aos="fade-up"><h2 class="text-2xl font-bold">🏅 Achievements</h2><p class="text-muted-foreground mt-2">Your awards and badges.</p></div>`;
+    }
+
+    async function loadEvents() {
+        try {
+            const q = query(collection(db, 'events'), where('targetAudience', 'array-contains', 'students'));
+            const snap = await getDocs(q);
+            const events = [];
+            snap.forEach(doc => events.push({ id: doc.id, ...doc.data() }));
+            events.sort((a, b) => (a.date?.seconds || 0) - (b.date?.seconds || 0));
+
+            let html = `<h2 class="text-2xl font-bold mb-4" data-aos="fade-up">📅 Events</h2>`;
+            if (events.length === 0) html += '<p class="text-muted-foreground">No upcoming events.</p>';
+            else {
+                html += '<div class="space-y-3">';
+                events.forEach(e => html += `<div class="bg-white rounded-2xl p-4 shadow-soft" data-aos="fade-up"><p class="font-semibold">${e.title}</p><p class="text-xs text-muted-foreground">${safeDate(e.date)} – ${e.time || ''}</p></div>`);
+                html += '</div>';
+            }
+            mainContent.innerHTML = html;
+        } catch (err) { mainContent.innerHTML = `<p class="text-red-500">Error: ${err.message}</p>`; }
+    }
+
+    async function loadAnalytics() {
+        mainContent.innerHTML = `<div class="bg-white rounded-2xl p-6 shadow-soft text-center" data-aos="fade-up"><h2 class="text-2xl font-bold">📈 Academic Analytics</h2><p class="text-muted-foreground mt-2">Detailed analytics coming soon.</p></div>`;
+    }
+
+    async function loadHealth() {
+        mainContent.innerHTML = `<div class="bg-white rounded-2xl p-6 shadow-soft text-center" data-aos="fade-up"><h2 class="text-2xl font-bold">🏥 Health Centre</h2><p class="text-muted-foreground mt-2">Medical records and visits.</p></div>`;
+    }
+
+    async function loadTransport() {
+        mainContent.innerHTML = `<div class="bg-white rounded-2xl p-6 shadow-soft text-center" data-aos="fade-up"><h2 class="text-2xl font-bold">🚌 Transport</h2><p class="text-muted-foreground mt-2">Bus route information.</p></div>`;
+    }
+
+    async function loadHostel() {
+        mainContent.innerHTML = `<div class="bg-white rounded-2xl p-6 shadow-soft text-center" data-aos="fade-up"><h2 class="text-2xl font-bold">🏠 Hostel</h2><p class="text-muted-foreground mt-2">Hostel details not available.</p></div>`;
+    }
+
+    // ---------- FAQ SECTION ----------
+    async function loadFAQ() {
+        mainContent.innerHTML = `
+        <div class="max-w-3xl mx-auto" data-aos="fade-up">
+            <h2 class="text-3xl font-bold font-orbitron text-oxford mb-6">❓ Frequently Asked Questions</h2>
+            <div class="bg-white rounded-2xl shadow-soft overflow-hidden">
+                <details class="faq-item border-b" open>
+                    <summary><span>How do I view my term results?</span><span class="faq-icon">+</span></summary>
+                    <div class="faq-answer">Click on <strong>Results</strong> in the sidebar. Your subject scores, grades, and teacher comments are displayed for each term. You can also print your result directly from that page.</div>
+                </details>
+                <details class="faq-item border-b">
+                    <summary><span>Can I take CBT exams on my phone?</span><span class="faq-icon">+</span></summary>
+                    <div class="faq-answer">Yes! The PREPSA CBT portal is fully responsive. Use the <strong>CBT Exams</strong> link in the sidebar to start any published exam. Make sure you have a stable internet connection.</div>
+                </details>
+                <details class="faq-item border-b">
+                    <summary><span>How do I change my password?</span><span class="faq-icon">+</span></summary>
+                    <div class="faq-answer">Go to <strong>Profile</strong>, click <em>Change Password</em>, and follow the prompts. You'll need your current password.</div>
+                </details>
+                <details class="faq-item">
+                    <summary><span>Where can I see my school fees balance?</span><span class="faq-icon">+</span></summary>
+                    <div class="faq-answer">The <strong>Fees</strong> section shows your total due, amount paid, and outstanding balance. Online payment integration is coming soon.</div>
+                </details>
+            </div>
+        </div>`;
+    }
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+        if (unsubscribeProfile) unsubscribeProfile();
+    });
+</script>
+</body>
+</html>
