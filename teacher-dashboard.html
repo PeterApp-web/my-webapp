@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teacher Dashboard | PREPSA – Prescious Prime Stars Academy</title>
+  <meta name="description" content="PREPSA teacher dashboard: manage classes, CBT exams, assignments, attendance, results, and use AI tools for lesson notes, exam creation, and student remarks. Christian education management reimagined." />
+  <meta name="keywords" content="teacher dashboard, PREPSA, Christian school, AI lesson planner, CBT exam creator, student results, attendance tracker, assignment grading, digital classroom, teacher analytics, Prescious Prime Stars Academy" />
+  <meta name="theme-color" content="#4F46E5" />
+  <link rel="canonical" href="https://prepsa.edu/teacher-dashboard" />
+  <meta property="og:title" content="Teacher Dashboard | PREPSA" />
+  <meta property="og:description" content="Manage your classes, create AI-powered lesson notes, CBT exams, and track student progress with the PREPSA teacher portal." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://prepsa.edu/teacher-dashboard" />
+  <meta property="og:image" content="https://res.cloudinary.com/drqh2og5z/image/upload/prepsa-og-teacher.jpg" />
+  <meta property="og:site_name" content="PREPSA Portal" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PREPSA Teacher Dashboard",
+    "url": "https://prepsa.edu/teacher-dashboard",
+    "applicationCategory": "EducationalApplication",
+    "author": { "@type": "EducationalOrganization", "name": "Prescious Prime Stars Academy" }
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'system-ui', 'sans-serif'],
+            orbitron: ['Orbitron', 'Poppins', 'sans-serif'],
+          },
+          colors: {
+            primary: { DEFAULT: '#4F46E5', foreground: '#ffffff' },
+            gold: { DEFAULT: '#EAB308', foreground: '#1f2937' },
+            navy: '#0A2342',
+            oxford: '#0A2342',
+            border: '#e5e7eb',
+            background: '#f9fafb',
+            foreground: '#111827',
+            muted: { DEFAULT: '#f3f4f6', foreground: '#6b7280' },
+          },
+          boxShadow: {
+            'soft': '0 8px 30px -10px rgba(0,0,0,0.1)',
+            'neon': '0 0 20px rgba(234,179,8,0.35)',
+          },
+          borderRadius: { '2xl': '1.5rem', '3xl': '2rem' },
+        },
+      },
+    };
+  </script>
+  <style>
+    body { font-family: 'Poppins', sans-serif; background: #f8fafc; }
+    .sidebar-link { transition: background 0.2s, color 0.2s; }
+    .sidebar-link:hover { background: rgba(255,255,255,0.12); }
+    .sidebar-link.active { background: rgba(79,70,229,0.3); border-left: 3px solid #EAB308; color: white !important; }
+    .section-card { background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border: 1px solid #f1f5f9; }
+    .badge { display: inline-block; padding: 0.2em 0.6em; font-size: 0.75rem; font-weight: 600; border-radius: 9999px; }
+    .loading-spinner { border: 3px solid #e5e7eb; border-top-color: #4F46E5; border-radius: 50%; width: 24px; height: 24px; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    /* Logo Intro Overlay */
+    #logo-intro-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: radial-gradient(ellipse at center, #0A2342 0%, #000000 100%);
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      transition: opacity 0.55s, visibility 0.55s;
+    }
+    #logo-intro-overlay.exit { opacity: 0; visibility: hidden; pointer-events: none; }
+    #logo-intro-ring {
+      position: absolute; width: 160px; height: 160px;
+      border: 2px solid rgba(234,179,8,0.5); border-radius: 50%;
+      animation: ringPulse 2.2s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    @keyframes ringPulse {
+      0% { width:60px; height:60px; opacity:0; border-width:4px; }
+      40% { width:200px; height:200px; opacity:0.9; border-width:1px; }
+      100% { width:400px; height:400px; opacity:0; border-width:0.5px; }
+    }
+    #logo-intro-inner {
+      z-index: 2; font-family: 'Orbitron',sans-serif;
+      animation: zoomInOut 2.2s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    @keyframes zoomInOut {
+      0% { transform:scale(0.1); opacity:0; filter:blur(8px); }
+      35% { transform:scale(1.08); opacity:1; filter:blur(0); }
+      55% { transform:scale(0.92); }
+      75% { transform:scale(1.02); }
+      100% { transform:scale(1); opacity:1; }
+    }
+    #logo-intro-text {
+      z-index:2; opacity:0; font-family: 'Orbitron',sans-serif;
+      animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.8s forwards;
+    }
+    @keyframes fadeSlideUp {
+      from { opacity:0; transform:translateY(30px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+    .skeleton {
+      background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+      background-size: 200% 100%; animation: shimmer 1.8s ease-in-out infinite;
+      border-radius: 0.5rem;
+    }
+    @keyframes shimmer { 0%{background-position:200% 0;} 100%{background-position:-200% 0;} }
+    .faq-item summary { cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between; padding:1rem 1.25rem; font-weight:600; color:#0A2342; }
+    .faq-item summary::-webkit-details-marker { display:none; }
+    .faq-item summary .faq-icon { transition:transform 0.3s; font-size:1.2rem; color:#EAB308; }
+    .faq-item[open] summary .faq-icon { transform:rotate(45deg); }
+    .faq-item .faq-answer { padding:0 1.25rem 1rem; color:#475569; line-height:1.7; }
+  </style>
+</head>
+<body class="min-h-screen flex">
+
+<!-- LOGO INTRO OVERLAY -->
+<div id="logo-intro-overlay">
+  <div id="logo-intro-ring"></div>
+  <div id="logo-intro-inner" class="grid place-items-center rounded-3xl bg-gradient-to-br from-gold to-amber-400 text-oxford font-extrabold shadow-neon"
+       style="width:100px;height:100px;font-size:3rem;font-family:'Orbitron';">P</div>
+  <p id="logo-intro-text" class="mt-5 text-lg font-semibold text-gold tracking-widest uppercase font-orbitron">Teacher Hub</p>
+</div>
+
+<!-- SIDEBAR -->
+<aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-oxford text-white flex flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300">
+  <div class="p-5 flex items-center gap-3 border-b border-white/10">
+    <span class="grid size-9 place-items-center rounded-lg bg-primary font-extrabold text-white text-sm font-orbitron">P</span>
+    <span class="text-lg font-extrabold tracking-tight font-orbitron">PREPSA</span>
+  </div>
+  <nav class="flex-1 mt-4 space-y-1 px-3 overflow-y-auto">
+    <a href="#" data-section="overview" class="sidebar-link active flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium"><span>🏠</span> Overview</a>
+    <a href="#" data-section="profile" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>👤</span> Profile</a>
+    <a href="#" data-section="classes" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>🏫</span> My Classes</a>
+    <a href="#" data-section="assignments" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>📝</span> Assignments</a>
+    <a href="#" data-section="cbt" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>💻</span> CBT Exams</a>
+    <a href="#" data-section="results" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>📊</span> Results</a>
+    <a href="#" data-section="attendance" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>📅</span> Attendance</a>
+    <a href="#" data-section="timetable" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>🕒</span> Timetable</a>
+    <a href="#" data-section="lms" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>💻</span> E‑Learning</a>
+    <a href="#" data-section="library" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>📚</span> E‑Library</a>
+    <a href="#" data-section="messages" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>💬</span> Messages</a>
+    <a href="#" data-section="notifications" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>🔔</span> Notifications</a>
+    <a href="#" data-section="events" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>📅</span> Events</a>
+    <a href="#" data-section="analytics" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>📈</span> Analytics</a>
+    <a href="#" data-section="settings" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>⚙️</span> Settings</a>
+    <a href="#" data-section="lessonplanner" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>📆</span> Lesson Planner</a>
+    <a href="#" data-section="gradebook" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>📖</span> Gradebook</a>
+    <a href="#" data-section="behavior" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>📋</span> Behavior</a>
+    <a href="#" data-section="parentcomm" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>📞</span> Parent Comms</a>
+    <a href="#" data-section="ai" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>🤖</span> AI Assistant</a>
+    <a href="#" data-section="faq" class="sidebar-link flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/70"><span>❓</span> FAQ</a>
+  </nav>
+  <div class="p-4 border-t border-white/10">
+    <div class="flex items-center gap-3">
+      <div class="size-9 rounded-full bg-gold text-oxford grid place-items-center font-bold text-sm" id="user-initials">T</div>
+      <div>
+        <p class="text-sm font-medium text-white" id="user-name">Teacher</p>
+        <p class="text-xs text-white/50" id="user-email">teacher@prepsa.com</p>
+      </div>
+    </div>
+    <button id="logout-btn" class="mt-3 w-full text-left text-xs text-white/50 hover:text-white transition flex items-center gap-2">🚪 Sign out</button>
+  </div>
+</aside>
+
+<div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden" onclick="closeSidebar()"></div>
+
+<!-- MAIN CONTENT AREA -->
+<div class="flex-1 flex flex-col md:ml-64">
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-border px-4 py-3 flex items-center justify-between">
+    <button class="md:hidden p-2 rounded-md hover:bg-gray-100" onclick="openSidebar()">☰</button>
+    <div class="flex-1 max-w-md ml-4"><input type="search" placeholder="Search…" class="w-full rounded-lg border px-4 py-2 text-sm" /></div>
+    <div class="flex items-center gap-3 relative">
+      <button id="notifications-bell" class="relative p-2 rounded-full hover:bg-gray-100">🔔<span id="notification-badge" class="absolute -top-1 -right-1 min-w-[18px] h-[18px] bg-red-500 text-white text-[10px] rounded-full hidden"></span></button>
+      <div id="notification-dropdown" class="hidden p-3 absolute right-0 top-full w-72 bg-white border rounded-lg shadow-lg z-50 max-h-80 overflow-y-auto">
+        <div class="flex justify-between items-center mb-2">
+          <p class="text-xs font-bold">Notifications</p>
+          <button id="mark-all-read-btn" class="text-xs text-primary hover:underline">Mark all read</button>
+        </div>
+        <div id="notification-list" class="text-xs space-y-1"></div>
+      </div>
+      <div class="size-8 rounded-full bg-primary/20 text-primary grid place-items-center font-bold text-xs" id="header-initials">T</div>
+    </div>
+  </header>
+
+  <main id="main-content" class="p-4 md:p-6 space-y-6">
+    <!-- Skeleton placeholder initially -->
+    <div class="skeleton h-48 rounded-2xl mb-6"></div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="skeleton h-24 rounded-xl"></div>
+      <div class="skeleton h-24 rounded-xl"></div>
+      <div class="skeleton h-24 rounded-xl"></div>
+      <div class="skeleton h-24 rounded-xl"></div>
+    </div>
+  </main>
+</div>
+
+<!-- SCRIPTS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 600, easing: 'ease-out-cubic', once: true, offset: 40 });
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+  import { getFirestore, doc, getDoc, onSnapshot, collection, query, where, getDocs, updateDoc, addDoc, orderBy, limit, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+  import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-storage.js";
+  import { getRemoteConfig, fetchAndActivate, getValue } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-remote-config.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDTg6I8aRkvBbFb-sesYhR0rtrQewZstXI",
+    authDomain: "myapp-d4a01.firebaseapp.com",
+    projectId: "myapp-d4a01",
+    storageBucket: "myapp-d4a01.appspot.com",
+    messagingSenderId: "153428401856",
+    appId: "1:153428401856:web:4f61f429722452c06c5725",
+    measurementId: "G-8JDMZ6QNVN"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const storage = getStorage(app);
+  const remoteConfig = getRemoteConfig(app);
+  remoteConfig.settings.minimumFetchIntervalMillis = 3600000;
+
+  // ========== CLOUDINARY CONFIG ==========
+  window.PREPSA_CLOUDINARY = {
+    cloudName: 'drqh2og5z',
+    uploadPreset: 'peterwork',
+    baseURL: 'https://res.cloudinary.com/drqh2og5z',
+    buildImageURL: (publicId, opts={}) => {
+      const t = [];
+      if(opts.width) t.push(`w_${opts.width}`);
+      if(opts.height) t.push(`h_${opts.height}`);
+      if(opts.quality) t.push(`q_${opts.quality}`);
+      if(opts.format) t.push(`f_${opts.format}`);
+      const trans = t.length ? t.join(',')+'/' : '';
+      return `https://res.cloudinary.com/drqh2og5z/image/upload/${trans}${publicId}`;
+    }
+  };
+
+  // ========== GLOBALS ==========
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+  const mainContent = document.getElementById('main-content');
+  const loadingScreen = document.getElementById('logo-intro-overlay');
+  let currentUser = null, teacherProfile = null, currentSection = 'overview';
+  let unsubscribeProfile = null, groqApiKey = null;
+
+  window.openSidebar = () => { sidebar.classList.remove('-translate-x-full'); overlay.classList.remove('hidden'); };
+  window.closeSidebar = () => { sidebar.classList.add('-translate-x-full'); overlay.classList.add('hidden'); };
+
+  // ========== UTILS ==========
+  function getInitials(name) {
+    if(!name) return 'T';
+    const parts = name.trim().split(' ').filter(Boolean);
+    return parts.slice(0,2).map(p=>p[0].toUpperCase()).join('');
+  }
+  function safeDate(seconds) { return seconds?.seconds ? new Date(seconds.seconds*1000).toLocaleDateString() : 'N/A'; }
+  function safeDateTime(seconds) { return seconds?.seconds ? new Date(seconds.seconds*1000).toLocaleString() : 'N/A'; }
+  function getClassIdList() {
+    const raw = teacherProfile?.classes || [];
+    return raw.map(c => typeof c === 'string' ? c : c.id || c.classId || c.name || '').filter(Boolean);
+  }
+
+  // ========== LOGO INTRO ==========
+  function playLogoIntro() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        loadingScreen.classList.add('exit');
+        setTimeout(() => { if(loadingScreen.parentNode) loadingScreen.style.display='none'; resolve(); }, 600);
+      }, 2300);
+    });
+  }
+
+  // ========== SKELETON HELPERS ==========
+  function showSkeleton() {
+    mainContent.innerHTML = `<div class="skeleton h-48 rounded-2xl mb-6"></div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="skeleton h-24 rounded-xl"></div>
+        <div class="skeleton h-24 rounded-xl"></div>
+        <div class="skeleton h-24 rounded-xl"></div>
+        <div class="skeleton h-24 rounded-xl"></div>
+      </div>`;
+  }
+
+  // ========== ACTIVE SECTION ==========
+  function setActiveSection(section) {
+    currentSection = section;
+    document.querySelectorAll('.sidebar-link[data-section]').forEach(link => {
+      link.classList.remove('active');
+      if(link.dataset.section === section) link.classList.add('active');
+    });
+    localStorage.setItem('activeTeacherSection', section);
+  }
+
+  document.querySelectorAll('.sidebar-link[data-section]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const section = link.dataset.section;
+      setActiveSection(section);
+      renderSection(section);
+      if(window.innerWidth < 768) closeSidebar();
+    });
+  });
+
+  async function renderSection(section) {
+    if(!currentUser) return;
+    showSkeleton();
+    const sectionMap = {
+      overview: loadDashboard, profile: loadProfile, classes: loadClasses,
+      assignments: loadAssignments, cbt: loadCBTExams, results: loadResults,
+      attendance: loadAttendance, timetable: loadTimetable, lms: loadELearning,
+      library: loadELibrary, messages: loadMessages, notifications: loadNotifications,
+      events: loadEvents, analytics: loadAnalytics, settings: loadSettings,
+      lessonplanner: loadLessonPlanner, gradebook: loadGradebook, behavior: loadBehavior,
+      parentcomm: loadParentComm, ai: loadAIAssistant, faq: loadFAQ
+    };
+    const fn = sectionMap[section];
+    if(fn) await fn();
+    AOS.refresh();
+  }
+
+  // ========== AI ASSISTANT (Groq via Remote Config) ==========
+  async function loadAIAssistant() {
+    mainContent.innerHTML = `
+      <div data-aos="fade-up" class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold font-orbitron text-oxford mb-6">🤖 AI Assistant (Powered by Groq)</h2>
+        <div class="bg-white rounded-2xl shadow-soft p-6">
+          <p class="text-sm text-muted-foreground mb-4">Generate lesson notes, exam questions, student remarks, and more with AI.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div class="border rounded-xl p-4">
+              <h3 class="font-semibold mb-2">📝 Lesson Note</h3>
+              <input type="text" id="ai-topic" placeholder="Topic (e.g., Photosynthesis)" class="w-full border rounded px-3 py-2 text-sm mb-2" />
+              <input type="text" id="ai-class" placeholder="Class (e.g., JSS 2)" class="w-full border rounded px-3 py-2 text-sm mb-2" />
+              <button id="gen-lesson" class="bg-primary text-white px-4 py-2 rounded text-sm w-full">Generate Lesson Note</button>
+            </div>
+            <div class="border rounded-xl p-4">
+              <h3 class="font-semibold mb-2">📋 Exam Questions</h3>
+              <input type="text" id="ai-subject-exam" placeholder="Subject" class="w-full border rounded px-3 py-2 text-sm mb-2" />
+              <input type="number" id="ai-num-questions" placeholder="Number of questions" class="w-full border rounded px-3 py-2 text-sm mb-2" min="1" value="5" />
+              <button id="gen-exam" class="bg-primary text-white px-4 py-2 rounded text-sm w-full">Generate Questions</button>
+            </div>
+            <div class="border rounded-xl p-4">
+              <h3 class="font-semibold mb-2">💬 Student Remarks</h3>
+              <input type="text" id="ai-student-name" placeholder="Student Name" class="w-full border rounded px-3 py-2 text-sm mb-2" />
+              <select id="ai-performance" class="w-full border rounded px-3 py-2 text-sm mb-2">
+                <option value="excellent">Excellent</option>
+                <option value="good">Good</option>
+                <option value="average">Average</option>
+                <option value="poor">Needs Improvement</option>
+              </select>
+              <button id="gen-remark" class="bg-primary text-white px-4 py-2 rounded text-sm w-full">Generate Remark</button>
+            </div>
+            <div class="border rounded-xl p-4">
+              <h3 class="font-semibold mb-2">✨ Custom Prompt</h3>
+              <textarea id="ai-custom-prompt" rows="3" placeholder="Enter your instruction..." class="w-full border rounded px-3 py-2 text-sm mb-2"></textarea>
+              <button id="gen-custom" class="bg-primary text-white px-4 py-2 rounded text-sm w-full">Ask AI</button>
+            </div>
+          </div>
+          <div id="ai-output" class="bg-gray-50 rounded-xl p-4 min-h-[100px] whitespace-pre-wrap text-sm"></div>
+        </div>
+      </div>`;
+
+    function callGroq(prompt) {
+      if(!groqApiKey) {
+        document.getElementById('ai-output').textContent = '❌ AI key not loaded from Remote Config. Please try again later.';
+        return;
+      }
+      const output = document.getElementById('ai-output');
+      output.textContent = '⏳ Thinking...';
+      fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${groqApiKey}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          model: 'mixtral-8x7b-32768',
+          messages: [{ role: 'user', content: prompt }],
+          temperature: 0.7,
+          max_tokens: 1024
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.choices && data.choices.length > 0) {
+          output.textContent = data.choices[0].message.content;
+        } else {
+          output.textContent = '⚠️ No response from AI.';
+        }
+      })
+      .catch(err => {
+        output.textContent = '❌ Error: ' + err.message;
+      });
+    }
+
+    document.getElementById('gen-lesson').addEventListener('click', () => {
+      const topic = document.getElementById('ai-topic').value.trim();
+      const cls = document.getElementById('ai-class').value.trim();
+      if(!topic) return alert('Enter topic');
+      callGroq(`Write a detailed lesson note for ${cls ? cls + ' on' : ''} "${topic}". Include objectives, materials, introduction, lesson development, evaluation, and conclusion.`);
+    });
+    document.getElementById('gen-exam').addEventListener('click', () => {
+      const subject = document.getElementById('ai-subject-exam').value.trim();
+      const num = document.getElementById('ai-num-questions').value || 5;
+      if(!subject) return alert('Enter subject');
+      callGroq(`Create ${num} multiple choice exam questions with 4 options each and correct answers for the subject: ${subject}.`);
+    });
+    document.getElementById('gen-remark').addEventListener('click', () => {
+      const name = document.getElementById('ai-student-name').value.trim();
+      const perf = document.getElementById('ai-performance').value;
+      if(!name) return alert('Enter student name');
+      callGroq(`Write a thoughtful end-of-term report comment for a student named ${name} who performed ${perf}. Be encouraging and constructive.`);
+    });
+    document.getElementById('gen-custom').addEventListener('click', () => {
+      const prompt = document.getElementById('ai-custom-prompt').value.trim();
+      if(!prompt) return alert('Enter a prompt');
+      callGroq(prompt);
+    });
+  }
+
+  // ========== OVERVIEW ==========
+  async function loadDashboard() {
+    try {
+      const classIds = getClassIdList();
+      const fullName = teacherProfile?.fullName || currentUser.displayName || 'Teacher';
+      const initials = getInitials(fullName);
+      if(classIds.length === 0) {
+        mainContent.innerHTML = `<div data-aos="fade-up" class="bg-white rounded-2xl p-6 shadow-soft mb-6 flex items-center gap-6">
+          <div class="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center text-3xl text-primary font-bold">${initials}</div>
+          <div><h2 class="text-2xl font-bold">${fullName}</h2><p class="text-muted-foreground">No classes assigned yet. Please contact the administrator.</p></div>
+        </div>`;
+        return;
+      }
+      const [studentsSnap, assignmentsSnap, examsSnap, resultsSnap] = await Promise.allSettled([
+        getDocs(query(collection(db, 'students'), where('class', 'in', classIds), limit(100))),
+        getDocs(query(collection(db, 'assignments'), where('class', 'in', classIds), limit(50))),
+        getDocs(query(collection(db, 'cbt_exams'), where('class', 'in', classIds), limit(50))),
+        getDocs(query(collection(db, 'results'), where('classId', 'in', classIds), limit(50)))
+      ]);
+
+      const studentsCount = studentsSnap.status === 'fulfilled' ? studentsSnap.value.docs.length : 0;
+      const assignmentsCount = assignmentsSnap.status === 'fulfilled' ? assignmentsSnap.value.docs.length : 0;
+      const pendingGrading = assignmentsSnap.status === 'fulfilled' ? assignmentsSnap.value.docs.filter(d => d.data().submissionStatus === 'submitted').length : 0;
+      const examsCount = examsSnap.status === 'fulfilled' ? examsSnap.value.docs.length : 0;
+      const resultsCount = resultsSnap.status === 'fulfilled' ? resultsSnap.value.docs.length : 0;
+
+      // get today's schedule (simplified)
+      const today = new Date().toISOString().split('T')[0];
+      let scheduleHtml = '<div class="section-card"><h3 class="font-bold text-lg mb-2">🕒 Today\'s Schedule</h3><p class="text-sm text-muted-foreground">No classes scheduled for today.</p></div>';
+
+      mainContent.innerHTML = `
+        <div data-aos="fade-up" class="bg-white rounded-2xl p-6 shadow-soft mb-6 flex flex-wrap gap-6 items-center">
+          <div class="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center text-3xl text-primary font-bold">${initials}</div>
+          <div>
+            <h2 class="text-2xl font-bold">${fullName}</h2>
+            <p class="text-muted-foreground">${teacherProfile?.title || 'Teacher'} · ${teacherProfile?.department || ''}</p>
+            <div class="flex flex-wrap gap-2 mt-2">
+              <button onclick="document.querySelector('[data-section=classes]').click()" class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">My Classes</button>
+              <button onclick="document.querySelector('[data-section=assignments]').click()" class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Assignments</button>
+              <button onclick="document.querySelector('[data-section=cbt]').click()" class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">CBT Exams</button>
+              <button onclick="document.querySelector('[data-section=results]').click()" class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Results</button>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="section-card text-center"><p class="text-xs font-bold uppercase">My Students</p><p class="text-2xl font-bold text-primary">${studentsCount}</p></div>
+          <div class="section-card text-center"><p class="text-xs font-bold uppercase">Assignments</p><p class="text-2xl font-bold text-primary">${assignmentsCount}</p></div>
+          <div class="section-card text-center"><p class="text-xs font-bold uppercase">Pending Grade</p><p class="text-2xl font-bold text-orange-600">${pendingGrading}</p></div>
+          <div class="section-card text-center"><p class="text-xs font-bold uppercase">Exams</p><p class="text-2xl font-bold text-primary">${examsCount}</p></div>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          ${scheduleHtml}
+          <div class="section-card"><h3 class="font-bold text-lg mb-2">✅ Pending Tasks</h3>
+            <ul class="space-y-1 text-sm">
+              <li class="flex items-center gap-2"><input type="checkbox" class="rounded" /> Grade ${pendingGrading} assignments</li>
+              <li class="flex items-center gap-2"><input type="checkbox" class="rounded" /> Submit attendance for today</li>
+            </ul>
+          </div>
+          <div class="section-card"><h3 class="font-bold text-lg mb-2">📊 Quick Stats</h3>
+            <p class="text-sm">Results recorded: ${resultsCount}</p>
+            <p class="text-sm">Total exams: ${examsCount}</p>
+          </div>
+        </div>
+      `;
+    } catch(err) { mainContent.innerHTML = `<p class="text-red-500">Error: ${err.message}</p>`; }
+  }
+
+  // ========== PROFILE (with photo upload) ==========
+  async function loadProfile() {
+    const p = teacherProfile || {};
+    const photo = p.photoURL || p.profilePhoto || p.passport || null;
+    const renderField = (label, value) => `<div class="flex flex-col sm:flex-row sm:justify-between py-1"><span class="text-muted-foreground font-medium">${label}:</span> <span class="text-foreground font-semibold">${value || 'N/A'}</span></div>`;
+
+    const categories = [
+      { title: '👤 Personal Information', fields: [['Staff ID', p.staffId],['Full Name', p.fullName],['Date of Birth', safeDate(p.dateOfBirth)],['Gender', p.gender],['Phone', p.phone],['Email', p.email]] },
+      { title: '📚 Academic & Employment', fields: [['Title', p.title],['Department', p.department],['Subjects', p.subjects?.join(', ')],['Classes', p.classes?.join(', ')],['Qualification', p.qualification]] },
+      { title: '🩺 Medical', fields: [['Blood Group', p.bloodGroup],['Allergies', p.allergies]] }
+    ];
+
+    let html = `<div class="bg-white rounded-2xl shadow-soft max-w-4xl mx-auto" data-aos="fade-up">
+      <div class="bg-primary/5 px-6 py-4 border-b flex justify-between items-center">
+        <h2 class="text-xl font-bold">👤 Teacher Profile</h2>
+        <button id="edit-request-btn" class="text-sm bg-primary text-white px-4 py-1 rounded-lg">Request Edit</button>
+      </div>
+      <div class="p-6">
+        <div class="flex flex-col md:flex-row gap-6 items-start mb-8">
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-32 h-32 rounded-full bg-primary/20 flex items-center justify-center text-4xl text-primary font-bold overflow-hidden shadow-md" id="profile-photo-container">
+              ${photo ? `<img src="${photo}" class="w-full h-full object-cover" alt="Photo" />` : getInitials(p.fullName)}
+            </div>
+            <input type="file" id="teacher-photo-file" accept="image/*" class="hidden" />
+            <button id="change-photo-btn" class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Change Photo</button>
+            <p id="upload-status" class="text-xs text-muted-foreground mt-1"></p>
+            <div id="qr-container" class="mt-2 qr-code"></div>
+            <p class="text-xs text-muted-foreground">Staff QR</p>
+          </div>
+          <div class="flex-1 space-y-6">`;
+    categories.forEach(cat => {
+      html += `<section><h3 class="text-base font-bold text-primary mb-3 uppercase tracking-wide">${cat.title}</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-sm">`;
+      cat.fields.forEach(([label, value]) => html += renderField(label, value));
+      html += `</div></section>`;
+    });
+    html += `</div></div></div></div>`;
+    mainContent.innerHTML = html;
+
+    new QRCode(document.getElementById('qr-container'), {
+      text: `PREPSA|${p.staffId}|${p.fullName}`,
+      width: 100, height: 100, colorDark: "#4F46E5", colorLight: "#ffffff"
+    });
+
+    document.getElementById('edit-request-btn')?.addEventListener('click', () => alert('Edit request sent to admin.'));
+    const fileInput = document.getElementById('teacher-photo-file');
+    const changeBtn = document.getElementById('change-photo-btn');
+    const statusEl = document.getElementById('upload-status');
+    changeBtn.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if(!file) return;
+      if(!file.type.startsWith('image/')) { statusEl.textContent = '❌ Please select an image file.'; return; }
+      if(file.size > 5*1024*1024) { statusEl.textContent = '❌ Image must be under 5MB.'; return; }
+      statusEl.textContent = '⏳ Uploading...';
+      changeBtn.disabled = true;
+      try {
+        const storageRef = ref(storage, `teacherPhotos/${currentUser.uid}`);
+        await uploadBytes(storageRef, file);
+        const downloadURL = await getDownloadURL(storageRef);
+        await updateDoc(doc(db, 'teachers', currentUser.uid), { photoURL: downloadURL });
+        statusEl.textContent = '✅ Photo updated!';
+        changeBtn.disabled = false;
+        document.getElementById('profile-photo-container').innerHTML = `<img src="${downloadURL}" class="w-full h-full object-cover" alt="Photo" />`;
+      } catch(err) {
+        statusEl.textContent = `❌ Upload failed: ${err.message}`;
+        changeBtn.disabled = false;
+      }
+    });
+  }
+
+  // ========== MY CLASSES ==========
+  async function loadClasses() {
+    const classIds = getClassIdList();
+    if(classIds.length === 0) {
+      mainContent.innerHTML = `<h2 class="text-2xl font-bold mb-4">🏫 My Classes</h2><p class="text-muted-foreground">No classes assigned.</p>`;
+      return;
+    }
+    try {
+      const studentsByClass = {};
+      for(const cid of classIds) {
+        const snap = await getDocs(query(collection(db, 'students'), where('class', '==', cid), limit(50)));
+        studentsByClass[cid] = snap.docs.length;
+      }
+      let html = `<h2 class="text-2xl font-bold mb-4" data-aos="fade-up">🏫 My Classes</h2><div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">`;
+      classIds.forEach(cid => {
+        html += `<div class="section-card" data-aos="zoom-in">
+          <h3 class="font-bold text-lg">${cid}</h3>
+          <p class="text-sm text-muted-foreground">Students: ${studentsByClass[cid] || 0}</p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <button onclick="document.querySelector('[data-section=attendance]').click()" class="bg-primary text-white px-3 py-1 rounded text-xs">Take Attendance</button>
+            <button onclick="document.querySelector('[data-section=results]').click()" class="bg-primary/10 text-primary px-3 py-1 rounded text-xs">Enter Results</button>
+          </div>
+        </div>`;
+      });
+      html += '</div>';
+      mainContent.innerHTML = html;
+    } catch(err) { mainContent.innerHTML = `<p class="text-red-500">Error: ${err.message}</p>`; }
+  }
+
+  // ========== ASSIGNMENTS ==========
+  async function loadAssignments() {
+    const classIds = getClassIdList();
+    if(classIds.length === 0) { mainContent.innerHTML = `<h2 class="text-2xl font-bold mb-4">📝 Assignments</h2><p class="text-muted-foreground">No classes assigned.</p>`; return; }
+    try {
+      const q = query(collection(db, 'assignments'), where('class', 'in', classIds), limit(50));
+      const snap = await getDocs(q);
+      const assignments = snap.docs.map(d => ({id: d.id, ...d.data()})).sort((a,b)=>(a.dueDate?.seconds||0)-(b.dueDate?.seconds||0));
+      let html = `<h2 class="text-2xl font-bold mb-4" data-aos="fade-up">📝 Assignments</h2>
+        <button onclick="alert('Create assignment form coming soon.')" class="mb-4 bg-primary text-white px-4 py-2 rounded-lg text-sm">+ New Assignment</button>`;
+      if(assignments.length === 0) html += '<p class="text-muted-foreground">No assignments yet.</p>';
+      else {
+        html += '<div class="space-y-3">';
+        assignments.forEach(a => {
+          html += `<div class="bg-white p-4 rounded-2xl shadow-soft" data-aos="fade-up">
+            <p class="font-semibold">${a.title}</p>
+            <p class="text-xs">Class: ${a.class} · Due: ${safeDate(a.dueDate)}</p>
+            <div class="flex gap-2 mt-2"><button class="bg-gray-200 text-foreground px-3 py-1 rounded text-xs">Grade</button></div>
+          </div>`;
+        });
+        html += '</div>';
+      }
+      mainContent.innerHTML = html;
+    } catch(err) { mainContent.innerHTML = `<p class="text-red-500">Error: ${err.message}</p>`; }
+  }
+
+  // ========== CBT EXAMS ==========
+  async function loadCBTExams() {
+    const classIds = getClassIdList();
+    if(classIds.length === 0) { mainContent.innerHTML = `<h2 class="text-2xl font-bold mb-4">🖥 CBT Exams</h2><p class="text-muted-foreground">No classes assigned.</p>`; return; }
+    try {
+      const q = query(collection(db, 'cbt_exams'), where('class', 'in', classIds), limit(50));
+      const snap = await getDocs(q);
+      const exams = snap.docs.map(d => ({id: d.id, ...d.data()}));
+      let html = `<h2 class="text-2xl font-bold mb-4" data-aos="fade-up">🖥 CBT Exams</h2>
+        <button id="open-create-exam-modal" class="mb-4 bg-primary text-white px-4 py-2 rounded-lg text-sm">+ Create Exam</button>`;
+      if(exams.length === 0) html += '<p class="text-muted-foreground">No exams yet.</p>';
+      else {
+        html += '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">';
+        exams.forEach(exam => {
+          html += `<div class="bg-white p-5 rounded-2xl shadow-soft" data-aos="zoom-in">
+            <h3 class="font-bold text-lg">${exam.title}</h3>
+            <p class="text-sm">Subject: ${exam.subject} · Class: ${exam.class}</p>
+            <p class="text-sm"><span class="badge ${exam.status==='published'?'bg-green-100 text-green-700':'bg-gray-100 text-gray-700'}">${exam.status}</span></p>
+            <a href="cbt-admin.html?examId=${exam.id}" class="mt-2 inline-block bg-primary text-white px-4 py-1 rounded text-sm">Manage</a>
+          </div>`;
+        });
+        html += '</div>';
+      }
+      mainContent.innerHTML = html;
+
+      document.getElementById('open-create-exam-modal')?.addEventListener('click', () => {
+        if(getClassIdList().length === 0) { alert("You must be assigned a class first."); return; }
+        showCreateExamModal();
+      });
+    } catch(err) { mainContent.innerHTML = `<p class="text-red-500">Error: ${err.message}</p>`; }
+  }
+
+  function showCreateExamModal() {
+    const modalHtml = `
+      <div id="create-exam-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000]">
+        <div class="bg-white rounded-2xl p-6 max-w-lg w-full">
+          <h3 class="text-lg font-bold mb-3">Create New CBT Exam</h3>
+          <form id="create-exam-form" class="space-y-3">
+            <div><label class="block text-sm">Exam Title</label><input type="text" name="title" required class="w-full border rounded px-3 py-2 text-sm" /></div>
+            <div class="grid grid-cols-2 gap-3">
+              <div><label class="block text-sm">Subject</label><select name="subject" class="w-full border rounded px-3 py-2 text-sm">${(teacherProfile?.subjects||[]).map(s=>`<option value="${s}">${s}</option>`).join('')}</select></div>
+              <div><label class="block text-sm">Class</label><select name="class" class="w-full border rounded px-3 py-2 text-sm">${getClassIdList().map(c=>`<option value="${c}">${c}</option>`).join('')}</select></div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div><label class="block text-sm">Duration (min)</label><input type="number" name="duration" value="60" class="w-full border rounded px-3 py-2 text-sm" /></div>
+              <div><label class="block text-sm">Term / Session</label><input type="text" name="term" placeholder="First Term 2026/2027" class="w-full border rounded px-3 py-2 text-sm" /></div>
+            </div>
+            <div class="flex justify-end gap-2">
+              <button type="button" id="close-create-modal" class="px-3 py-1 bg-gray-300 rounded text-sm">Cancel</button>
+              <button type="submit" class="px-3 py-1 bg-primary text-white rounded text-sm">Save Draft</button>
+            </div>
+          </form>
+        </div>
+      </div>`;
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+    const modal = document.getElementById('create-exam-modal');
+    const form = document.getElementById('create-exam-form');
+    const closeBtn = document.getElementById('close-create-modal');
+    const closeModal = () => modal.remove();
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const data = { teacherId: currentUser.uid, teacherName: teacherProfile?.fullName, status: 'draft', questionCount:0, createdAt: new Date() };
+      formData.forEach((val, key) => { data[key] = val; });
+      try {
+        await addDoc(collection(db, 'cbt_exams'), data);
+        alert('Exam created! You can now add questions.');
+        closeModal();
+        loadCBTExams();
+      } catch(err) { alert('Error: ' + err.message); }
+    });
+  }
+
+  // ========== RESULTS ==========
+  async function loadResults() {
+    const classIds = getClassIdList();
+    if(classIds.length === 0) { mainContent.innerHTML = `<h2 class="text-2xl font-bold mb-4">📊 Results</h2><p class="text-muted-foreground">No classes assigned.</p>`; return; }
+    try {
+      const q = query(collection(db, 'results'), where('classId', 'in', classIds), limit(50));
+      const snap = await getDocs(q);
+      const results = snap.docs.map(d => ({id: d.id, ...d.data()}));
+      let html = `<h2 class="text-2xl font-bold mb-4" data-aos="fade-up">📊 Results</h2>
+        <button onclick="alert('Enter results form coming soon.')" class="mb-4 bg-primary text-white px-4 py-2 rounded-lg text-sm">+ Enter Results</button>`;
+      if(results.length === 0) html += '<p class="text-muted-foreground">No results recorded yet.</p>';
+      else {
+        html += '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">';
+        results.forEach(r => {
+          html += `<div class="bg-white p-4 rounded-2xl shadow-soft" data-aos="fade-up">
+            <p class="font-semibold">${r.studentName || 'Unknown'}</p>
+            <p class="text-xs">Class: ${r.classId} · Term: ${r.term}</p>
+            <span class="badge ${r.published?'bg-green-100 text-green-700':'bg-gray-100 text-gray-700'}">${r.published?'Published':'Draft'}</span>
+            <button class="mt-2 text-sm text-primary">View / Edit</button>
+          </div>`;
+        });
+        html += '</div>';
+      }
+      mainContent.innerHTML = html;
+    } catch(err) { mainContent.innerHTML = `<p class="text-red-500">Error: ${err.message}</p>`; }
+  }
+
+  // ========== ATTENDANCE ==========
+  async function loadAttendance() {
+    const classIds = getClassIdList();
+    if(classIds.length === 0) { mainContent.innerHTML = `<h2 class="text-2xl font-bold mb-4">📅 Attendance</h2><p class="text-muted-foreground">No classes assigned.</p>`; return; }
+    mainContent.innerHTML = `<div data-aos="fade-up" class="bg-white rounded-2xl p-6"><h2 class="text-2xl font-bold">📅 Attendance</h2><p>Attendance management will be available here. You can mark students present, absent, or late.</p></div>`;
+  }
+
+  // ========== TIMETABLE ==========
+  async function loadTimetable() {
+    mainContent.innerHTML = `<div data-aos="fade-up" class="bg-white rounded-2xl p-6"><h2 class="text-2xl font-bold">🕒 Timetable</h2><p class="text-muted-foreground mt-2">Your class schedule will appear here once uploaded by the school.</p></div>`;
+  }
+
+  async function loadELearning() {
+    mainContent.innerHTML = `<div data-aos="fade-up" class="bg-white rounded-2xl p-6"><h2 class="text-2xl font-bold">💻 E‑Learning</h2><p class="text-muted-foreground mt-2">Upload materials, create quizzes, and manage resources for your students.</p></div>`;
+  }
+
+  async function loadELibrary() {
+    mainContent.innerHTML = `<div data-aos="fade-up" class="bg-white rounded-2xl p-6"><h2 class="text-2xl font-bold">📚 E‑Library</h2><p class="text-muted-foreground mt-2">Access digital textbooks, lesson plans, and past questions.</p></div>`;
+  }
+
+  async function loadMessages() {
+    mainContent.innerHTML = `<div data-aos="fade-up" class="bg-white rounded-2xl p-6"><h2 class="text-2xl font-bold">💬 Messages</h2><p class="text-muted-foreground mt-2">Communicate with students, parents, and staff.</p></div>`;
+  }
+
+  async function loadNotifications() {
+    try {
+      const q = query(collection(db, 'notifications'), where('userId', '==', currentUser.uid));
+      const snap = await getDocs(q);
+      const notifs = snap.docs.map(d => ({id: d.id, ...d.data()})).sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+      let html = `<h2 class="text-2xl font-bold mb-4" data-aos="fade-up">🔔 Notifications</h2><div class="bg-white rounded-2xl p-6 shadow-soft"><div class="space-y-2">`;
+      notifs.forEach(n => {
+        html += `<div class="border-b pb-2 flex justify-between items-start ${n.read?'opacity-50':''}"><div><p class="font-medium">${n.title}</p><p class="text-xs text-muted-foreground">${n.message}</p></div>${n.read ? '' : '<span class="badge bg-red-100 text-red-700">New</span>'}</div>`;
+      });
+      html += `</div><button id="mark-all-notif-read" class="mt-3 text-sm text-primary">Mark all as read</button></div>`;
+      mainContent.innerHTML = html;
+      document.getElementById('mark-all-notif-read')?.addEventListener('click', async () => {
+        for(const n of notifs) { if(!n.read) await updateDoc(doc(db, 'notifications', n.id), { read: true }); }
+        loadNotifications(); updateNotificationBadge();
+      });
+    } catch(err) { mainContent.innerHTML = `<p class="text-red-500">Error: ${err.message}</p>`; }
+  }
+
+  async function loadEvents() {
+    try {
+      const q = query(collection(db, 'events'), where('targetAudience', 'array-contains', 'teachers'), orderBy('date', 'asc'), limit(10));
+      const snap = await getDocs(q);
+      const events = snap.docs.map(d => d.data());
+      let html = `<h2 class="text-2xl font-bold mb-4" data-aos="fade-up">📅 Events</h2>`;
+      if(events.length === 0) html += '<p class="text-muted-foreground">No upcoming events.</p>';
+      else {
+        html += '<div class="space-y-3">';
+        events.forEach(e => html += `<div class="bg-white p-4 rounded-2xl shadow-soft" data-aos="fade-up"><p class="font-semibold">${e.title}</p><p class="text-xs">${safeDate(e.date)} – ${e.time||''}</p></div>`);
+        html += '</div>';
+      }
+      mainContent.innerHTML = html;
+    } catch(err) { mainContent.innerHTML = `<p class="text-red-500">Error: ${err.message}</p>`; }
+  }
+
+  async function loadAnalytics() {
+    mainContent.innerHTML = `<div data-aos="fade-up" class="bg-white rounded-2xl p-6"><h2 class="text-2xl font-bold">📈 Academic Analytics</h2><p class="text-muted-foreground mt-2">Student performance graphs and trends will appear here.</p></div>`;
+  }
+
+  async function loadSettings() {
+    mainContent.innerHTML = `
+      <div data-aos="fade-up" class="bg-white rounded-2xl p-6 max-w-lg mx-auto">
+        <h2 class="text-2xl font-bold mb-4">⚙️ Settings</h2>
+        <div class="space-y-3">
+          <div><label class="block text-sm font-medium">Change Password</label><input type="password" placeholder="Current" class="w-full border rounded px-3 py-2 mt-1" /><input type="password" placeholder="New" class="w-full border rounded px-3 py-2 mt-1" /><button class="mt-2 bg-primary text-white px-4 py-2 rounded text-sm">Update</button></div>
+          <div><label class="flex items-center gap-2 text-sm"><input type="checkbox" id="darkModeCheckbox" /> Dark Mode</label></div>
+        </div>
+      </div>`;
+    const darkCheckbox = document.getElementById('darkModeCheckbox');
+    const saved = localStorage.getItem('prepsa_dark_mode') === 'true';
+    if(saved) document.documentElement.classList.add('dark');
+    if(darkCheckbox) {
+      darkCheckbox.checked = saved;
+      darkCheckbox.addEventListener('change', () => {
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem('prepsa_dark_mode', document.documentElement.classList.contains('dark'));
+      });
+    }
+  }
+
+  async function loadLessonPlanner() {
+    mainContent.innerHTML = `<div data-aos="fade-up" class="bg-white rounded-2xl p-6"><h2 class="text-2xl font-bold">📆 Lesson Planner</h2><p class="text-muted-foreground mt-2">Plan weekly lessons and schemes of work.</p></div>`;
+  }
+
+  async function loadGradebook() {
+    mainContent.innerHTML = `<div data-aos="fade-up" class="bg-white rounded-2xl p-6"><h2 class="text-2xl font-bold">📖 Gradebook</h2><p class="text-muted-foreground mt-2">Record continuous assessment and exam scores.</p></div>`;
+  }
+
+  async function loadBehavior() {
+    mainContent.innerHTML = `<div data-aos="fade-up" class="bg-white rounded-2xl p-6"><h2 class="text-2xl font-bold">📋 Behavior Reports</h2><p class="text-muted-foreground mt-2">Log disciplinary actions and commendations.</p></div>`;
+  }
+
+  async function loadParentComm() {
+    mainContent.innerHTML = `<div data-aos="fade-up" class="bg-white rounded-2xl p-6"><h2 class="text-2xl font-bold">📞 Parent Communication</h2><p class="text-muted-foreground mt-2">Send messages and schedule parent-teacher meetings.</p></div>`;
+  }
+
+  async function loadFAQ() {
+    mainContent.innerHTML = `
+      <div data-aos="fade-up" class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold font-orbitron text-oxford mb-6">❓ Frequently Asked Questions</h2>
+        <div class="bg-white rounded-2xl shadow-soft overflow-hidden">
+          <details class="faq-item border-b" open>
+            <summary><span>How can AI help me create lesson notes?</span><span class="faq-icon">+</span></summary>
+            <div class="faq-answer">Go to <strong>AI Assistant</strong> from the sidebar, enter a topic and class, and click "Generate Lesson Note". The AI will provide a complete, structured lesson plan.</div>
+          </details>
+          <details class="faq-item border-b">
+            <summary><span>How do I take attendance for my class?</span><span class="faq-icon">+</span></summary>
+            <div class="faq-answer">Navigate to <strong>Attendance</strong> and select your class. You can mark students present, absent, or late with one click.</div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Can I publish results directly to parents?</span><span class="faq-icon">+</span></summary>
+            <div class="faq-answer">Yes, after entering results in the <strong>Results</strong> section, you can publish them. Parents will then see the results in their parent dashboard.</div>
+          </details>
+        </div>
+      </div>`;
+  }
+
+  // ========== LOGOUT ==========
+  document.getElementById('logout-btn').addEventListener('click', async () => {
+    await signOut(auth);
+    window.location.href = 'portal.html';
+  });
+
+  // ========== NOTIFICATION HELPER ==========
+  async function updateNotificationBadge() {
+    if(!currentUser) return;
+    const q = query(collection(db, 'notifications'), where('userId', '==', currentUser.uid), where('read', '==', false));
+    const snap = await getDocs(q);
+    const badge = document.getElementById('notification-badge');
+    badge.textContent = snap.size > 9 ? '9+' : snap.size;
+    badge.style.display = snap.size ? 'flex' : 'none';
+  }
+
+  document.getElementById('notifications-bell').addEventListener('click', async (e) => {
+    e.stopPropagation();
+    const dropdown = document.getElementById('notification-dropdown');
+    dropdown.classList.toggle('hidden');
+    if(!dropdown.classList.contains('hidden')) {
+      const q = query(collection(db, 'notifications'), where('userId', '==', currentUser.uid));
+      const snap = await getDocs(q);
+      const list = document.getElementById('notification-list');
+      list.innerHTML = snap.docs.map(d => {
+        const n = d.data();
+        return `<div class="border-b pb-1 ${n.read?'opacity-50':''}"><p class="font-medium">${n.title}</p><p class="text-xs">${n.message}</p></div>`;
+      }).join('') || '<p>No notifications</p>';
+    }
+  });
+  document.addEventListener('click', (e) => {
+    if(!e.target.closest('#notifications-bell') && !e.target.closest('#notification-dropdown'))
+      document.getElementById('notification-dropdown').classList.add('hidden');
+  });
+  document.getElementById('mark-all-read-btn')?.addEventListener('click', async () => {
+    const q = query(collection(db, 'notifications'), where('userId', '==', currentUser.uid), where('read', '==', false));
+    const snap = await getDocs(q);
+    snap.forEach(d => updateDoc(d.ref, { read: true }));
+    updateNotificationBadge();
+  });
+
+  // ========== AUTH & PROFILE LISTENER ==========
+  async function updateHeaderInfo() {
+    const name = teacherProfile?.fullName || currentUser?.displayName || 'Teacher';
+    document.getElementById('user-name').textContent = name;
+    document.getElementById('user-email').textContent = currentUser?.email || '';
+    const initials = getInitials(name);
+    document.getElementById('user-initials').textContent = initials;
+    document.getElementById('header-initials').textContent = initials;
+  }
+
+  onAuthStateChanged(auth, async (user) => {
+    if(!user) { window.location.href = 'portal.html'; return; }
+    currentUser = user;
+    // Fetch Remote Config for Groq key
+    try {
+      await fetchAndActivate(remoteConfig);
+      const keyParam = getValue(remoteConfig, "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");
+      groqApiKey = keyParam.asString();
+      console.log('Groq key loaded:', groqApiKey ? 'yes' : 'no');
+    } catch(e) { console.warn('Remote Config error:', e); }
+
+    const userDoc = await getDoc(doc(db, 'users', user.uid));
+    if(!userDoc.exists() || userDoc.data().role !== 'teacher') {
+      await signOut(auth);
+      window.location.href = 'portal.html';
+      return;
+    }
+
+    unsubscribeProfile = onSnapshot(doc(db, 'teachers', user.uid), (snap) => {
+      teacherProfile = snap.exists() ? snap.data() : { fullName: user.displayName || 'Teacher' };
+      updateHeaderInfo();
+      if(currentSection) renderSection(currentSection);
+    });
+
+    const saved = localStorage.getItem('activeTeacherSection') || 'overview';
+    setActiveSection(saved);
+    await playLogoIntro();
+    await renderSection(saved);
+    setInterval(updateNotificationBadge, 30000);
+    updateNotificationBadge();
+  });
+</script>
+</body>
+</html>
